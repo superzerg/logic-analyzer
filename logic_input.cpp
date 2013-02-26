@@ -11,14 +11,13 @@
 //Compile with :
 // g++ -o logic_input -l rt logic_input.cpp -l bcm2835 -l mgl -O3
 
-#define DELAY 1 //delay in ms between 2 measurements
+#define DELAY 2 //delay in ms between 2 measurements
 #define MISO 27 
 #define MOSI 4
 #define CLK 14
 #define CE1 15
 #define NPIN 4
-#define NDATA 5000
-//#define NDATA 2000
+#define NDATA 500
 
 /*typedef enum
 {
@@ -47,13 +46,16 @@ public:
             this->rawdata=new mglData[npin];
         else
             this->rawdata=NULL;
+//printf("rawdata->0x%X\n",this->rawdata);
         this->npoint=0;
         this->pins=NULL;
         this->labels=NULL;
         if (pins!=NULL && labels!=NULL)
+        {
             init_acquisition(pins, labels,npin);
-        if (npoint>0)
-            acquire(npoint);
+            if (npoint>0)
+                acquire(npoint);
+        }
     }
     
     ~logic_input()
@@ -61,16 +63,31 @@ public:
 //printf("logic_input destructor\n");
         if(this->npin>0)
             for (int pin=0;pin<this->npin;pin++)
-                if (npoint>0)
+                if (this->npoint>0) 
+                {
+//printf("rawdata[%i] destruction\n");
                     this->rawdata[pin].~mglData();
-        if (npoint>0)
+                }
+        if (this->npoint>0)
+        {
+//printf("t destruction\n");
             this->t.~mglData();
-        if (rawdata!=NULL)
+        }
+        if (this->rawdata!=NULL)
+        {
+//printf("rawdata destruction at 0x%X\n",rawdata);
             delete[] rawdata;
-        if (pins!=NULL)
+        }
+        if (this->pins!=NULL)
+        {
+//printf("pins destruction at 0x%X\n",pins);
             delete[] pins;
-        if (labels!=NULL)
+        }
+        if (this->labels!=NULL)
+        {
+//printf("labels destruction at 0x%X\n",labels);
             delete[] labels;
+        }
     }
     
     void init_acquisition(uint8_t * pins, const char *labels[], uint8_t npin=0)
@@ -87,18 +104,21 @@ public:
             printf("ERROR in init_acquisition: pin number varied from construction.\n");
             return;
         }
+//printf("pins memory allocution\n");
         this->pins = new uint8_t[npin];
+//printf("pins->0x%X\n",this->pins);
+//printf("labels memory allocution\n");
         this->labels = new char[npin][30];
-        if (!bcm2835_init())
-        {
-            printf("ERROR in init_acquisition while intializing BCM2835\n");
-            return;
-        }
+//printf("labels->0x%X\n",this->labels);
+//printf("dummy memory allocution\n");
+//uint8_t *dummy=new uint8_t;
+//printf("dummy->0x%X\n",dummy);
+//delete dummy;
         for (int pin=0;pin<npin;pin++)
         {
             this->pins[pin]=pins[pin];
+//printf("copy labels to %X\n",this->labels[pin]);
             strcpy(this->labels[pin],labels[pin]);
-            bcm2835_gpio_fsel(this->pins[pin], BCM2835_GPIO_FSEL_INPT);
         }
     }
     
@@ -111,16 +131,6 @@ public:
         {
             printf("ERROR in aquire: npoint must be > 0\n");
             return;
-        }
-        if(npoint!=this->npoint && this->npoint!=0)
-        {
-            printf("cleanning\n");
-            //cleanning
-            if(this->t.nx>1)
-                this->t.~mglData();
-            if(this->npin>0)
-                for (pin=0;pin<this->npin;pin++)
-                    this->rawdata[pin].~mglData();
         }
         printf("allocate memory.\n");
         //allocate memory for data objects
@@ -135,6 +145,13 @@ public:
         struct timespec start;
         struct timespec end;
         
+        if (!bcm2835_init())
+        {
+            printf("ERROR in acquire while intializing BCM2835\n");
+            return;
+        }
+        for (pin=0;pin<npin;pin++)
+            bcm2835_gpio_fsel(this->pins[pin], BCM2835_GPIO_FSEL_INPT);
         //start aquisition
         printf("start aquisition\n");
         clock_gettime(CLOCK_MONOTONIC,&start);
@@ -145,13 +162,13 @@ public:
             for (pin=0;pin<this->npin;pin++)
                 rawdata[pin].a[i]=bcm2835_gpio_lev(this->pins[pin]);
 //for (pin=0;pin<this->npin;pin++)
-//    printf("pin %i (pull UP)=%f\n",pin,rawdata[pin].a[i]);
+//    printf("gpio%i (pull UP)=%f\n",this->pins[pin],rawdata[pin].a[i]);
             for (pin=0;pin<this->npin;pin++)
-                bcm2835_gpio_set_pud(pins[i], BCM2835_GPIO_PUD_DOWN);
+                bcm2835_gpio_set_pud(this->pins[pin], BCM2835_GPIO_PUD_DOWN);
             for (pin=0;pin<this->npin;pin++)
                 rawdata[pin].a[i]+=2*bcm2835_gpio_lev(this->pins[pin]);
 //for (pin=0;pin<this->npin;pin++)
-//    printf("pin %i (pull DOWN)=%f\n",pin,rawdata[pin].a[i]);
+//    printf("gpio%i (pull DOWN)=%f\n",this->pins[pin],rawdata[pin].a[i]);
             clock_gettime(CLOCK_MONOTONIC,&end);
             t.a[i]=(float)(end.tv_sec-start.tv_sec + ((float)(end.tv_nsec-start.tv_nsec))/1000000000);
             if(DELAY>=1)
@@ -165,15 +182,19 @@ public:
     
     int Draw(mglGraph *gr)
     {
-//        gr->Rotate(0,0);
+printf("Drawing\n");
         gr->SetRanges(0,this->t.a[this->t.nx-1]*1.05,-0.3,3.3);
         for (int pin=0;pin<this->npin;pin++)
         {
+printf("subplot %i\n",pin);
             gr->SubPlot(1,this->npin,pin);
             gr->Box();
             gr->Axis("xy");
+printf("Label: %s\n",this->labels[pin]);
             gr->Label('y',this->labels[pin]);
+printf("plot\n");
             gr->Plot(this->t,this->rawdata[pin],"+-");
+printf("done\n");
         }
         return 0;
     }
@@ -417,7 +438,7 @@ int main(int argc, char **argv)
     uint8_t pins[4]={15,14,4,27};
     const char *labels[4]={"CS","CLK","MOSI","MISO"};
     capture.init_acquisition(pins, labels);
-    capture.acquire(2000);
+    capture.acquire(NDATA);
 
     mglGraphZB gr(1200,800);
     float logic_values[]={0, 1, 2, 3};
