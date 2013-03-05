@@ -19,7 +19,7 @@ clean:
 	rm -f $(OBJECTS) *~
 	
 clean_all: 
-	rm -f $(EXECUTABLE) $(OBJECTS)
+	rm -f $(EXECUTABLE) $(OBJECTS) *~
 
 test: $(EXECUTABLE) 
 	sleep 1; sudo nice -n -20 ./logic_analyzer& sleep 2.7;sudo ../NMC9314B_programmer/NMC9314B_bit_banged -r -a 63 -b;sudo ../NMC9314B_programmer/NMC9314B_bit_banged -r -a 63 -b
