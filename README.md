@@ -4,7 +4,8 @@ Guide for Logic Analyzer RPi
 I)Exemple of output 
 ==============
 ![logic states](read.png)
-Image otained durring two consecutive read instructions on a NMC9314 EEPROM memory using following command.
+Image otained durring two consecutive read instructions on a NMC9314 EEPROM memory using following command:
+
 	make test
 
 II) Dependance
