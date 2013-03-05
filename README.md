@@ -47,13 +47,13 @@ On a 3V3 circuit you can connect direclty your input to the GPIO pin.
 VI) Install
 ===============
 1. install the C library for Raspberry Pi (http://www.open.com.au/mikem/bcm2835/index.html)
-2. get the Logic Analyser RPi files at https://github.com/superzerg/logic-analyser
+2. get the Logic Analyser RPi files at https://github.com/superzerg/logic-analyzer
 3. compile with:
 	make
 
 VII) More Information
 ===============
-More information is availble with the developper guide (http://superzerg.github.com/logic-analyser/index.html)
+More information is availble with the developper guide (http://superzerg.github.com/logic-analyzer/index.html)
 
 VIII) Licence
 ===============
