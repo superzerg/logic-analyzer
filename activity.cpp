@@ -58,6 +58,14 @@ printf("end at t=%fs\n",t_end[nactive]);
     }
 }
 
+activity::~activity()
+{
+    if(this->t_start!=NULL)
+        delete[] this->t_start;
+    if(this->t_end!=NULL)
+        delete[] this->t_end;
+}
+
 int activity::Draw(mglGraph *gr,uint8_t subplot)
 {
     gr->SubPlot(1,this->npin,subplot);

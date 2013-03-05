@@ -130,7 +130,7 @@ void logic_input::acquire(uint32_t npoint,float delay)
     printf("aquisition done\n");
     }
     
-int logic_input::Draw(mglGraph *gr, const char *labels[4])
+int logic_input::Draw(mglGraph *gr, const char *labels[])
 {
 //printf("logic_input::Draw()\n");
     gr->SetRanges(0,this->t.a[this->t.nx-1]*1.05,-0.3,3.5);
