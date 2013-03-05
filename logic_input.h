@@ -15,7 +15,7 @@ typedef enum
     HIGHV = 3,
 }logic_state;
 
-//! Class doing aquisition and plotting rawdata.
+//! Class doing aquisition from RPI's GPIO.
 /*! Saving to and loading from a file to be added.*/
 class logic_input : public mglDraw
 {
@@ -34,7 +34,7 @@ public:
     //! Destructor
     ~logic_input();
     //! Plot logic values acquired
-    /*!     \param pointer to a mglGraph object
+    /*!     \param gr pointer to a mglGraph object
             \param label array of strings giving label of each pin. */
     int Draw(mglGraph *gr,const char *label[]=NULL);
 //private:

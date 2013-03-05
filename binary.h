@@ -15,7 +15,7 @@
 #include "transition.h"
 #endif
 
-//! Class containining bits information
+//! Class containining bits information obtained from logic_input and transition.
 
 class binary : public mglDraw
 {
@@ -55,7 +55,7 @@ public:
             \return value between inclusive bits index_start and index_end (as most significant bit first).*/
     uint32_t Get(uint32_t index_start, uint32_t index_end=0);
     //! Copy the logic value of a bit in string.
-    /*!     \param value[2] string reciving the logic value:
+    /*!     \param value 2 chars reciving the logic value:
                 - \"0\" for low voltage (<1V when pull up and down used).
                 - \"1\" for high voltage (>2V when pull up and down used).
                 - \" \" for high resistance (<1V when pull down and >2V when pull up)

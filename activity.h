@@ -10,7 +10,7 @@
 #include "logic_input.h"
 #endif
 
-//! Class activity
+//! Class containing activity obtained from logic_input
 /*! Class containing time range when ship is active and able to draw the background of  subplots accordingly*/
 
 class activity: public mglDraw
