@@ -43,8 +43,12 @@ VI) INSTALL
 2. get the Logic Analyser RPi files at https://github.com/superzerg/logic-analyser
 3. compile with:
 	make
-	
-VII) LICENCE
+
+VII)More Information
+===============
+More information is availble with the developper guide (http://superzerg.github.com/logic-analyser/index.html)
+
+VIII) LICENCE
 ===============
 Copyright (C) 1994, 1995, 1996, 1999, 2000, 2001, 2002, 2004, 2005,
 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
