@@ -208,9 +208,6 @@ int microwire::Draw(mglGraph *gr)
             this->miso_mess[i].Draw(gr);
         }
     }
-printf("write PNG...\n");
-    gr->WritePNG("test.png");
-printf("done\n");
     return 0;
 }
 
