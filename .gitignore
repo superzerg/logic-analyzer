@@ -1,0 +1,6 @@
+doc/
+png/
+logic_analyzer
+*.o
+*~
+test.png
