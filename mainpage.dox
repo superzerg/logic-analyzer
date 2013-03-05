@@ -1,11 +1,11 @@
 /**
-@brief Developper Guide for Logic Analyzer for Raspberry Pi
+@brief Developper Guide for Logic Analyzer RPi
 
 @author superzerg
 
 @file 
 
-@mainpage Developper Guide for Logic Analyzer for Raspberry pi
+@mainpage Developper Guide for Logic Analyzer RPi
 This guide has been made so you can more easily addapt the  Logic Analyzer RPi software for your needs and contibute to it.
 
 The classes used are:
