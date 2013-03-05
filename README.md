@@ -8,13 +8,15 @@ Image otained durring two consecutive read instructions on a NMC9314 EEPROM memo
 
 	make test
 
-II) Dependance
+You must have installed [NMC9314 Pi](https://github.com/superzerg/NMC9314_pi) first.
+
+II) Dependance 
 ==============
 It use the C library for Raspberry Pi (http://www.open.com.au/mikem/bcm2835/index.html)
 
 III) Disclamer
 ===============
-This program has been made for personal use, it works for me, but I offer no waranty as this program may (unlikely) damage your raspberry pi, your memory and/or any electronic device connected. Use it at your own risk.
+This program has been made for personal use, it works for me, but I offer no warranty as this program may (unlikely) damage your raspberry pi, your memory and/or any electronic device connected. Use it at your own risk.
 
 IV) Connection
 ===============
@@ -50,12 +52,38 @@ PDF files are also availble there for easier printing.
 ![revison 1 boards](http://3.bp.blogspot.com/-M0E1IVgNnlc/USI5afQSoqI/AAAAAAAAEhA/QnwqdTqGNE0/s320/raspberry+leaf.png "Rev. 1 board")
 ![revison 2 boards](http://1.bp.blogspot.com/-s2VVUs3YO5E/USTWSZq1FzI/AAAAAAAAEqk/iRyL0OY6ZWU/s320/raspberry+leaf+r2.png "Rev. 2 board")
 
-The numbers next to the GPIO pins used to aquire data are the one tu use in [pins](http://superzerg.github.com/logic-analyzer/classlogic__input.html#a691df164430ee863f12e0aaaeb7510a7) array.
+The numbers next to the GPIO pins used to acquire data are the one to use in [pins](http://superzerg.github.com/logic-analyzer/classlogic__input.html#a691df164430ee863f12e0aaaeb7510a7) array.
 The order matter, for exemple with the microwire protocol:
 - pins[0] acquires CS (Chip Select) of the studied device.
 - pins[1] acquires CLK (clock) of the studied device.
 - pins[2] acquires MOSI (Master Out Slave In) of the studied device.
 - pins[3] acquires MISO (Master In Slave Out) of the studied device.
+
+V) Usage
+===============
+
+No arguments can yet be passed to the main program, so you will have to edit logic_analyzer.cpp:
+1) Edit the pins array according to indications in [IV Connection](#iv-connection) eg.
+
+	#include <mgl/mgl_zb.h>
+	#include "microwire.h"
+	
+	int main(int argc, char **argv)
+	{
+		uint8_t pins[4]={15,14,4,27};
+	
+2) Use the right protocol eg.
+
+		microwire test(pins,4);
+	
+3) The default is to create a PNG image, it is done as follow :
+
+		mglGraphZB gr(1200,800);
+		test.Draw(&gr);
+		gr->WritePNG("filename.png");
+	}
+	
+It is also possible to Draw into a windows or a widget, see the mathgl documention.
 
 VI) Install
 ===============
