@@ -14,5 +14,6 @@ int main(int argc, char **argv)
     microwire test(pins,4);
     mglGraphZB gr(1200,800);
     test.Draw(&gr);
+    gr.WritePNG("test.png");
     return 1;
 }
