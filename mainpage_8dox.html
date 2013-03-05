@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Logic Analyzer RPi: Developper Guide for Logic Analyzer for Raspberry pi</title>
+<title>Logic Analyzer RPi: mainpage.dox File Reference</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -36,9 +36,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </script>
   <div id="navrow1" class="tabs">
     <ul class="tablist">
-      <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
+      <li><a href="index.html"><span>Main&#160;Page</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
-      <li><a href="files.html"><span>Files</span></a></li>
+      <li class="current"><a href="files.html"><span>Files</span></a></li>
       <li>
         <div id="MSearchBox" class="MSearchBoxInactive">
         <span class="left">
@@ -57,7 +57,11 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
       </li>
     </ul>
   </div>
-</div><!-- top -->
+  <div id="navrow2" class="tabs2">
+    <ul class="tablist">
+      <li><a href="files.html"><span>File&#160;List</span></a></li>
+    </ul>
+  </div>
 <!-- window showing the filter options -->
 <div id="MSearchSelectWindow"
      onmouseover="return searchBox.OnSearchSelectShow()"
@@ -72,42 +76,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </iframe>
 </div>
 
+</div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">Developper Guide for Logic Analyzer for Raspberry pi </div>  </div>
+<div class="title">mainpage.dox File Reference</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This guide has been made so you can more easily addapt the Logic Analyzer RPi software for your needs and contibute to it.</p>
-<p>The classes used are:</p>
-<ol type="1">
-<li><a class="el" href="classlogic__input.html">logic_input</a>: takes care of acquisition from Raspberry pi's GPIO pins and method to draw it</li>
-<li><a class="el" href="classactivity.html">activity</a>: contains chip enable periods obtained from <a class="el" href="classlogic__input.html" title="Class doing aquisition from RPI&#39;s GPIO.">logic_input</a> and method to draw it</li>
-<li><a class="el" href="classtransition.html">transition</a>: contains the aquisition time of the clock transitions obtained from <a class="el" href="classlogic__input.html" title="Class doing aquisition from RPI&#39;s GPIO.">logic_input</a> and methods to draw it.</li>
-<li><a class="el" href="classbinary.html">binary</a>: contains the bit obtained from <a class="el" href="classlogic__input.html" title="Class doing aquisition from RPI&#39;s GPIO.">logic_input</a> and methods to draw it.</li>
-<li><a class="el" href="classmessage.html">message</a>: contains decoded information.</li>
-</ol>
-<p>A protocol must be used for the conversion from activity and/or transition and at least one binary to a message. The following classes are implemented protocols:</p>
-<ul>
-<li><a class="el" href="classmicrowire.html">microwire</a></li>
-</ul>
-<p>If you want to decode anthing else, you need to create your own protocol There is a few rules to follow (this may evolve).</p>
-<ol type="1">
-<li>A protocol has a <a class="el" href="classlogic__input.html" title="Class doing aquisition from RPI&#39;s GPIO.">logic_input</a> and an array of <a class="el" href="classmessage.html">message</a> as member.</li>
-<li>A protocol has a constructor with 2 parameter: <dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pins</td><td>is an array of uint8_t corresponging to the GPIO pins used. </td></tr>
-    <tr><td class="paramname">npin</td><td>is the size of the pins array. The order of the pin determines their function.</td></tr>
-  </table>
-  </dd>
-</dl>
-</li>
-<li>A protocol has a Draw() function calling all the necessary Draw() functions of his members <dl class="section see"><dt>See Also</dt><dd><a class="el" href="classmicrowire.html#ad89e7320e8e3f0d2a3bf8623aca7466e" title="Constructor.">microwire::microwire()</a> </dd></dl>
-</li>
-</ol>
+
+<p>Developper Guide for Logic Analyzer for Raspberry Pi.  
+<a href="#details">More...</a></p>
+<a name="details" id="details"></a><h2>Detailed Description</h2>
+<div class="textblock"><p>Developper Guide for Logic Analyzer for Raspberry Pi. </p>
+<dl class="section author"><dt>Author</dt><dd>superzerg </dd></dl>
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Mar 5 2013 05:00:12 for Logic Analyzer RPi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Mar 5 2013 05:00:11 for Logic Analyzer RPi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
