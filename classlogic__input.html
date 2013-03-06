@@ -89,7 +89,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>Class doing aquisition from RPI's GPIO.  
+<p>Class doing acquisition from RPI's GPIO.  
  <a href="classlogic__input.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="logic__input_8h_source.html">logic_input.h</a>&gt;</code></p>
@@ -99,7 +99,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a450e489e87441db0bad7c5c9d71494b5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogic__input.html#a450e489e87441db0bad7c5c9d71494b5">logic_input</a> (uint8_t <a class="el" href="classlogic__input.html#a3349a83e945710442279df3f53907328">npin</a>=0, uint8_t *<a class="el" href="classlogic__input.html#a691df164430ee863f12e0aaaeb7510a7">pins</a>=NULL, uint32_t <a class="el" href="classlogic__input.html#a6cc447732c8c6e0432ab17115e77dc53">npoint</a>=0, float delay=0)</td></tr>
 <tr class="memdesc:a450e489e87441db0bad7c5c9d71494b5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a450e489e87441db0bad7c5c9d71494b5"></a><br/></td></tr>
 <tr class="memitem:aa39c71bd501093e64be1703fce039038"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogic__input.html#aa39c71bd501093e64be1703fce039038">init_acquisition</a> (uint8_t *<a class="el" href="classlogic__input.html#a691df164430ee863f12e0aaaeb7510a7">pins</a>, uint8_t <a class="el" href="classlogic__input.html#a3349a83e945710442279df3f53907328">npin</a>=0)</td></tr>
-<tr class="memdesc:aa39c71bd501093e64be1703fce039038"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialization of the object for the capture.  <a href="#aa39c71bd501093e64be1703fce039038"></a><br/></td></tr>
+<tr class="memdesc:aa39c71bd501093e64be1703fce039038"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialisation of the object for the capture.  <a href="#aa39c71bd501093e64be1703fce039038"></a><br/></td></tr>
 <tr class="memitem:aa46010f91ee7f82cb5f74a75ba913a88"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogic__input.html#aa46010f91ee7f82cb5f74a75ba913a88">acquire</a> (uint32_t <a class="el" href="classlogic__input.html#a6cc447732c8c6e0432ab17115e77dc53">npoint</a>=0, float delay=0)</td></tr>
 <tr class="memdesc:aa46010f91ee7f82cb5f74a75ba913a88"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start the acquisition.  <a href="#aa46010f91ee7f82cb5f74a75ba913a88"></a><br/></td></tr>
 <tr class="memitem:a0f5cf5d89a03cfea37539f51647bf0bf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0f5cf5d89a03cfea37539f51647bf0bf"></a>
@@ -112,20 +112,20 @@ Public Member Functions</h2></td></tr>
 Public Attributes</h2></td></tr>
 <tr class="memitem:a6cc447732c8c6e0432ab17115e77dc53"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a6cc447732c8c6e0432ab17115e77dc53"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogic__input.html#a6cc447732c8c6e0432ab17115e77dc53">npoint</a></td></tr>
-<tr class="memdesc:a6cc447732c8c6e0432ab17115e77dc53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of logic values aquired. <br/></td></tr>
+<tr class="memdesc:a6cc447732c8c6e0432ab17115e77dc53"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of logic values acquired. <br/></td></tr>
 <tr class="memitem:a3349a83e945710442279df3f53907328"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3349a83e945710442279df3f53907328"></a>
 uint8_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogic__input.html#a3349a83e945710442279df3f53907328">npin</a></td></tr>
 <tr class="memdesc:a3349a83e945710442279df3f53907328"><td class="mdescLeft">&#160;</td><td class="mdescRight">Number of pin used in acquisition. <br/></td></tr>
 <tr class="memitem:a691df164430ee863f12e0aaaeb7510a7"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a691df164430ee863f12e0aaaeb7510a7"></a>
 uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogic__input.html#a691df164430ee863f12e0aaaeb7510a7">pins</a></td></tr>
-<tr class="memdesc:a691df164430ee863f12e0aaaeb7510a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array of GPIO number, eachone is used durring acquisition. <br/></td></tr>
+<tr class="memdesc:a691df164430ee863f12e0aaaeb7510a7"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array of GPIO number, each one is used during acquisition. <br/></td></tr>
 <tr class="memitem:a208c7f7472cb5bb44da0e33aaf32a66e"><td class="memItemLeft" align="right" valign="top">mglData *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogic__input.html#a208c7f7472cb5bb44da0e33aaf32a66e">rawdata</a></td></tr>
 <tr class="memdesc:a208c7f7472cb5bb44da0e33aaf32a66e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array of mglData vector.  <a href="#a208c7f7472cb5bb44da0e33aaf32a66e"></a><br/></td></tr>
 <tr class="memitem:a4b9112427064603351d34f5170feb643"><td class="memItemLeft" align="right" valign="top">mglData&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogic__input.html#a4b9112427064603351d34f5170feb643">t</a></td></tr>
-<tr class="memdesc:a4b9112427064603351d34f5170feb643"><td class="mdescLeft">&#160;</td><td class="mdescRight">mglData vector of the time of each aquisition.  <a href="#a4b9112427064603351d34f5170feb643"></a><br/></td></tr>
+<tr class="memdesc:a4b9112427064603351d34f5170feb643"><td class="mdescLeft">&#160;</td><td class="mdescRight">mglData vector of the time of each acquisition.  <a href="#a4b9112427064603351d34f5170feb643"></a><br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>Class doing aquisition from RPI's GPIO. </p>
+<div class="textblock"><p>Class doing acquisition from RPI's GPIO. </p>
 <p>Saving to and loading from a file to be added. </p>
 </div><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a450e489e87441db0bad7c5c9d71494b5"></a>
@@ -165,7 +165,7 @@ uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 </div><div class="memdoc">
 
 <p>Constructor. </p>
-<p>Call init_acquisition and acquire if the corresponding parrameters are set. </p>
+<p>Call init_acquisition and acquire if the corresponding parameters are set. </p>
 
 </div>
 </div>
@@ -198,7 +198,7 @@ uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">npoint</td><td>number of logic values to acquire (1 point is 2 GPIO measurements: one with pull up and one with pull down). </td></tr>
-    <tr><td class="paramname">delay</td><td>time in ms to wait between 2 point aquisitionb. </td></tr>
+    <tr><td class="paramname">delay</td><td>time in ms to wait between 2 point acquisition. </td></tr>
   </table>
   </dd>
 </dl>
@@ -265,11 +265,11 @@ uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
       </table>
 </div><div class="memdoc">
 
-<p>Initialization of the object for the capture. </p>
+<p>Initialisation of the object for the capture. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pins</td><td>array of the GPIO pin number (i for GPIOi) to be used durring acquisition. </td></tr>
-    <tr><td class="paramname">npin</td><td>number of pins to be used durring acquisition. Max value is pins array size. </td></tr>
+    <tr><td class="paramname">pins</td><td>array of the GPIO pin number (i for GPIOi) to be used during acquisition. </td></tr>
+    <tr><td class="paramname">npin</td><td>number of pins to be used during acquisition. Max value is pins array size. </td></tr>
   </table>
   </dd>
 </dl>
@@ -288,7 +288,7 @@ uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 </div><div class="memdoc">
 
 <p>Array of mglData vector. </p>
-<p>Size of the array is npin, each vector contains the npoint logic value measurements for the coresponding pin </p>
+<p>Size of the array is npin, each vector contains the npoint logic value measurements for the co responding pin </p>
 
 </div>
 </div>
@@ -302,7 +302,7 @@ uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
       </table>
 </div><div class="memdoc">
 
-<p>mglData vector of the time of each aquisition. </p>
+<p>mglData vector of the time of each acquisition. </p>
 <p>contains npoint acquisition time in s. </p>
 
 </div>
@@ -314,7 +314,7 @@ uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Mar 5 2013 05:44:34 for Logic Analyzer RPi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 6 2013 10:15:07 for Logic Analyzer RPi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

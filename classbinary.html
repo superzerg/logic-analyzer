@@ -89,7 +89,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>Class containining bits information obtained from <a class="el" href="classlogic__input.html" title="Class doing aquisition from RPI&#39;s GPIO.">logic_input</a> and transition.  
+<p>Class containing bits information obtained from <a class="el" href="classlogic__input.html" title="Class doing acquisition from RPI&#39;s GPIO.">logic_input</a> and transition.  
  <a href="classbinary.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="binary_8h_source.html">binary.h</a>&gt;</code></p>
@@ -100,11 +100,11 @@ Public Member Functions</h2></td></tr>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbinary.html#aad8aef180ce8820170ea63aa97989811">binary</a> (uint32_t <a class="el" href="classbinary.html#a03d9560942ab90b4dff175f112ed3122">nbit</a>=0)</td></tr>
 <tr class="memdesc:aad8aef180ce8820170ea63aa97989811"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor. <br/></td></tr>
 <tr class="memitem:a79a44d18ed5b468cb690ef49eac3b7f3"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbinary.html#a79a44d18ed5b468cb690ef49eac3b7f3">binary</a> (const <a class="el" href="classbinary.html">binary</a> &amp;source, uint32_t index_start=0, uint32_t index_end=0)</td></tr>
-<tr class="memdesc:a79a44d18ed5b468cb690ef49eac3b7f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default copy contructor, it allows to select a subrange of the source object.  <a href="#a79a44d18ed5b468cb690ef49eac3b7f3"></a><br/></td></tr>
+<tr class="memdesc:a79a44d18ed5b468cb690ef49eac3b7f3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Default copy constructor, it allows to select a sub-range of the source object.  <a href="#a79a44d18ed5b468cb690ef49eac3b7f3"></a><br/></td></tr>
 <tr class="memitem:ac70241e7ea0158259260a5e146b83a35"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbinary.html#ac70241e7ea0158259260a5e146b83a35">binary</a> (const <a class="el" href="classbinary.html">binary</a> &amp;source, float t_start, float t_end=0)</td></tr>
-<tr class="memdesc:ac70241e7ea0158259260a5e146b83a35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy contructor allowing to select a subrange in time of the source object.  <a href="#ac70241e7ea0158259260a5e146b83a35"></a><br/></td></tr>
+<tr class="memdesc:ac70241e7ea0158259260a5e146b83a35"><td class="mdescLeft">&#160;</td><td class="mdescRight">Copy constructor allowing to select a sub-range in time of the source object.  <a href="#ac70241e7ea0158259260a5e146b83a35"></a><br/></td></tr>
 <tr class="memitem:a8bcced31a22113c12424ad7ba876fc9d"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbinary.html#a8bcced31a22113c12424ad7ba876fc9d">binary</a> (<a class="el" href="classlogic__input.html">logic_input</a> *data, <a class="el" href="classtransition.html">transition</a> *clk, uint8_t <a class="el" href="classbinary.html#a8642b4c10eb17c021ee679c847482576">pin</a>, char transition_direction='u')</td></tr>
-<tr class="memdesc:a8bcced31a22113c12424ad7ba876fc9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor from an <a class="el" href="classlogic__input.html" title="Class doing aquisition from RPI&#39;s GPIO.">logic_input</a> object data.  <a href="#a8bcced31a22113c12424ad7ba876fc9d"></a><br/></td></tr>
+<tr class="memdesc:a8bcced31a22113c12424ad7ba876fc9d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor from an <a class="el" href="classlogic__input.html" title="Class doing acquisition from RPI&#39;s GPIO.">logic_input</a> object data.  <a href="#a8bcced31a22113c12424ad7ba876fc9d"></a><br/></td></tr>
 <tr class="memitem:a4370bc41745323a12cc0da346a9a5555"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4370bc41745323a12cc0da346a9a5555"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbinary.html#a4370bc41745323a12cc0da346a9a5555">~binary</a> ()</td></tr>
 <tr class="memdesc:a4370bc41745323a12cc0da346a9a5555"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br/></td></tr>
@@ -118,7 +118,7 @@ Public Member Functions</h2></td></tr>
 <tr class="memdesc:ab8743fa99f3ccc9bc5d1129098635403"><td class="mdescLeft">&#160;</td><td class="mdescRight">Display each bit value.  <a href="#ab8743fa99f3ccc9bc5d1129098635403"></a><br/></td></tr>
 <tr class="memitem:ad99a9abb2041460823e0309fdc91b527"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ad99a9abb2041460823e0309fdc91b527"></a>
 <a class="el" href="classbinary.html">binary</a> &amp;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbinary.html#ad99a9abb2041460823e0309fdc91b527">operator=</a> (const <a class="el" href="classbinary.html">binary</a> source)</td></tr>
-<tr class="memdesc:ad99a9abb2041460823e0309fdc91b527"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assignment opperator. <br/></td></tr>
+<tr class="memdesc:ad99a9abb2041460823e0309fdc91b527"><td class="mdescLeft">&#160;</td><td class="mdescRight">Assignment operator. <br/></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -127,7 +127,7 @@ uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <tr class="memdesc:a6ddf656f1dd9290b179db813c19201c8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Array of bits. <br/></td></tr>
 <tr class="memitem:a73957376032badfd673e57a3a96678ff"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a73957376032badfd673e57a3a96678ff"></a>
 mglData&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbinary.html#a73957376032badfd673e57a3a96678ff">t</a></td></tr>
-<tr class="memdesc:a73957376032badfd673e57a3a96678ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">mglData object containing the aquisition time of each bit <br/></td></tr>
+<tr class="memdesc:a73957376032badfd673e57a3a96678ff"><td class="mdescLeft">&#160;</td><td class="mdescRight">mglData object containing the acquisition time of each bit <br/></td></tr>
 <tr class="memitem:a03d9560942ab90b4dff175f112ed3122"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a03d9560942ab90b4dff175f112ed3122"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classbinary.html#a03d9560942ab90b4dff175f112ed3122">nbit</a></td></tr>
 <tr class="memdesc:a03d9560942ab90b4dff175f112ed3122"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of bits <br/></td></tr>
@@ -137,7 +137,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <tr class="memdesc:a8642b4c10eb17c021ee679c847482576"><td class="mdescLeft">&#160;</td><td class="mdescRight">pin where the binary data has been captured  <a href="#a8642b4c10eb17c021ee679c847482576"></a><br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
-<div class="textblock"><p>Class containining bits information obtained from <a class="el" href="classlogic__input.html" title="Class doing aquisition from RPI&#39;s GPIO.">logic_input</a> and transition. </p>
+<div class="textblock"><p>Class containing bits information obtained from <a class="el" href="classlogic__input.html" title="Class doing acquisition from RPI&#39;s GPIO.">logic_input</a> and transition. </p>
 </div><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a79a44d18ed5b468cb690ef49eac3b7f3"></a>
 <div class="memitem">
@@ -169,7 +169,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
       </table>
 </div><div class="memdoc">
 
-<p>Default copy contructor, it allows to select a subrange of the source object. </p>
+<p>Default copy constructor, it allows to select a sub-range of the source object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">source</td><td>source binary object </td></tr>
@@ -211,7 +211,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
       </table>
 </div><div class="memdoc">
 
-<p>Copy contructor allowing to select a subrange in time of the source object. </p>
+<p>Copy constructor allowing to select a sub-range in time of the source object. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">source</td><td>source binary object </td></tr>
@@ -259,11 +259,11 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
       </table>
 </div><div class="memdoc">
 
-<p>Constructor from an <a class="el" href="classlogic__input.html" title="Class doing aquisition from RPI&#39;s GPIO.">logic_input</a> object data. </p>
+<p>Constructor from an <a class="el" href="classlogic__input.html" title="Class doing acquisition from RPI&#39;s GPIO.">logic_input</a> object data. </p>
 <p>binary values are got from data at pin pin, when the specified transition occurs. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">data</td><td>pointer to the <a class="el" href="classlogic__input.html" title="Class doing aquisition from RPI&#39;s GPIO.">logic_input</a> object </td></tr>
+    <tr><td class="paramname">data</td><td>pointer to the <a class="el" href="classlogic__input.html" title="Class doing acquisition from RPI&#39;s GPIO.">logic_input</a> object </td></tr>
     <tr><td class="paramname">clk</td><td>pointer to the transition object </td></tr>
     <tr><td class="paramname">pin</td><td>index of the data where to find binary values </td></tr>
     <tr><td class="paramname">transition_direction</td><td>'u' for low to high transitions, 'd' for the high to low transitions </td></tr>
@@ -295,7 +295,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
   </table>
   </dd>
 </dl>
-<dl class="section return"><dt>Returns</dt><dd>execution status (0 if ok) </dd></dl>
+<dl class="section return"><dt>Returns</dt><dd>execution status (0 if OK) </dd></dl>
 
 </div>
 </div>
@@ -398,11 +398,11 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <p>Copy the logic value of a bit in string. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">value</td><td>2 chars reciving the logic value:<ul>
+    <tr><td class="paramname">value</td><td>2 chars receiving the logic value:<ul>
 <li>"0" for low voltage (&lt;1V when pull up and down used).</li>
 <li>"1" for high voltage (&gt;2V when pull up and down used).</li>
 <li>" " for high resistance (&lt;1V when pull down and &gt;2V when pull up)</li>
-<li>"E" for error (&gt;2V when pull down and &lt;1V when pull up). Abnomarl state due to a transition between both measurements.</li>
+<li>"E" for error (&gt;2V when pull down and &lt;1V when pull up). Abnormal state due to a transition between both measurements.</li>
 <li>"?" error from the software, report if seen. </li>
 </ul>
 </td></tr>
@@ -451,7 +451,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue Mar 5 2013 05:44:34 for Logic Analyzer RPi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 6 2013 10:15:07 for Logic Analyzer RPi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
