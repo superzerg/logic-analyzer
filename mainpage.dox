@@ -1,17 +1,17 @@
 /**
-@brief Developper Guide for Logic Analyzer RPi
+@brief Developer's Guide for Logic Analyzer RPi
 
 @author superzerg
 
 @file 
 
-@mainpage Developper Guide for Logic Analyzer RPi
-This guide has been made so you can more easily addapt the  Logic Analyzer RPi software for your needs and contibute to it.
+@mainpage Developer's Guide for Logic Analyzer RPi
+This guide has been made so you can more easily adapt the  Logic Analyzer RPi software for your needs and contribute to it.
 
 The classes used are:
 1. [logic_input](@ref logic_input): takes care of acquisition from Raspberry pi's GPIO pins and method to draw it
 2. [activity](@ref activity): contains chip enable periods obtained from logic_input and method to draw it
-3. [transition](@ref transition): contains the aquisition time of the clock transitions obtained from logic_input and methods to draw it.
+3. [transition](@ref transition): contains the acquisition time of the clock transitions obtained from logic_input and methods to draw it.
 4. [binary](@ref binary): contains the bit obtained from logic_input and methods to draw it.
 5. [message](@ref message): contains decoded information. 
 
@@ -19,11 +19,11 @@ A protocol must be used for the conversion from activity and/or transition and a
 The following classes are implemented protocols:
 - [microwire](@ref microwire)
 
-If you want to decode anthing else, you need to create your own protocol
+If you want to decode anything else, you need to create your own protocol
 There is a few rules to follow (this may evolve).
 1. A protocol has a logic_input and an array of [message](@ref message) as member.
 2. A protocol has a constructor with 2 parameter:
-    \param pins is an array of uint8_t corresponging to the GPIO pins used. 
+    \param pins is an array of uint8_t corresponding to the GPIO pins used. 
     \param npin is the size of the pins array.
 The order of the pin determines their function.
 3. A protocol has a Draw() function calling all the necessary Draw() functions of his members
