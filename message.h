@@ -21,7 +21,7 @@ public:
     //! Initialize the message from parameters: 
     /*!     \param data object representing the message (subset of acquired binary data).
             \param label string representing the message (Drawn string).
-            \param t0 acquisition time in seconds of the beginig of the message.
+            \param t0 acquisition time in seconds of the beginning of the message.
             \param tmessage duration of the message in seconds.
             \param color char giving the color of the message.
         this->pin and this->npin are taken from data
@@ -42,7 +42,7 @@ public:
     char label[30];
     //! acquisition time when message started.
     float t0;
-    //! durration of the message.
+    //! duration of the message.
     float tmessage;
     //! color of the message.
     char color;

@@ -15,20 +15,20 @@
 #include "transition.h"
 #endif
 
-//! Class containining bits information obtained from logic_input and transition.
+//! Class containing bits information obtained from logic_input and transition.
 
 class binary : public mglDraw
 {
 public:
     //! Constructor
     binary(uint32_t nbit=0);
-    //! Default copy contructor, it allows to select a subrange of the source object
+    //! Default copy constructor, it allows to select a sub-range of the source object
     /*!     \param source source binary object
             \param index_start inclusive index to start copy from
             \param index_end inclusive index where to stop the copy.
                 If index_end=0 or omitted, copy 1 bit only.*/
     binary(const binary &source, uint32_t index_start=0,  uint32_t index_end=0);
-    //! Copy contructor allowing to select a subrange in time of the source object
+    //! Copy constructor allowing to select a sub-range in time of the source object
     /*!     \param source source binary object
             \param t_start time to start copy from
             \param t_end time when to stop the copy.
@@ -55,20 +55,20 @@ public:
             \return value between inclusive bits index_start and index_end (as most significant bit first).*/
     uint32_t Get(uint32_t index_start, uint32_t index_end=0);
     //! Copy the logic value of a bit in string.
-    /*!     \param value 2 chars reciving the logic value:
+    /*!     \param value 2 chars receiving the logic value:
                 - \"0\" for low voltage (<1V when pull up and down used).
                 - \"1\" for high voltage (>2V when pull up and down used).
                 - \" \" for high resistance (<1V when pull down and >2V when pull up)
-                - \"E\" for error (>2V when pull down and <1V when pull up). Abnomarl state due to a transition between both measurements.
+                - \"E\" for error (>2V when pull down and <1V when pull up). Abnormal state due to a transition between both measurements.
                 - \"?\" error from the software, report if seen.
             \param bit index of the bit*/
     void sprint(char value[2], uint32_t bit);
     //! Display each bit value
     /*!     \param gr pointer to mglGraph object
-            \return execution status (0 if ok)*/
+            \return execution status (0 if OK)*/
     int Draw(mglGraph *gr);
-    //! Assignment opperator
-    /*Checks for self assignement*/
+    //! Assignment operator
+    /*Checks for self assignment*/
     binary& operator = (const binary source)
     {
         if(this!=&source)
@@ -87,7 +87,7 @@ public:
 //private:
     //! Array of bits
     uint8_t* bits;
-    //! mglData object containing the aquisition time of each bit
+    //! mglData object containing the acquisition time of each bit
     mglData t;
     //! number of bits
     uint32_t nbit;

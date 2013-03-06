@@ -22,7 +22,7 @@ public:
     //! Constructor
     /*! Calls init() if data is not NULL.\sa init()*/
     transition(logic_input *data=NULL,uint8_t pin_clock=1,activity *cs=NULL);
-    //! Intialization
+    //! Initialization
     /*!     \param data logic_input source. if not NULL call find_transition().
             \param pin_clock index of the pin of the clock
             \param cs pointer to activity. If not NULL GetStats() is called.
@@ -45,7 +45,7 @@ public:
     //! Draw statistics on period transitions
     /*!     \param gr pointer to a mglData object*/
     int Draw(mglGraph *gr);
-    //! Draw vertical arrows at sime times as transitions.
+    //! Draw vertical arrows at same times as transitions.
     /*!     \param gr pointer to a mglGraph object.
             \param sign sign of the transition:
                 - \'u\' for getting stats about LTH transitions.
@@ -53,19 +53,19 @@ public:
             \param subplot subplot index where to draw.*/
     int Draw(mglGraph *gr,char sign,uint8_t subplot);
 //private:
-    //! number of LTH tansitions
+    //! number of LTH transitions
     uint32_t ntransition_up;
-    //! array of index of logic_input measurements corresponding to all LTH tansitions.
+    //! array of index of logic_input measurements corresponding to all LTH transitions.
     uint32_t *index_transition_up;
-    //! mglData object containing acquisition time corresponding to all LTH tansitions.
+    //! mglData object containing acquisition time corresponding to all LTH transitions.
     mglData t_transition_up;
-    //! number of HTL tansitions
+    //! number of HTL transitions
     uint32_t ntransition_down;
-    //! array of index of logic_input measurements corresponding to all HTL tansitions.
+    //! array of index of logic_input measurements corresponding to all HTL transitions.
     uint32_t *index_transition_down;
-    //! mglData object containing acquisition time corresponding to all HTL tansitions.
+    //! mglData object containing acquisition time corresponding to all HTL transitions.
     mglData t_transition_down;
-    //! number of pin used durring acquisition.
+    //! number of pin used during acquisition.
     uint8_t npin;
     //! index of the pin of the clock
     uint8_t pin_clock;
@@ -76,6 +76,6 @@ public:
     //! max period of the clock measured 
     float period_max;
     //! time in s where to center the statistic display
-    /*! initialized at the midle of the first active period*/
+    /*! initialized at the middle of the first active period*/
     float t_first_activity;
 };

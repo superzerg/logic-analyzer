@@ -1,20 +1,20 @@
 Guide for Logic Analyzer RPi
 ==============
 
-I)Exemple of output 
+I)Example of output 
 ==============
 ![logic states](read.png)
-Image otained durring two consecutive read instructions on a NMC9314 EEPROM memory using following command:
+Image obtained during two consecutive read instructions on a NMC9314 EEPROM memory using following command:
 
 	make test
 
 You must have installed [NMC9314 Pi](https://github.com/superzerg/NMC9314_pi) first.
 
-II) Dependance 
+II) Dependence 
 ==============
-It use the C library for Raspberry Pi (http://www.open.com.au/mikem/bcm2835/index.html)
+It use the C library for Raspberry Pi [http://www.open.com.au/mikem/bcm2835](http://www.open.com.au/mikem/bcm2835/index.html)
 
-III) Disclamer
+III) Disclaimer
 ===============
 This program has been made for personal use, it works for me, but I offer no warranty as this program may (unlikely) damage your raspberry pi, your memory and/or any electronic device connected. Use it at your own risk.
 
@@ -83,20 +83,20 @@ No arguments can yet be passed to the main program, so you will have to edit log
 		gr->WritePNG("filename.png");
 	}
 	
-It is also possible to Draw into a windows or a widget, see the mathgl documention.
+It is also possible to Draw into a windows or a widget, see the mathgl documentation.
 
 VI) Install
 ===============
 1. install the C library for Raspberry Pi (http://www.open.com.au/mikem/bcm2835/index.html)
-2. get the Logic Analyser RPi files at https://github.com/superzerg/logic-analyzer
+2. get the Logic Analyzer RPi files at https://github.com/superzerg/logic-analyzer
 3. compile with:
 	make
 
 VII) More Information
 ===============
-More information is availble with the developper guide (http://superzerg.github.com/logic-analyzer/index.html)
+More information is available with the developer's guide (http://superzerg.github.com/logic-analyzer/index.html)
 
-VIII) Licence
+VIII) License
 ===============
 Copyright (C) 1994, 1995, 1996, 1999, 2000, 2001, 2002, 2004, 2005,
 2006, 2007, 2008, 2009 Free Software Foundation, Inc.
