@@ -59,7 +59,15 @@ The order matter, for exemple with the microwire protocol:
 - pins[2] acquires MOSI (Master Out Slave In) of the studied device.
 - pins[3] acquires MISO (Master In Slave Out) of the studied device.
 
-V) Usage
+V) Install
+===============
+1. install the C library for Raspberry Pi (http://www.open.com.au/mikem/bcm2835/index.html)
+2. get the Logic Analyzer RPi files at https://github.com/superzerg/logic-analyzer
+3. compile with:
+	make
+
+
+VI) Usage
 ===============
 
 No arguments can yet be passed to the main program, so you will have to edit logic_analyzer.cpp:
@@ -84,13 +92,6 @@ No arguments can yet be passed to the main program, so you will have to edit log
 	}
 	
 It is also possible to Draw into a windows or a widget, see the mathgl documentation.
-
-VI) Install
-===============
-1. install the C library for Raspberry Pi (http://www.open.com.au/mikem/bcm2835/index.html)
-2. get the Logic Analyzer RPi files at https://github.com/superzerg/logic-analyzer
-3. compile with:
-	make
 
 VII) More Information
 ===============
