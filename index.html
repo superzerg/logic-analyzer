@@ -3,7 +3,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/xhtml;charset=UTF-8"/>
 <meta http-equiv="X-UA-Compatible" content="IE=9"/>
-<title>Logic Analyzer RPi: Developper Guide for Logic Analyzer RPi</title>
+<title>Logic Analyzer RPi: Developer&#39;s Guide for Logic Analyzer RPi</title>
 <link href="tabs.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="jquery.js"></script>
 <script type="text/javascript" src="dynsections.js"></script>
@@ -74,15 +74,15 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 
 <div class="header">
   <div class="headertitle">
-<div class="title">Developper Guide for Logic Analyzer RPi </div>  </div>
+<div class="title">Developer's Guide for Logic Analyzer RPi </div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p>This guide has been made so you can more easily addapt the Logic Analyzer RPi software for your needs and contibute to it.</p>
+<div class="textblock"><p>This guide has been made so you can more easily adapt the Logic Analyzer RPi software for your needs and contribute to it.</p>
 <p>The classes used are:</p>
 <ol type="1">
 <li><a class="el" href="classlogic__input.html">logic_input</a>: takes care of acquisition from Raspberry pi's GPIO pins and method to draw it</li>
 <li><a class="el" href="classactivity.html">activity</a>: contains chip enable periods obtained from <a class="el" href="classlogic__input.html" title="Class doing acquisition from RPI&#39;s GPIO.">logic_input</a> and method to draw it</li>
-<li><a class="el" href="classtransition.html">transition</a>: contains the aquisition time of the clock transitions obtained from <a class="el" href="classlogic__input.html" title="Class doing acquisition from RPI&#39;s GPIO.">logic_input</a> and methods to draw it.</li>
+<li><a class="el" href="classtransition.html">transition</a>: contains the acquisition time of the clock transitions obtained from <a class="el" href="classlogic__input.html" title="Class doing acquisition from RPI&#39;s GPIO.">logic_input</a> and methods to draw it.</li>
 <li><a class="el" href="classbinary.html">binary</a>: contains the bit obtained from <a class="el" href="classlogic__input.html" title="Class doing acquisition from RPI&#39;s GPIO.">logic_input</a> and methods to draw it.</li>
 <li><a class="el" href="classmessage.html">message</a>: contains decoded information.</li>
 </ol>
@@ -90,12 +90,12 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <ul>
 <li><a class="el" href="classmicrowire.html">microwire</a></li>
 </ul>
-<p>If you want to decode anthing else, you need to create your own protocol There is a few rules to follow (this may evolve).</p>
+<p>If you want to decode anything else, you need to create your own protocol There is a few rules to follow (this may evolve).</p>
 <ol type="1">
 <li>A protocol has a <a class="el" href="classlogic__input.html" title="Class doing acquisition from RPI&#39;s GPIO.">logic_input</a> and an array of <a class="el" href="classmessage.html">message</a> as member.</li>
 <li>A protocol has a constructor with 2 parameter: <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pins</td><td>is an array of uint8_t corresponging to the GPIO pins used. </td></tr>
+    <tr><td class="paramname">pins</td><td>is an array of uint8_t corresponding to the GPIO pins used. </td></tr>
     <tr><td class="paramname">npin</td><td>is the size of the pins array. The order of the pin determines their function.</td></tr>
   </table>
   </dd>
@@ -107,7 +107,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 6 2013 10:15:08 for Logic Analyzer RPi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Wed Mar 6 2013 10:18:44 for Logic Analyzer RPi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
