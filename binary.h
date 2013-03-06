@@ -34,15 +34,15 @@ public:
             \param t_end time when to stop the copy.
                 If t_end=0 or omitted, copy until the end.*/
     binary(const binary &source, float t_start,  float t_end=0);
-    //! Constructor from an logic_input object data
+    //! Destructor
+    ~binary();
+    //! Initialize from an logic_input object data
     /*! binary values are got from data at pin pin, when the specified transition occurs.
             \param data pointer to the logic_input object
             \param clk pointer to the transition object
             \param pin index of the data where to find binary values
             \param transition_direction 'u' for low to high transitions, 'd' for the high to low transitions*/
-    binary(logic_input *data, transition *clk, uint8_t pin, char transition_direction='u');
-    //! Destructor
-    ~binary();
+    void init(logic_input *data, transition *clk, uint8_t pin, char transition_direction='u');
     //! Return bad reading number on an interval.
     /*!     \param index_start inclusive index to start looking for bad readings.
             \param index_end inclusive index to stop looking for bad readings.
@@ -76,17 +76,20 @@ public:
             this->nbit=source.nbit;
             this->npin=source.npin;
             this->t=source.t;
-            this->bits=new uint8_t[this->nbit];
-            for (uint32_t bit=0;bit<this->nbit;bit++)
+            if(source.nbit>0)
             {
-                this->bits[bit]=source.bits[bit];
+                this->bits=new uint8_t[this->nbit];
+                for (uint32_t bit=0;bit<this->nbit;bit++)
+                {
+                    this->bits[bit]=source.bits[bit];
+                }
             }
         }
         return *this;
     }
 //private:
     //! Array of bits
-    uint8_t* bits;
+    uint8_t *bits;
     //! mglData object containing the acquisition time of each bit
     mglData t;
     //! number of bits

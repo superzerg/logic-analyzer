@@ -30,26 +30,48 @@
 #define ACTIVITY
 #include "activity.h"
 #endif
+
+#ifndef PROTOCOL
+#define PROTOCOL
+#include "protocol.h"
+#endif
+
 //! Example class decoding instructions sent to a NMC9314 EEPROM memory (Microwire interface)
-class microwire: public mglDraw
+//* As bellow, all protocols must herit from class protocol.
+class microwire: public protocol
 {
 public:
     //! Constructor.
-    /*! Setup and start capture on the GPIO pins given.
-            \param pins array of GPIO pin used in the capture such as:
+    /*! call init_acquisition()*/
+    microwire(uint8_t pins[]=NULL,uint8_t npin=4);
+    //! Destructor
+    ~microwire();
+    //! Initialize acquisition (not defined, as protocol::init_acquisition() do the job).
+    /*! Setup capture on the GPIO pins given.
+            \param pins array of GPIO pin used in  init_acquisition() such as:
                 - pins[0] acquires CS (Chip Select)
                 - pins[1] acquires CLK (the clock)
                 - pins[2] acquires MOSI (Master Out Slave In)
                 - pins[3] acquires MISO (Master In Slave Out)
                 - any pin>3 will not be decoded but will be acquired and displayed.
             \param npin number of pin to acquire (must be smaller or equal to the size of pins)*/
-    microwire(uint8_t pins[],uint8_t npin=4);
-    //! Destructor
-    ~microwire();
-    //! function extracting messages
+    init_acquisition(uint8_t pins[],uint8_t npin);
+    //! Start acquisition (not defined, as protocol::acquire() do the job).
+    /*!     \param npoint number of points to acquire.
+            \param period wait time in ms between 2 measurements.*/
+    /void acquire(uint32_t npoint=2000, float period=1.0);
+    //! Perform all the decoding.
+    /*! This function decodes:
+            - activity from CS pin, 
+            - transitions from CLK,
+            - binary from MOSI and MISO
+            - messages from MOSI binary,
+            - messages from MISO binary*/
+    void decode ();
+    //! function extracting messages from MOSI
     /*! Puts the extracted messages array in mosi_mess, from binary mosi and activity cs.*/
     void decode_mosi();
-    //! function extracting messages
+    //! function extracting messages from MISO
     /*! Puts the extracted messages array in miso_mess, from binary miso and activity cs.*/
     void decode_miso();
     //! Draw all messages

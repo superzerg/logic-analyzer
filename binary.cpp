@@ -3,11 +3,6 @@
 
 binary::binary(uint32_t nbit)
 {
-    if(nbit<0)
-    {
-        printf("ERROR in binary constructor, nbit must be>=0\n");
-        return;
-    }
     this->nbit=nbit;
     if (nbit>0)
         this->bits=new uint8_t[nbit];
@@ -86,14 +81,25 @@ binary::binary(const binary &source, float t_start,  float t_end)
     this->pin=source.pin;        
 }
 
-binary::binary(logic_input *data, transition *clk, uint8_t pin, char transition_direction)
+binary::~binary()
 {
+    if (this->bits!=NULL)
+        delete[] this->bits;
+    this->bits=NULL;
+    this->nbit=0;
+    this->npin=0;
+    this->pin=0;
+}
+
+void binary::init(logic_input *data, transition *clk, uint8_t pin, char transition_direction)
+{
+    this->~binary();
     uint32_t nbit;
     uint32_t *index_transition;
     mglData *t_transition;
     if (pin>=data->npin)
     {
-        printf("ERROR in binary constructor, pin %i not valid\n",pin);
+        printf("ERROR in binary initialization, pin %i not valid\n",pin);
         return;
     }
     this->npin=data->npin;
@@ -116,7 +122,7 @@ binary::binary(logic_input *data, transition *clk, uint8_t pin, char transition_
             t_transition=&(clk->t_transition_down);
             break;
          default:
-            printf("ERROR in binary constructor, transition_direction must be \'u\' or \'d\'\n");
+            printf("ERROR in binary initialization, transition_direction must be \'u\' or \'d\'\n");
             return;
     }
     this->nbit=nbit;
@@ -130,19 +136,6 @@ binary::binary(logic_input *data, transition *clk, uint8_t pin, char transition_
     }
 } 
    
-binary::~binary()
-{
-    if (this->bits!=NULL)
-        delete[] this->bits;
-    this->bits=NULL;
-//        if (t.nx>1)
-//            this->t.~mglData();
-    this->nbit=0;
-    this->npin=0;
-    this->pin=0;
-   
-}
-
 uint32_t binary::Get_nbad(uint32_t index_start, uint32_t index_end)
 {
     if(index_end==0)

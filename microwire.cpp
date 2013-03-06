@@ -1,16 +1,11 @@
 #include "microwire.h"
 
-microwire::microwire(uint8_t pins[],uint8_t npin): 
-    capture(npin,pins, 3000,0.5), 
-    cs(capture, 0, 1),
-    clk(&capture, 1,&cs),
-    mosi(&capture, &clk, 2, 'u'),
-    miso(&capture, &clk, 3, 'd')
+microwire::microwire(uint8_t pins[],uint8_t npin)
 {
-    mosi_mess=NULL;
-    miso_mess=NULL;
-    this->decode_mosi();
-    this->decode_miso();
+    this->mosi_mess=NULL;
+    this->miso_mess=NULL;
+    if(pins!=NULL && npin>0)
+        this->init_acquisition(pins,npin);
 }
 
 microwire::~microwire()
@@ -21,6 +16,16 @@ microwire::~microwire()
         delete[] miso_mess;
     mosi_mess=NULL;
     miso_mess=NULL;
+}
+
+void microwire::decode()
+{
+    cs.init(&capture, 0, HIGHV);
+    clk.init(&capture, 1,&cs);
+    mosi.init(&capture, &clk, 2, 'u');
+    miso.init(&capture, &clk, 3, 'd');
+    this->decode_mosi();
+    this->decode_miso();    
 }
 
 void microwire::decode_mosi()
@@ -180,20 +185,20 @@ int microwire::Draw(mglGraph *gr)
     gr->SetTicksVal('y',4,logic_values,ylabels);
     gr->SetPlotFactor(1.15);
 //printf("capture.Draw()\n");
-    capture.Draw(gr,plot_labels);
+    this->capture.Draw(gr,plot_labels);
 //printf("cs.Draw()\n");
-    cs.Draw(gr,0);
-    cs.Draw(gr,1);
+    this->cs.Draw(gr,0);
+    this->cs.Draw(gr,1);
 //printf("clk.Draw()\n");
-    clk.Draw(gr);
+    this->clk.Draw(gr);
 //printf("mosi.Draw()\n");
-    cs.Draw(gr,2);
-    clk.Draw(gr,'u',2);
-    mosi.Draw(gr);
+    this->cs.Draw(gr,2);
+    this->clk.Draw(gr,'u',2);
+    this->mosi.Draw(gr);
 //printf("miso.Draw()\n");
-    cs.Draw(gr,3);
-    clk.Draw(gr,'d',3);
-    miso.Draw(gr);
+    this->cs.Draw(gr,3);
+    this->clk.Draw(gr,'d',3);
+    this->miso.Draw(gr);
     if(this->mosi_mess!=NULL)
     {
         for (uint32_t i=0;i<this->nmessage;i++)

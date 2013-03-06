@@ -17,10 +17,12 @@ class activity: public mglDraw
 {
 public:
     //! Constructor from a logic_input object data
+    /*! Calls init if data is not NULL*/
+    activity(logic_input *data=NULL,uint8_t pin=0, logic_state=HIGHV);
     /*!     \param data logic_input object
             \param pin pin index corresponding to Chip Select 
-            \param active_value value when the Chip is Enabled (1 for active HIGH or 0 for active LOW)*/
-    activity(logic_input &data,uint8_t pin=0, float active_value=1);
+            \param active_value value when the Chip is Enabled (HIGHV or LOWV)*/
+    void init(logic_input *data,uint8_t pin=0, logic_state=HIGHV);
     //!Destructor
     ~activity();
     //! Paint background of a subplot according to activity

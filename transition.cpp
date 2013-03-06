@@ -14,8 +14,28 @@ transition::transition(logic_input *data,uint8_t pin_clock,activity *cs)
         init(data,pin_clock,cs);
 }
 
+transition::~transition()
+{
+    this->ntransition_up=0;
+    this->ntransition_down=0;
+    this->npin=0;
+    this->period=0;
+    this->t_first_activity=0;
+    if(this->index_transition_up!=NULL)
+    {
+        delete[] index_transition_up;
+    }
+    this->index_transition_up=NULL;
+    if(this->index_transition_down!=NULL)        
+    {
+        delete[] index_transition_down;
+    }
+    this->index_transition_down=NULL;
+}
+
 void transition::init(logic_input *data,uint8_t pin_clock,activity *cs)
 {
+    this->~transition();
     if(data==NULL)
     {
         printf("ERROR in transition::init(): data is NULL\n");
@@ -28,26 +48,10 @@ void transition::init(logic_input *data,uint8_t pin_clock,activity *cs)
     }
     this->pin_clock=pin_clock;
     this->npin=data->npin;
-    find_transition(data,'u');
-    find_transition(data,'d');
+    this->find_transition(data,'u');
+    this->find_transition(data,'d');
     if(cs!=NULL)
         this->period=this->GetStats(cs,'u')/2+this->GetStats(cs,'d')/2;
-}
-
-transition::~transition()
-{
-//printf("transition destructor\n");
-    if(this->index_transition_up!=NULL)
-    {
-//printf("index_transition_up destruction\n");
-        delete[] index_transition_up;
-    }
-    if(this->index_transition_down!=NULL)        
-    {
-//printf("index_transition_down destruction\n");
-        delete[] index_transition_down;
-    }
-//printf("done\n");
 }
 
 float transition::GetStats(activity *cs,char sign)
