@@ -2,12 +2,9 @@
 
 logic_input::logic_input(uint8_t npin,uint8_t * pins,uint32_t npoint,float delay)
 {
-//printf("logic_input constructor\n");
-    this->npin=npin;
-    if (npin>0)
-        this->rawdata=new mglData[npin];
-    else
-        this->rawdata=NULL;
+printf("logic_input constructor with npin=%i\n",npin);
+    this->npin=0;
+    this->rawdata=NULL;
 //printf("rawdata->0x%X\n",this->rawdata);
     this->npoint=0;
     this->pins=NULL;
@@ -21,30 +18,22 @@ logic_input::logic_input(uint8_t npin,uint8_t * pins,uint32_t npoint,float delay
     
 logic_input::~logic_input()
 {
-//printf("logic_input destructor\n");
-/*        if(this->npin>0)
-        for (int pin=0;pin<this->npin;pin++)
-            if (this->npoint>0) 
-            {
-printf("rawdata[%i] destruction\n",pin);
-                this->rawdata[pin].~mglData();
-            }
-    if (this->npoint>0)
-    {
-printf("t destruction\n");
-        this->t.~mglData();
-    }*/
-//It seems to be the right thing to do, but do "double free or corruption" error
+printf("logic_input destructor\n");
+    this->npin=0;
+    this->npoint=0;
     if (this->rawdata!=NULL)
     {
-//printf("rawdata destruction at 0x%X\n",this->rawdata);
+printf("logic_input destructor: rawdata destruction at 0x%X\n",this->rawdata);
         delete[] this->rawdata;
+        this->rawdata=NULL;
     }
     if (this->pins!=NULL)
     {
-//printf("pins destruction at 0x%X\n",this->pins);
+printf("logic_input destructor: pins destruction at 0x%X\n",this->pins);
         delete[] this->pins;
+        this->pins=NULL;
     }
+    
 //printf("done\n");
 }
     
@@ -57,13 +46,12 @@ void logic_input::init_acquisition(uint8_t * pins, uint8_t npin)
         printf("ERROR in init_acquisition: npin must be > 0\n");
         return;
     }
-    if(npin!=this->npin)
-    {
-        printf("ERROR in init_acquisition: pin number varied from construction.\n");
-        return;
-    }
-//printf("pins memory allocution\n");
+//test disable destructors
+//    this->~logic_input();
+printf("pins memory allocution (array of %i)\n",npin);
+    this->rawdata=new mglData[npin];
     this->pins = new uint8_t[npin];
+    this->npin = npin;
 //printf("pins->0x%X\n",this->pins);
    for (int pin=0;pin<npin;pin++)
     {
@@ -73,24 +61,27 @@ void logic_input::init_acquisition(uint8_t * pins, uint8_t npin)
     
 void logic_input::acquire(uint32_t npoint,float delay)
 {
+//printf("logic_input::acquire(%i , %f)\n",npoint, delay);
     int pin;
     if(npoint==0)
         npoint=this->npoint;
-    if(npoint<1)
+    if(pins==NULL)
     {
-        printf("ERROR in aquire: npoint must be > 0\n");
+        printf("ERROR in logic_input::acquire(), logic_input::init_acquisition() must be called first to set pins\n");
         return;
     }
-    printf("allocate memory.\n");
+//printf("allocate memory.\n");
     //allocate memory for data objects
-//printf("allocate t.\n");
+//printf("allocate t for %i points.\n",npoint);
     this->t.Create(npoint);
-//printf("allocate rawdata[pin].\n");
+  
+//printf("allocate rawdata[pin] which is at %X.\n",this->rawdata);
     for (pin=0;pin<this->npin;pin++)
     {
-//printf("pin %i, nx=%i\n",pin,rawdata[pin].nx);
         this->rawdata[pin].Create(npoint);
+//printf("pin %i, nx=%i\n",pin,this->rawdata[pin].nx);
     }
+    
     struct timespec start;
     struct timespec end;
     
@@ -119,7 +110,7 @@ void logic_input::acquire(uint32_t npoint,float delay)
 //for (pin=0;pin<this->npin;pin++)
 //    printf("gpio%i (pull DOWN)=%f\n",this->pins[pin],rawdata[pin].a[i]);
         clock_gettime(CLOCK_MONOTONIC,&end);
-        t.a[i]=(float)(end.tv_sec-start.tv_sec + ((float)(end.tv_nsec-start.tv_nsec))/1000000000);
+        this->t.a[i]=(float)(end.tv_sec-start.tv_sec + ((float)(end.tv_nsec-start.tv_nsec))/1000000000);
         if(delay>=1)
             bcm2835_delay(delay);
         if(delay<1 && delay>=0.001)

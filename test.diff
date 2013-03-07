@@ -1,0 +1,804 @@
+diff --git a/activity.cpp b/activity.cpp
+index d92b2b3..dfb0a81 100644
+--- a/activity.cpp
++++ b/activity.cpp
+@@ -2,6 +2,7 @@
+ 
+ activity::activity(logic_input *data,uint8_t pin, logic_state active_value)
+ {
++    pmesg(DEBUG,"activity constructor.\n");
+     this->nactive=0;
+     this->t_start=NULL;
+     this->t_end=NULL;
+@@ -13,6 +14,7 @@ activity::activity(logic_input *data,uint8_t pin, logic_state active_value)
+ 
+ activity::~activity()
+ {
++    pmesg(DEBUG,"activity destructor.\n");
+     if(this->t_start!=NULL)
+         delete[] this->t_start;
+     if(this->t_end!=NULL)
+@@ -25,6 +27,7 @@ activity::~activity()
+ 
+ void activity::init(logic_input *data,uint8_t pin, logic_state active_value)
+ {
++    pmesg(DEBUG,"activity::init().\n");
+     this->~activity();
+     logic_state inactive_value;
+     if(active_value == HIGHV)
+@@ -33,14 +36,17 @@ void activity::init(logic_input *data,uint8_t pin, logic_state active_value)
+         inactive_value = HIGHV;
+     else
+     {
+-        printf("ERROR in activity initialization: bad active_value = %i\n",active_value);
++        pmesg(ERROR,"ERROR in activity::init(): bad active_value = %i.\n",active_value);
+         return;
+     }
+     if(data==NULL);
++    {
++        pmesg(ERROR,"ERROR in activity::init(): data is NULL.\n");
+         return;
++    }
+     if (pin>=data->npin)
+     {
+-        printf("ERROR in activity initialization : bad pin %i",pin);
++        pmesg(ERROR,"ERROR in activity::init(): bad pin %i.\n",pin);
+         return;
+     }
+     this->npin=data->npin;
+@@ -69,13 +75,13 @@ void activity::init(logic_input *data,uint8_t pin, logic_state active_value)
+         if((data->rawdata[pin].a[point]==active_value) && (active==0))
+         {
+             t_start[nactive]=data->t.a[point];
+-printf("%ith activity at t=%fs ",nactive+1,t_start[nactive]);
++            pmesg(INFORMATION,"%ith activity at t=%fs ",nactive+1,t_start[nactive]);
+             active=1;
+         }
+         if((data->rawdata[pin].a[point]==inactive_value) && (active==1))
+         {
+             t_end[nactive]=data->t.a[point-1];
+-printf("end at t=%fs\n",t_end[nactive]);
++            pmesg(INFORMATION,"end at t=%fs\n",t_end[nactive]);
+             active=0;
+             nactive++;
+         }   
+@@ -87,12 +93,13 @@ printf("end at t=%fs\n",t_end[nactive]);
+         {
+             t_end[nactive]=data->t.a[data->npoint-1];
+         }else
+-            printf("ERROR in activity constructor: number of activation does not match between two calls.\n");
++            pmesg(WARNING,"ERROR in activity::init(): number of activation does not match between two calls.\n");
+     }
+ }
+ 
+ int activity::Draw(mglGraph *gr,uint8_t subplot)
+ {
++    pmesg(DEBUG,"activity::Draw(%i).\n",subplot);
+     gr->SubPlot(1,this->npin,subplot);
+     gr->FaceZ(0,gr->Min.y,-1,this->t_start[0],gr->Max.y-gr->Min.y,"r9");
+     for (uint32_t i=0;i<this->nactive;i++)
+diff --git a/binary.cpp b/binary.cpp
+index b8dcfa6..f013f7c 100644
+--- a/binary.cpp
++++ b/binary.cpp
+@@ -3,6 +3,7 @@
+ 
+ binary::binary(uint32_t nbit)
+ {
++    pmesg(DEBUG,"binary destructor.\n");
+     this->nbit=nbit;
+     if (nbit>0)
+         this->bits=new uint8_t[nbit];
+@@ -17,12 +18,13 @@ binary::binary(const binary &source, uint32_t index_start,  uint32_t index_end)
+ {
+     if(index_end==0)
+         index_end=source.nbit-1;
++    pmesg(DEBUG,"binary copy constructor, i_start=%i i_end=%i.\n",index_start,index_end);
+     this->npin=0;
+     this->pin=0;
+     this->bits=NULL;
+     if(index_end-index_start+1<1)
+     {
+-        printf("ERROR in binary copy constructor, empty range\n");
++        pmesg(ERROR,"ERROR in binary copy constructor, empty range.\n");
+         return;
+     }
+     this->nbit=index_end-index_start+1;
+@@ -41,13 +43,13 @@ binary::binary(const binary &source, float t_start,  float t_end)
+ {
+     if(t_end==0)
+         t_end=source.t.a[nbit-1];
+-//printf("binary copy constructor, t_start=%f t_end=%f\n",t_start,t_end);
++    pmesg(DEBUG,"binary copy constructor, t_start=%f t_end=%f.\n",t_start,t_end);
+     this->npin=0;
+     this->pin=0;
+     this->bits=NULL;
+     if(t_end-t_start<0)
+     {
+-        printf("ERROR in binary copy constructor, empty range\n");
++        pmesg(ERROR,"ERROR in binary copy constructor, empty range\n");
+         return;
+     }
+     //find the number of bits between t_start and t_end
+@@ -68,8 +70,7 @@ binary::binary(const binary &source, float t_start,  float t_end)
+     }
+     if (index_end==0)
+         index_end=source.nbit-1;
+-//printf("binary copy constructor, this->nbit=%i or %i, index_end=%i (t=%fs), index_start=%i(t=%fs)\n",this->nbit,index_end-index_start+1,index_end,source.t.a[index_end],index_start,source.t.a[index_start]);
+-//        this->nbit=index_end-index_start+1;
++        pmesg(DEBUG,"binary copy constructor, this->nbit=%i or %i, index_end=%i (t=%fs), index_start=%i(t=%fs)\n",this->nbit,index_end-index_start+1,index_end,source.t.a[index_end],index_start,source.t.a[index_start]);
+     this->bits=new uint8_t[this->nbit];
+     this->t.Create(this->nbit);
+     for (uint32_t bit=0;bit<this->nbit;bit++)
+@@ -83,6 +84,7 @@ binary::binary(const binary &source, float t_start,  float t_end)
+ 
+ binary::~binary()
+ {
++    pmesg(DEBUG,"binary destructor.\n");
+     if (this->bits!=NULL)
+         delete[] this->bits;
+     this->bits=NULL;
+@@ -93,13 +95,14 @@ binary::~binary()
+ 
+ void binary::init(logic_input *data, transition *clk, uint8_t pin, char transition_direction)
+ {
++    pmesg(DEBUG,"binary::init().\n");
+     this->~binary();
+     uint32_t nbit;
+     uint32_t *index_transition;
+     mglData *t_transition;
+     if (pin>=data->npin)
+     {
+-        printf("ERROR in binary initialization, pin %i not valid\n",pin);
++        pmesg(CRITICAL,"ERROR in binary initialization, pin %i not valid\n",pin);
+         return;
+     }
+     this->npin=data->npin;
+@@ -109,20 +112,16 @@ void binary::init(logic_input *data, transition *clk, uint8_t pin, char transiti
+     {
+         case 'u':
+             nbit=clk->ntransition_up;
+-//To check : index_transition[i]==clk->index_transition_up[i]
+             index_transition=clk->index_transition_up;
+-//same for t                
+             t_transition=&(clk->t_transition_up);
+             break;
+         case 'd':
+             nbit=clk->ntransition_down;
+-//To check : index_transition[i]==clk->index_transition_down[i]
+             index_transition=clk->index_transition_down;
+-//same for t                
+             t_transition=&(clk->t_transition_down);
+             break;
+          default:
+-            printf("ERROR in binary initialization, transition_direction must be \'u\' or \'d\'\n");
++            pmesg(CRITICAL,"ERROR in binary initialization, transition_direction must be \'u\' or \'d\'\n");
+             return;
+     }
+     this->nbit=nbit;
+@@ -132,17 +131,18 @@ void binary::init(logic_input *data, transition *clk, uint8_t pin, char transiti
+     {
+         this->bits[i]=data->rawdata[pin].a[index_transition[i]];
+         this->t.a[i]=t_transition->a[i];
+-//printf("read :%i at %fs\n",this->bits[i],this->t.a[i]);
++        pmesg(DEBUG,"read :%i at %fs\n",this->bits[i],this->t.a[i]);
+     }
+ } 
+    
+ uint32_t binary::Get_nbad(uint32_t index_start, uint32_t index_end)
+ {
++    pmesg(DEBUG,"binary::Get_nbad().\n");
+     if(index_end==0)
+         index_end=index_start;
+     if(index_start>=this->nbit || index_end>=this->nbit)
+     {
+-        printf("ERROR in binary::Get(%i,%i): out of ranges index(es)\n",index_start,index_end);
++        pmesg(WARNING,"ERROR in binary::Get(%i,%i): out of ranges index(es)\n",index_start,index_end);
+         return 0;
+     }
+     uint32_t nbad=0;
+@@ -156,11 +156,12 @@ uint32_t binary::Get_nbad(uint32_t index_start, uint32_t index_end)
+ 
+ uint32_t binary::Get(uint32_t index_start, uint32_t index_end)
+ {
++    pmesg(DEBUG,"binary::Get().\n");
+     if(index_end==0)
+         index_end=index_start;
+     if(index_start>=this->nbit || index_end>=this->nbit)
+     {
+-        printf("ERROR in binary::Get(%i,%i): out of ranges index(es)\n",index_start,index_end);
++        pmesg(WARNING,"ERROR in binary::Get(%i,%i): out of ranges index(es)\n",index_start,index_end);
+         return 0;
+     }
+     uint32_t value=0;
+@@ -168,7 +169,7 @@ uint32_t binary::Get(uint32_t index_start, uint32_t index_end)
+     for (uint32_t bit=index_start;bit<=index_end;bit++)
+     {
+         lshift=index_end-bit;
+-//printf("at index %i/%i, bit=%i<<%i, counting for %i\n",bit,this->nbit,this->bits[bit],lshift,((uint32_t)(this->bits[bit]/3))<<lshift);
++        pmesg(DEBUG,"at index %i/%i, bit=%i<<%i, counting for %i\n",bit,this->nbit,this->bits[bit],lshift,((uint32_t)(this->bits[bit]/3))<<lshift);
+         value=value+(((uint32_t)(this->bits[bit]/3))<<lshift);
+     }
+     return value;
+@@ -176,9 +177,10 @@ uint32_t binary::Get(uint32_t index_start, uint32_t index_end)
+ 
+ void binary::sprint(char value[2], uint32_t bit)
+ {
++    pmesg(DEBUG,"binary::sprint().\n");
+     if(bit>this->nbit-1)
+     {
+-        printf("ERROR in binary::Print: bit=%i>nbit\n",bit);
++        pmesg(WARNING,"ERROR in binary::sprint(): bit=%i>nbit\n",bit);
+         strcpy(value,"");
+         return;
+     }
+@@ -204,12 +206,13 @@ void binary::sprint(char value[2], uint32_t bit)
+ 
+ int binary::Draw(mglGraph *gr)
+ {
++    pmesg(DEBUG,"binary::Draw().\n");
+     char c[2];
+     gr->SubPlot(1,this->npin,this->pin);
+     for(uint32_t i=0;i<this->nbit;i++)
+     {
+         this->sprint(c,i);
+-//printf("subplot %i: add label \"%s\" at t=%fs\n",this->pin,c,this->t.a[i]);
++        pmesg(DEBUG,"subplot %i: add label \"%s\" at t=%fs\n",this->pin,c,this->t.a[i]);
+         gr->Puts(mglPoint(this->t.a[i],1.5,0.5),c);
+     }
+     return 0;
+diff --git a/logic_input.cpp b/logic_input.cpp
+index 812a09f..a3e34b2 100644
+--- a/logic_input.cpp
++++ b/logic_input.cpp
+@@ -2,13 +2,13 @@
+ 
+ logic_input::logic_input(uint8_t npin,uint8_t * pins,uint32_t npoint,float delay)
+ {
+-//printf("logic_input constructor\n");
++    pmesg(DEBUG,"logic_input constructor\n");
+     this->npin=npin;
+     if (npin>0)
+         this->rawdata=new mglData[npin];
+     else
+         this->rawdata=NULL;
+-//printf("rawdata->0x%X\n",this->rawdata);
++    pmesg(DEBUG("rawdata->0x%X\n",this->rawdata);
+     this->npoint=0;
+     this->pins=NULL;
+     if (pins!=NULL)
+@@ -21,31 +21,24 @@ logic_input::logic_input(uint8_t npin,uint8_t * pins,uint32_t npoint,float delay
+     
+ logic_input::~logic_input()
+ {
+-//printf("logic_input destructor\n");
+-/*        if(this->npin>0)
++    pmesg(DEBUG,"logic_input destructor\n");
++    if(this->npin>0)
+         for (int pin=0;pin<this->npin;pin++)
+             if (this->npoint>0) 
+             {
+-printf("rawdata[%i] destruction\n",pin);
++                pmesg(DEBUG,"rawdata[%i] destruction\n",pin);
+                 this->rawdata[pin].~mglData();
+             }
+-    if (this->npoint>0)
+-    {
+-printf("t destruction\n");
+-        this->t.~mglData();
+-    }*/
+-//It seems to be the right thing to do, but do "double free or corruption" error
+     if (this->rawdata!=NULL)
+     {
+-//printf("rawdata destruction at 0x%X\n",this->rawdata);
++        pmesg(DEBUG,"rawdata destruction at 0x%X\n",this->rawdata);
+         delete[] this->rawdata;
+     }
+     if (this->pins!=NULL)
+     {
+-//printf("pins destruction at 0x%X\n",this->pins);
++        pmesg(DEBUG,"pins destruction at 0x%X\n",this->pins);
+         delete[] this->pins;
+     }
+-//printf("done\n");
+ }
+     
+ void logic_input::init_acquisition(uint8_t * pins, uint8_t npin)
+@@ -54,21 +47,19 @@ void logic_input::init_acquisition(uint8_t * pins, uint8_t npin)
+         npin=this->npin;
+     if(npin<1)
+     {
+-        printf("ERROR in init_acquisition: npin must be > 0\n");
++        pmesg(CRITICAL,"ERROR in init_acquisition: npin must be > 0\n");
+         return;
+     }
+     if(npin!=this->npin)
+     {
+-        printf("ERROR in init_acquisition: pin number varied from construction.\n");
++        pmesg(CRITICAL,"ERROR in init_acquisition: pin number varied from construction.\n");
+         return;
+     }
+-//printf("pins memory allocution\n");
++    pmesg(DEBUG,"pins memory allocution\n");
+     this->pins = new uint8_t[npin];
+-//printf("pins->0x%X\n",this->pins);
++    pmesg(DEBUG,"pins->0x%X\n",this->pins);
+    for (int pin=0;pin<npin;pin++)
+-    {
+         this->pins[pin]=pins[pin];
+-    }
+ }
+     
+ void logic_input::acquire(uint32_t npoint,float delay)
+@@ -78,17 +69,17 @@ void logic_input::acquire(uint32_t npoint,float delay)
+         npoint=this->npoint;
+     if(npoint<1)
+     {
+-        printf("ERROR in aquire: npoint must be > 0\n");
++            pmesg(WARNING,"ERROR in logic_input::aquire: npoint must be > 0\n");
+         return;
+     }
+-    printf("allocate memory.\n");
++    pmesg(DEBUG,"allocate memory.\n");
+     //allocate memory for data objects
+-//printf("allocate t.\n");
++    pmesg(DEBUG,"allocate t.\n");
+     this->t.Create(npoint);
+-//printf("allocate rawdata[pin].\n");
++    pmesg(DEBUG,"allocate rawdata[pin].\n");
+     for (pin=0;pin<this->npin;pin++)
+     {
+-//printf("pin %i, nx=%i\n",pin,rawdata[pin].nx);
++        pmesg(DEBUG,"pin %i, nx=%i\n",pin,rawdata[pin].nx);
+         this->rawdata[pin].Create(npoint);
+     }
+     struct timespec start;
+@@ -96,13 +87,13 @@ void logic_input::acquire(uint32_t npoint,float delay)
+     
+     if (!bcm2835_init())
+     {
+-        printf("ERROR in acquire while intializing BCM2835\n");
++        pmesg(CRITICAL,"ERROR in logic_input::acquire while intializing BCM2835\n");
+         return;
+     }
+     for (pin=0;pin<npin;pin++)
+         bcm2835_gpio_fsel(this->pins[pin], BCM2835_GPIO_FSEL_INPT);
+     //start aquisition
+-    printf("start aquisition\n");
++    pmesg(INFORMATION,"start aquisition\n");
+     clock_gettime(CLOCK_MONOTONIC,&start);
+     for (uint32_t i=0;i<npoint;i++)
+     {
+@@ -110,14 +101,10 @@ void logic_input::acquire(uint32_t npoint,float delay)
+             bcm2835_gpio_set_pud(this->pins[pin], BCM2835_GPIO_PUD_UP);
+         for (pin=0;pin<this->npin;pin++)
+             rawdata[pin].a[i]=bcm2835_gpio_lev(this->pins[pin]);
+-//for (pin=0;pin<this->npin;pin++)
+-//    printf("gpio%i (pull UP)=%f\n",this->pins[pin],rawdata[pin].a[i]);
+         for (pin=0;pin<this->npin;pin++)
+             bcm2835_gpio_set_pud(this->pins[pin], BCM2835_GPIO_PUD_DOWN);
+         for (pin=0;pin<this->npin;pin++)
+             rawdata[pin].a[i]+=2*bcm2835_gpio_lev(this->pins[pin]);
+-//for (pin=0;pin<this->npin;pin++)
+-//    printf("gpio%i (pull DOWN)=%f\n",this->pins[pin],rawdata[pin].a[i]);
+         clock_gettime(CLOCK_MONOTONIC,&end);
+         t.a[i]=(float)(end.tv_sec-start.tv_sec + ((float)(end.tv_nsec-start.tv_nsec))/1000000000);
+         if(delay>=1)
+@@ -127,40 +114,38 @@ void logic_input::acquire(uint32_t npoint,float delay)
+     }
+     bcm2835_close();
+     this->npoint=npoint;
+-    printf("aquisition done\n");
++    pmesg(INFORMATION,"aquisition done\n");
+     }
+     
+-int logic_input::Draw(mglGraph *gr, const char *labels[])
++int logic_input::Draw(mglGraph *gr, const char *labels[], uint8_t pin_stats)
+ {
+-//printf("logic_input::Draw()\n");
++    pmesg(DEBUG,"logic_input::Draw()\n");
+     gr->SetRanges(0,this->t.a[this->t.nx-1]*1.05,-0.3,3.5);
+     char stats[50];
+     sprintf(stats,"acquired %.1f points/s",this->npoint/(this->t.a[this->npoint-1]-this->t.a[0]));
+-//printf("Puts(%s at (%f,%f,%f)\n",stats,gr->Max.x/10, 3., 1.);
++    pmesg(DEBUG,"Puts(%s at (%f,%f,%f)\n",stats,gr->Max.x/10, 3., 1.);
+     char deltax_ticks_str[10];
+     float deltax_ticks;
+     sprintf(deltax_ticks_str,"%.1f",gr->Max.x/10-gr->Min.x/10);
+     deltax_ticks=atof(deltax_ticks_str);
+     for (uint8_t pin=0;pin<this->npin;pin++)
+     {
+-//printf("subplot %i/%i\n",pin,this->npin);
++        pmesg(DEBUG,"subplot %i/%i\n",pin,this->npin);
+         gr->SubPlot(1,this->npin,pin);
+         gr->SetTicks('x',deltax_ticks);
+-///printf("Box()\n");
++        pmesg(DEBUG,"Box()\n");
+         gr->Box();
+-//printf("Axis(\"xy\")\n");
++        pmesg(DEBUG,"Axis(\"xy\")\n");
+         gr->Axis("xy");       
+-//printf("ok\n");
+         if(labels!=NULL)
+         {
+-//printf("Label: %s\n",labels[pin]);
++            pmesg(DEBUG,"Label: %s\n",labels[pin]);
+             gr->Label('y',labels[pin]);
+         }
+-//printf("plot\n");
+-        if(pin==0)
++        pmesg(DEBUG,"plot\n");
++        if(pin==pin_stats)
+             gr->Puts(mglPoint(gr->Max.x/10, 3.2, 1.),stats);
+         gr->Plot(this->t,this->rawdata[pin],"k+-");
+-//printf("done\n");
+     }
+     return 0;
+ }
+diff --git a/logic_input.h b/logic_input.h
+index 2731965..b585c89 100644
+--- a/logic_input.h
++++ b/logic_input.h
+@@ -35,8 +35,9 @@ public:
+     ~logic_input();
+     //! Plot logic values acquired
+     /*!     \param gr pointer to a mglGraph object
+-            \param label array of strings giving label of each pin. */
+-    int Draw(mglGraph *gr,const char *label[]=NULL);
++            \param label array of strings giving label of each pin. 
++            \param subplot where to print stats about acquisition.*/
++    int Draw(mglGraph *gr,const char *label[]=NULL, uint8_t pin_stats=0);
+ //private:
+     //! Number of logic values acquired
+     uint32_t npoint;
+diff --git a/message.cpp b/message.cpp
+index 5f96853..f8333da 100644
+--- a/message.cpp
++++ b/message.cpp
+@@ -3,6 +3,7 @@
+ 
+ message::message(const binary *data,const char label[30],float t0,float tmessage,char color)
+ {
++    pmesg(DEBUG,"message constructor\n");
+     this->t0=0;
+     this->tmessage=0;
+     this->color='w';
+@@ -15,9 +16,10 @@ message::message(const binary *data,const char label[30],float t0,float tmessage
+ 
+ void message::init(const binary *data,const char label[30],float t0,float tmessage,char color)
+ {
++    pmesg(DEBUG,"message::init()\n");
+     if (data==NULL || data->nbit==0)
+     {
+-        printf("ERROR in message initialisation: data is empty\n");
++        pmesg(CRITICAL,"ERROR in message initialisation: data is empty\n");
+         return;
+     }
+     this->data=*data;
+@@ -37,6 +39,7 @@ void message::init(const binary *data,const char label[30],float t0,float tmessa
+ 
+ int message::Draw(mglGraph *gr)
+ {
++    pmesg(DEBUG,"message::Draw()\n");
+     if(this->tmessage==0)
+         return 1;
+     gr->SubPlot(1,this->npin,this->pin);
+diff --git a/microwire.cpp b/microwire.cpp
+index da1552a..231fa1c 100644
+--- a/microwire.cpp
++++ b/microwire.cpp
+@@ -2,6 +2,7 @@
+ 
+ microwire::microwire(uint8_t pins[],uint8_t npin)
+ {
++    pmesg(DEBUG,"microwire constructor.\n");
+     this->mosi_mess=NULL;
+     this->miso_mess=NULL;
+     if(pins!=NULL && npin>0)
+@@ -10,6 +11,7 @@ microwire::microwire(uint8_t pins[],uint8_t npin)
+ 
+ microwire::~microwire()
+ {
++    pmesg(DEBUG,"microwire destructor.\n");
+     if(mosi_mess!=NULL)
+         delete[] mosi_mess;
+     if(miso_mess!=NULL)
+@@ -20,6 +22,7 @@ microwire::~microwire()
+ 
+ void microwire::decode()
+ {
++    pmesg(DEBUG,"microwire::decode().\n");
+     cs.init(&capture, 0, HIGHV);
+     clk.init(&capture, 1,&cs);
+     mosi.init(&capture, &clk, 2, 'u');
+@@ -30,6 +33,7 @@ void microwire::decode()
+ 
+ void microwire::decode_mosi()
+ {
++    pmesg(DEBUG,"microwire::decode_mosi().\n");
+     this->nmessage=this->cs.nactive;
+     this->mosi_mess=new message[this->nmessage];
+     binary *data;
+@@ -60,7 +64,7 @@ void microwire::decode_mosi()
+             t0=data->t.a[firstbit]-clk_period/2;
+         }
+         //Decode instruction
+-//printf("message %i, bits[%i:%i]=%i\n",i,firstbit,firstbit+1,data->Get(firstbit,firstbit+1));
++        pmesg(DEBUG,"message %i, bits[%i:%i]=%i\n",i,firstbit,firstbit+1,data->Get(firstbit,firstbit+1));
+         switch(data->Get(firstbit,firstbit+1))
+         {
+             case 2://READ
+@@ -91,7 +95,7 @@ void microwire::decode_mosi()
+                 this->mosi_mess[i].init(data,label,t0,t1-t0,'y');
+                 break;
+             case 0://need 2 more bits to get instruction
+-//printf("message %i, bits[2:3]=%i\n",i,data->Get(firstbit+2,firstbit+3));
++            pmesg(DEBUG,"message %i, bits[2:3]=%i\n",i,data->Get(firstbit+2,firstbit+3));
+                 switch(data->Get(firstbit+2,firstbit+3))
+                 {
+                     case 3://ENABLE WRITE
+@@ -128,11 +132,11 @@ void microwire::decode_mosi()
+                         this->mosi_mess[i].init(data,label,t0,t1-t0,'y');
+                         break;
+                     default:
+-                        printf("ERROR while reading instruction: got 2nd OP code=%i\n",data->Get(firstbit+2,firstbit+3));
++                        pmesg(WARNING,"ERROR while reading instruction: got 2nd OP code=%i\n",data->Get(firstbit+2,firstbit+3));
+                 }
+                 break;
+             default:
+-                printf("ERROR while reading instruction: got OP=%i\n",data->Get(firstbit,firstbit+1));
++               pmesg(WARNING,"ERROR while reading instruction: got OP=%i\n",data->Get(firstbit,firstbit+1));
+         }
+         delete data;
+     }
+@@ -140,6 +144,7 @@ void microwire::decode_mosi()
+ 
+ void microwire::decode_miso()
+ {
++    pmesg(DEBUG,"microwire::decode_miso().\n");
+     this->nmessage=this->cs.nactive;
+     this->miso_mess=new message[this->nmessage];
+     binary *data;
+@@ -178,24 +183,19 @@ void microwire::decode_miso()
+ 
+ int microwire::Draw(mglGraph *gr)
+ {
+-//printf("microwire::Draw() start\n");
++    pmesg(DEBUG,"microwire::Draw().\n");
+     float logic_values[]={0, 1, 2, 3};
+     const char *ylabels[]={"0V", "HR", "ERR", "3V3"};
+     const char *plot_labels[4]={"CS","CLK","MOSI","MISO"};
+     gr->SetTicksVal('y',4,logic_values,ylabels);
+     gr->SetPlotFactor(1.15);
+-//printf("capture.Draw()\n");
+     this->capture.Draw(gr,plot_labels);
+-//printf("cs.Draw()\n");
+     this->cs.Draw(gr,0);
+     this->cs.Draw(gr,1);
+-//printf("clk.Draw()\n");
+     this->clk.Draw(gr);
+-//printf("mosi.Draw()\n");
+     this->cs.Draw(gr,2);
+     this->clk.Draw(gr,'u',2);
+     this->mosi.Draw(gr);
+-//printf("miso.Draw()\n");
+     this->cs.Draw(gr,3);
+     this->clk.Draw(gr,'d',3);
+     this->miso.Draw(gr);
+diff --git a/protocol.cpp b/protocol.cpp
+index fe94e21..bef5f83 100644
+--- a/protocol.cpp
++++ b/protocol.cpp
+@@ -28,6 +28,7 @@ protocol::~protocol()
+ void protocol::init_acquisition(uint8_t pins[],uint8_t npin)
+ {
+ //! init_acquisition() does not have to be reimplemented, this is the default behaviour:
++    pmesg(DEBUG,"protocol::init_acquisition().\n");
+     //! 1. Clean everything
+     this->~protocol();
+     //! 2. Call binary::init_acquisition() if paramaters are given
+@@ -38,6 +39,7 @@ void protocol::init_acquisition(uint8_t pins[],uint8_t npin)
+ void protocol::acquire(uint32_t npoint, float period)
+ {
+ //! acquire() does not have to be reimplemented, this is the default behaviour:
++    pmesg(DEBUG,"protocol::acquire().\n");
+     //! 1. Call binary::acquire()
+     capture.acquire(npoint,period);
+ }
+diff --git a/transition.cpp b/transition.cpp
+index f8ab5ef..1f4b1d8 100644
+--- a/transition.cpp
++++ b/transition.cpp
+@@ -3,6 +3,7 @@
+ 
+ transition::transition(logic_input *data,uint8_t pin_clock,activity *cs)
+ {
++    pmesg(DEBUG,"transition constructor.\n");
+     this->ntransition_up=0;
+     this->index_transition_up=NULL;
+     this->ntransition_down=0;
+@@ -16,6 +17,7 @@ transition::transition(logic_input *data,uint8_t pin_clock,activity *cs)
+ 
+ transition::~transition()
+ {
++    pmesg(DEBUG,"transition destructor.\n");
+     this->ntransition_up=0;
+     this->ntransition_down=0;
+     this->npin=0;
+@@ -35,15 +37,16 @@ transition::~transition()
+ 
+ void transition::init(logic_input *data,uint8_t pin_clock,activity *cs)
+ {
++    pmesg(DEBUG,"transition::init().\n");
+     this->~transition();
+     if(data==NULL)
+     {
+-        printf("ERROR in transition::init(): data is NULL\n");
++        pmesg(CRITICAL,"ERROR in transition::init(): data is NULL\n");
+         return;
+     }
+     if(pin_clock>=data->npin)
+     {
+-        printf("ERROR in  transition::init(): invalid pin=%i\n",pin_clock);
++        pmesg(CRITICAL,"ERROR in  transition::init(): invalid pin=%i\n",pin_clock);
+         return;
+     }
+     this->pin_clock=pin_clock;
+@@ -56,6 +59,7 @@ void transition::init(logic_input *data,uint8_t pin_clock,activity *cs)
+ 
+ float transition::GetStats(activity *cs,char sign)
+ {
++    pmesg(DEBUG,"transition::GetStats().\n");
+     uint32_t *index_transition=NULL;
+     uint32_t *ntransition=NULL;
+     mglData *t_transition=NULL;
+@@ -72,12 +76,12 @@ float transition::GetStats(activity *cs,char sign)
+             t_transition=&this->t_transition_down;
+             break;
+         default:
+-            printf("ERROR in transition::get_stats: sign unknown (must be \'u\' or \'d\')\n");
++            pmesg(WARNING,"ERROR in transition::get_stats: sign unknown (must be \'u\' or \'d\')\n");
+             return 0.;
+     }
+     if(index_transition==NULL)
+     {
+-        printf("ERROR in transition::get_stats: transition::init() must be called first\n");
++        pmesg(WARNING,"ERROR in transition::get_stats: transition::init() must be called first\n");
+         return 0.;
+     }
+     float period_min=1e6, period_max=0, period_mean=0,period;
+@@ -92,7 +96,7 @@ float transition::GetStats(activity *cs,char sign)
+             if(t_transition->a[j]>cs->t_start[i] && t_transition->a[j+1]>cs->t_start[i])
+             {
+                 period=t_transition->a[j+1]-t_transition->a[j];
+-//printf("mess %i T %i/%i=%f (%f - %f), limits =(%f , %f)\n",i+1, j+1, *ntransition-1 ,period, t_transition->a[j+1], t_transition->a[j], cs->t_start[i], cs->t_end[i]);
++                pmesg(DEBUG,"mess %i T %i/%i=%f (%f - %f), limits =(%f , %f)\n",i+1, j+1, *ntransition-1 ,period, t_transition->a[j+1], t_transition->a[j], cs->t_start[i], cs->t_end[i]);
+                 if(period_min > period)
+                     period_min=period;
+                 if(period_max < period)
+@@ -101,13 +105,10 @@ float transition::GetStats(activity *cs,char sign)
+                     this->t_first_activity=cs->t_start[i]/2+cs->t_end[i]/2;
+                 period_mean+=period;
+                 nperiod++;
+-             }
+-         }
+-     }
+-     period_mean/=nperiod;
+-//printf("T%c_{min} is %3fms\n",sign,period_min);        
+-//printf("T%c_{max} is %3fms\n",sign,period_max);
+-//printf("<T%c> is %3fms\n",sign,period_mean);
++            }
++        }
++    }
++    period_mean/=nperiod;
+     this->period=period_mean;
+     this->period_min=period_min;
+     this->period_max=period_max;
+@@ -116,24 +117,24 @@ float transition::GetStats(activity *cs,char sign)
+ 
+ void transition::find_transition(logic_input *data,char sign)
+ {
+-//printf("find_transition start\n");
++    pmesg(DEBUG,"transition::find_transition().\n");
+     if (data==NULL) 
+     {
+-        printf("ERROR in transition::find_transition: data is NULL\n");
++        pmesg(ERROR,"ERROR in transition::find_transition: data is NULL\n");
+         return;
+     }
+     if (data->npin==0) 
+     {
+-        printf("ERROR in transition::find_transition: data->npin is 0\n");
++        pmesg(ERROR,"ERROR in transition::find_transition: data->npin is 0\n");
+         return;
+     }
+     if (data->npoint==0) 
+     {
+-        printf("ERROR in transition::find_transition: data->npoint is 0\n");        
++        pmesg(ERROR,"ERROR in transition::find_transition: data->npoint is 0\n");        
+         return;
+     }
+      if (this->pin_clock<0 || this->pin_clock>data->npin) {
+-        printf("ERROR in transition::find_transition: pin_clock must be >0 and <data->npin\n");
++        pmesg(ERROR,"ERROR in transition::find_transition: pin_clock must be >0 and <data->npin\n");
+         return;
+     }
+     float oldstate_ok,newstate_ok;
+@@ -157,7 +158,7 @@ void transition::find_transition(logic_input *data,char sign)
+             t_transition=&this->t_transition_down;
+             break;
+         default:
+-            printf("ERROR in transition::find_transition: sign unknown (must be \'u\' or \'d\')\n");
++            pmesg(ERROR,"ERROR in transition::find_transition: sign unknown (must be \'u\' or \'d\')\n");
+             return;
+     }
+     //find number of transition first
+@@ -177,7 +178,7 @@ void transition::find_transition(logic_input *data,char sign)
+         }else
+             nskip++;
+     }
+-//printf("got case %c, pin %i, %i trans found, allocate memory\n",sign,this->pin_clock,*ntransition);
++    pmesg(DEBUG,"got case %c, pin %i, %i trans found, allocate memory\n",sign,this->pin_clock,*ntransition);
+     //Allocate memory for clock variables
+     t_transition->Create(*ntransition);
+     (*index_transition)=new uint32_t[*ntransition];
+@@ -185,17 +186,17 @@ void transition::find_transition(logic_input *data,char sign)
+     nskip=0;
+     oldstate=1;
+     uint32_t j=0;
+-//printf("Fill variables\n");
++    pmesg(DEBUG,"Fill variables\n");
+     for (uint32_t i=0;i<data->npoint;i++)
+     {
+-//printf("data point #%i, transition %i\n",i,j);
++        pmesg(DEBUG,"data point #%i, transition %i\n",i,j);
+         clock_val=data->rawdata[this->pin_clock].a[i];
+         if(oldstate==oldstate_ok && clock_val==newstate_ok)
+         {
+             (*index_transition)[j]=i;
+             t_transition->a[j]=data->t.a[i];
+             j++;
+-//printf("transition found at t=%fs\n",data->t.a[i]);               
++        pmesg(DEBUG,"transition found at t=%fs\n",data->t.a[i]);               
+         }
+         if(clock_val==0 || clock_val==3 ||nskip>3)
+         {
+@@ -204,18 +205,17 @@ void transition::find_transition(logic_input *data,char sign)
+         }else
+             nskip++;
+     }
+-//printf("done\n");
+ }
+ 
+    
+ int transition::Draw(mglGraph *gr)
+ {
+-//printf("transition::Draw\n");
++    pmesg(DEBUG,"transition::Draw().\n");
+     gr->SubPlot(1,this->npin,this->pin_clock);
+     char stats[50]="";
+     if (this->t_first_activity!=0)
+         sprintf(stats,"T=%.1fms (%.1fms to %.1fms)",this->period*1000,this->period_min*1000,this->period_max*1000);
+-//printf("Puts(%f, %f),\"%s\")\n",this->t_first_activity,3.2,stats);
++    pmesg(DEBUG,"Puts(%f, %f),\"%s\")\n",this->t_first_activity,3.2,stats);
+     gr->Puts(mglPoint(this->t_first_activity,3.2,1.),stats);
+     return 0;
+ }   
+@@ -223,7 +223,7 @@ int transition::Draw(mglGraph *gr)
+ 
+ int transition::Draw(mglGraph *gr,char sign,uint8_t subplot)
+ {
+-//printf("transition::Draw\n");
++    pmesg(DEBUG,"transition::Draw(%c,%i).\n",sign,subplot);
+     float oldstate,newstate;
+     uint32_t *ntransition;
+     mglData *t_transition;
+@@ -242,7 +242,7 @@ int transition::Draw(mglGraph *gr,char sign,uint8_t subplot)
+             t_transition=&this->t_transition_down;
+             break;
+         default:
+-            printf("ERROR in transition::draw: sign unknown (must be \'u\' or \'d\')\n");
++            pmesg(WARNING,"ERROR in transition::draw: sign unknown (must be \'u\' or \'d\')\n");
+             return 1;
+     }
+     gr->SubPlot(1,this->npin,subplot);

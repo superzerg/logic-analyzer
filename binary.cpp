@@ -8,7 +8,7 @@ binary::binary(uint32_t nbit)
         this->bits=new uint8_t[nbit];
     else
         this->bits=NULL;
-    this->t.Create(nbit);
+    this->nbit=0;
     this->npin=0;
     this->pin=0;
 }
@@ -83,6 +83,7 @@ binary::binary(const binary &source, float t_start,  float t_end)
 
 binary::~binary()
 {
+printf("binary destructor\n");
     if (this->bits!=NULL)
         delete[] this->bits;
     this->bits=NULL;
@@ -93,13 +94,19 @@ binary::~binary()
 
 void binary::init(logic_input *data, transition *clk, uint8_t pin, char transition_direction)
 {
-    this->~binary();
+//test disable destructors
+//    this->~binary();
+    if(data==NULL)
+    {
+        printf("ERROR in binary::init(): data is NULL\n");
+        return;
+    }
     uint32_t nbit;
     uint32_t *index_transition;
     mglData *t_transition;
     if (pin>=data->npin)
     {
-        printf("ERROR in binary initialization, pin %i not valid\n",pin);
+        printf("ERROR in binar::init(), pin %i not valid\n",pin);
         return;
     }
     this->npin=data->npin;
@@ -109,31 +116,31 @@ void binary::init(logic_input *data, transition *clk, uint8_t pin, char transiti
     {
         case 'u':
             nbit=clk->ntransition_up;
-//To check : index_transition[i]==clk->index_transition_up[i]
             index_transition=clk->index_transition_up;
-//same for t                
             t_transition=&(clk->t_transition_up);
             break;
         case 'd':
             nbit=clk->ntransition_down;
-//To check : index_transition[i]==clk->index_transition_down[i]
             index_transition=clk->index_transition_down;
-//same for t                
             t_transition=&(clk->t_transition_down);
             break;
          default:
-            printf("ERROR in binary initialization, transition_direction must be \'u\' or \'d\'\n");
+            printf("ERROR in binary::init(), transition_direction must be \'u\' or \'d\'\n");
             return;
     }
+//printf("allocate memory for  %i bits\n",nbit);
     this->nbit=nbit;
-    this->bits=new uint8_t[nbit];
-    this->t.Create(nbit);
+    this->bits=new uint8_t[this->nbit];
+//printf("create t\n");
+    this->t.Create(this->nbit);
+//printf("fill bits and t\n");
     for (uint32_t i=0;i<this->nbit;i++)
     {
         this->bits[i]=data->rawdata[pin].a[index_transition[i]];
         this->t.a[i]=t_transition->a[i];
 //printf("read :%i at %fs\n",this->bits[i],this->t.a[i]);
     }
+//printf("done\n");
 } 
    
 uint32_t binary::Get_nbad(uint32_t index_start, uint32_t index_end)
@@ -142,7 +149,7 @@ uint32_t binary::Get_nbad(uint32_t index_start, uint32_t index_end)
         index_end=index_start;
     if(index_start>=this->nbit || index_end>=this->nbit)
     {
-        printf("ERROR in binary::Get(%i,%i): out of ranges index(es)\n",index_start,index_end);
+        printf("ERROR in binary::Get_nbad(%i,%i): out of ranges index(es)\n",index_start,index_end);
         return 0;
     }
     uint32_t nbad=0;
@@ -178,7 +185,7 @@ void binary::sprint(char value[2], uint32_t bit)
 {
     if(bit>this->nbit-1)
     {
-        printf("ERROR in binary::Print: bit=%i>nbit\n",bit);
+        printf("ERROR in binary::sprint(): bit=%i>nbit-1\n",bit);
         strcpy(value,"");
         return;
     }

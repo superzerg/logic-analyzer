@@ -16,6 +16,7 @@ transition::transition(logic_input *data,uint8_t pin_clock,activity *cs)
 
 transition::~transition()
 {
+printf("transition destructor\n");
     this->ntransition_up=0;
     this->ntransition_down=0;
     this->npin=0;
@@ -31,11 +32,14 @@ transition::~transition()
         delete[] index_transition_down;
     }
     this->index_transition_down=NULL;
+    this->t_transition_up.Create(1);
+    this->t_transition_down.Create(1);
 }
 
 void transition::init(logic_input *data,uint8_t pin_clock,activity *cs)
 {
-    this->~transition();
+//test disable destructors
+//    this->~transition();
     if(data==NULL)
     {
         printf("ERROR in transition::init(): data is NULL\n");
@@ -43,12 +47,14 @@ void transition::init(logic_input *data,uint8_t pin_clock,activity *cs)
     }
     if(pin_clock>=data->npin)
     {
-        printf("ERROR in  transition::init(): invalid pin=%i\n",pin_clock);
+        printf("ERROR in  transition::init(): pin=%i not valid\n",pin_clock);
         return;
     }
     this->pin_clock=pin_clock;
     this->npin=data->npin;
+printf("find u transitions\n");
     this->find_transition(data,'u');
+printf("find d transitions\n");
     this->find_transition(data,'d');
     if(cs!=NULL)
         this->period=this->GetStats(cs,'u')/2+this->GetStats(cs,'d')/2;
@@ -116,7 +122,7 @@ float transition::GetStats(activity *cs,char sign)
 
 void transition::find_transition(logic_input *data,char sign)
 {
-//printf("find_transition start\n");
+printf("transition::find_transition\n");
     if (data==NULL) 
     {
         printf("ERROR in transition::find_transition: data is NULL\n");
@@ -132,7 +138,8 @@ void transition::find_transition(logic_input *data,char sign)
         printf("ERROR in transition::find_transition: data->npoint is 0\n");        
         return;
     }
-     if (this->pin_clock<0 || this->pin_clock>data->npin) {
+    if (this->pin_clock<0 || this->pin_clock>data->npin) 
+    {
         printf("ERROR in transition::find_transition: pin_clock must be >0 and <data->npin\n");
         return;
     }
@@ -143,26 +150,29 @@ void transition::find_transition(logic_input *data,char sign)
     switch(sign)
     {
         case 'u':
-            oldstate_ok=0;
-            newstate_ok=3;
+            oldstate_ok=LOWV;
+            newstate_ok=HIGHV;
             ntransition=&this->ntransition_up;
             index_transition=&this->index_transition_up;
+printf("this->t_transition_up at %X\n",&this->t_transition_up);
             t_transition=&this->t_transition_up;
             break;
         case 'd':
-            oldstate_ok=3;
-            newstate_ok=0;
+            oldstate_ok=LOWV;
+            newstate_ok=HIGHV;
             ntransition=&this->ntransition_down;
             index_transition=&this->index_transition_down;
             t_transition=&this->t_transition_down;
+printf("this->t_transition_down at %X\n",&this->t_transition_down);
             break;
         default:
             printf("ERROR in transition::find_transition: sign unknown (must be \'u\' or \'d\')\n");
             return;
     }
     //find number of transition first
+printf("find number of transitions...\n");    
     uint32_t nskip=0;
-    float oldstate=1;
+    float oldstate=HIGHR;
     float clock_val;
     *ntransition=0;
     for (uint32_t i=0;i<data->npoint;i++)
@@ -170,22 +180,26 @@ void transition::find_transition(logic_input *data,char sign)
         clock_val=data->rawdata[this->pin_clock].a[i];
         if(oldstate==oldstate_ok && clock_val==newstate_ok)
              (*ntransition)++;
-        if(clock_val==0 || clock_val==3 ||nskip>3)
+        if(clock_val==LOWV || clock_val==HIGHV ||nskip>3)
         {
             oldstate=clock_val;
             nskip=0;
         }else
             nskip++;
     }
-//printf("got case %c, pin %i, %i trans found, allocate memory\n",sign,this->pin_clock,*ntransition);
+printf("case %c, pin %i, %i trans found, allocate memory\n",sign,this->pin_clock,*ntransition);
+printf("ntransition_up=%i, ntransition_down=%i\n",this->ntransition_up,this->ntransition_down);
     //Allocate memory for clock variables
+printf("t_transition->nx=%i\n",t_transition->nx);
+printf("t_transition->Create(%i) with t_transition=%X\n",*ntransition,t_transition);
     t_transition->Create(*ntransition);
+printf("new uint32_t[%i])\n",*ntransition);
     (*index_transition)=new uint32_t[*ntransition];
     //Fill clock variables
     nskip=0;
-    oldstate=1;
+    oldstate=HIGHR;
     uint32_t j=0;
-//printf("Fill variables\n");
+printf("Fill variables\n");
     for (uint32_t i=0;i<data->npoint;i++)
     {
 //printf("data point #%i, transition %i\n",i,j);
@@ -197,7 +211,7 @@ void transition::find_transition(logic_input *data,char sign)
             j++;
 //printf("transition found at t=%fs\n",data->t.a[i]);               
         }
-        if(clock_val==0 || clock_val==3 ||nskip>3)
+        if(clock_val==LOWV || clock_val==HIGHV ||nskip>3)
         {
             oldstate=clock_val;
             nskip=0;

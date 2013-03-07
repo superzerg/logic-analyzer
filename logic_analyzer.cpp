@@ -11,9 +11,21 @@
 int main(int argc, char **argv)
 {
     uint8_t pins[4]={15,14,4,27};
-    microwire test(pins,4);
-    mglGraphZB gr(1200,800);
+    microwire test;
+    printf("init acquisition\n");
+    test.init_acquisition(pins,4);
+    printf("acquire...\n");
+    test.acquire(3000,0.5);
+    printf("decode...\n");
+printf("test.clk.t_transition_up.Create(10)\n");
+//test.clk.t_transition_up.Create(100);
+//test.clk.t_transition_down.Create(100);
+//    test.decode();
+    printf("create graph window\n");
+    mglGraphZB gr(1280,1024);
+    printf("plot\n");
     test.Draw(&gr);
+    printf("Write PNG\n");
     gr.WritePNG("test.png");
     return 1;
 }

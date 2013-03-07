@@ -13,6 +13,7 @@ activity::activity(logic_input *data,uint8_t pin, logic_state active_value)
 
 activity::~activity()
 {
+printf("activity destructor\n");
     if(this->t_start!=NULL)
         delete[] this->t_start;
     if(this->t_end!=NULL)
@@ -23,9 +24,12 @@ activity::~activity()
     this->npin=0;
 }
 
-void activity::init(logic_input *data,uint8_t pin, logic_state active_value)
+void activity::init(logic_input *data,uint8_t cs_pin, logic_state active_value)
 {
-    this->~activity();
+printf("activity::init()\n");
+printf("activity destructor\n");
+//test disable destructors
+//    this->~activity();
     logic_state inactive_value;
     if(active_value == HIGHV)
         inactive_value = LOWV;
@@ -33,27 +37,32 @@ void activity::init(logic_input *data,uint8_t pin, logic_state active_value)
         inactive_value = HIGHV;
     else
     {
-        printf("ERROR in activity initialization: bad active_value = %i\n",active_value);
+        printf("ERROR in activity::init(): bad active_value = %i\n",active_value);
         return;
     }
-    if(data==NULL);
-        return;
-    if (pin>=data->npin)
+    if(data==NULL)
     {
-        printf("ERROR in activity initialization : bad pin %i",pin);
+        printf("ERROR in activity::init(): data is NULL\n");
+        return;
+    }
+    if (cs_pin>=data->npin)
+    {
+        printf("ERROR in activity::init(): bad pin %i\n",cs_pin);
         return;
     }
     this->npin=data->npin;
     //get the number of activation
     uint8_t active=0;
+//printf("look in the %i points\n",data->npoint);
     for(uint32_t point=0;point<data->npoint;point++)
     {
-        if((data->rawdata[pin].a[point]==active_value ) && (active==0))
+        if((data->rawdata[cs_pin].a[point]==active_value ) && (active==0))
         {
             this->nactive++;
             active=1;
+//printf("activity detected\n");
         }
-        if((data->rawdata[pin].a[point]==inactive_value) && (active==1))
+        if((data->rawdata[cs_pin].a[point]==inactive_value) && (active==1))
         {
             active=0;
         }   
@@ -66,13 +75,13 @@ void activity::init(logic_input *data,uint8_t pin, logic_state active_value)
     active=0;
     for(uint32_t point=0;point<data->npoint;point++)
     {
-        if((data->rawdata[pin].a[point]==active_value) && (active==0))
+        if((data->rawdata[cs_pin].a[point]==active_value) && (active==0))
         {
             t_start[nactive]=data->t.a[point];
 printf("%ith activity at t=%fs ",nactive+1,t_start[nactive]);
             active=1;
         }
-        if((data->rawdata[pin].a[point]==inactive_value) && (active==1))
+        if((data->rawdata[cs_pin].a[point]==inactive_value) && (active==1))
         {
             t_end[nactive]=data->t.a[point-1];
 printf("end at t=%fs\n",t_end[nactive]);
@@ -86,6 +95,7 @@ printf("end at t=%fs\n",t_end[nactive]);
         if(nactive==this->nactive-1)
         {
             t_end[nactive]=data->t.a[data->npoint-1];
+printf("end at t=%fs\n",t_end[nactive]);
         }else
             printf("ERROR in activity constructor: number of activation does not match between two calls.\n");
     }
@@ -93,6 +103,16 @@ printf("end at t=%fs\n",t_end[nactive]);
 
 int activity::Draw(mglGraph *gr,uint8_t subplot)
 {
+    if(subplot>=this->npin)
+    {
+        printf("ERROR in activity::Draw(), subplot greater than the number of plot.\n");
+        return 1;
+    }
+    if(gr==NULL)
+    {
+        printf("ERROR in activity::Draw(),gr is NULL.\n");
+        return 1;
+    }
     gr->SubPlot(1,this->npin,subplot);
     gr->FaceZ(0,gr->Min.y,-1,this->t_start[0],gr->Max.y-gr->Min.y,"r9");
     for (uint32_t i=0;i<this->nactive;i++)

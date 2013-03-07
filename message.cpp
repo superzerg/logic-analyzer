@@ -3,6 +3,7 @@
 
 message::message(const binary *data,const char label[30],float t0,float tmessage,char color)
 {
+printf("message constructor\n");
     this->t0=0;
     this->tmessage=0;
     this->color='w';
@@ -11,10 +12,12 @@ message::message(const binary *data,const char label[30],float t0,float tmessage
     strcpy(this->label,"");
     if(data!=NULL)
         init(data,label,t0,tmessage,color);
+printf("done\n");
 }
 
 void message::init(const binary *data,const char label[30],float t0,float tmessage,char color)
 {
+printf("message::init()\n");
     if (data==NULL || data->nbit==0)
     {
         printf("ERROR in message initialisation: data is empty\n");

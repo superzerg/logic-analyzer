@@ -25,24 +25,27 @@ protocol::~protocol()
     mosi_mess=NULL;*/
  }
  
+//! init_acquisition() does not have to be reimplemented, this is the default behaviour:
 void protocol::init_acquisition(uint8_t pins[],uint8_t npin)
 {
-//! init_acquisition() does not have to be reimplemented, this is the default behaviour:
+printf("protocol::init_acquisition(*,%i)\n",npin);
     //! 1. Clean everything
-    this->~protocol();
+//test disable destructors
+//    this->~protocol();
     //! 2. Call binary::init_acquisition() if paramaters are given
     if(pins!=NULL && npin>0)
-        capture.init_acquisition(pins,npin);
+        this->capture.init_acquisition(pins,npin);
 }
 
 void protocol::acquire(uint32_t npoint, float period)
 {
 //! acquire() does not have to be reimplemented, this is the default behaviour:
     //! 1. Call binary::acquire()
-    capture.acquire(npoint,period);
+    this->capture.acquire(npoint,period);
+printf("got %i points on %i pins\n",this->capture.npoint,this->capture.npin);
 }
 
-// decode() obviously need to be implemented for each protocol
+// decode() need to be implemented for each protocol
 /* This is a template decode() function, for a full exemple look at microwire::decode()
 void protocol::decode (void)
 {
