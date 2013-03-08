@@ -3,7 +3,7 @@
 
 message::message(const binary *data,const char label[30],float t0,float tmessage,char color)
 {
-printf("message constructor\n");
+    pmesg(DEBUG,"message constructor\n");
     this->t0=0;
     this->tmessage=0;
     this->color='w';
@@ -17,10 +17,10 @@ printf("done\n");
 
 void message::init(const binary *data,const char label[30],float t0,float tmessage,char color)
 {
-printf("message::init()\n");
+    pmesg(DEBUG,"message::init()\n");
     if (data==NULL || data->nbit==0)
     {
-        printf("ERROR in message initialisation: data is empty\n");
+        pmesg(CRITICAL,"ERROR in messag::init(): data is empty\n");
         return;
     }
     this->data=*data;
@@ -40,6 +40,7 @@ printf("message::init()\n");
 
 int message::Draw(mglGraph *gr)
 {
+    pmesg(DEBUG,"message::Draw()\n");
     if(this->tmessage==0)
         return 1;
     gr->SubPlot(1,this->npin,this->pin);

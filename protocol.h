@@ -26,6 +26,12 @@
 #define ACTIVITY
 #include "activity.h"
 #endif
+
+#ifndef DEBUG_H
+#define DEBUG_H
+#include "debug.h"
+#endif
+
 //! protocol class, parent of all protocols.
  class protocol: public mglDraw
 {

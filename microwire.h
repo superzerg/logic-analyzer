@@ -36,6 +36,11 @@
 #include "protocol.h"
 #endif
 
+#ifndef DEBUG_H
+#define DEBUG_H
+#include "debug.h"
+#endif
+
 //! Example class decoding instructions sent to a NMC9314 EEPROM memory (Microwire interface)
 //* As bellow, all protocols must herit from class protocol.
 class microwire: public protocol
@@ -92,10 +97,10 @@ public:
     /*! Determined from CLK pin*/
     transition clk;
     //! Contain the MOSI binary data 
-    /*! Determined from MOSI pin, clock transitions and activity*/
+    /*! Determined from MOSI pin rawdata, clock transitions and activity*/
     binary mosi;
     //! Contain the MISO binary data 
-    /*! Determined from MISO pin, clock transitions and activity*/
+    /*! Determined from MISO pin rawdata, clock transitions and activity*/
     binary miso;
     //! array of message decoded from mosi \sa decode_mosi()
     message *mosi_mess;

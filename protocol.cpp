@@ -28,7 +28,7 @@ protocol::~protocol()
 //! init_acquisition() does not have to be reimplemented, this is the default behaviour:
 void protocol::init_acquisition(uint8_t pins[],uint8_t npin)
 {
-printf("protocol::init_acquisition(*,%i)\n",npin);
+    pmesg(DEBUG,"protocol::init_acquisition().\n");
     //! 1. Clean everything
 //test disable destructors
 //    this->~protocol();
@@ -40,6 +40,7 @@ printf("protocol::init_acquisition(*,%i)\n",npin);
 void protocol::acquire(uint32_t npoint, float period)
 {
 //! acquire() does not have to be reimplemented, this is the default behaviour:
+    pmesg(DEBUG,"protocol::acquire().\n");
     //! 1. Call binary::acquire()
     this->capture.acquire(npoint,period);
 printf("got %i points on %i pins\n",this->capture.npoint,this->capture.npin);

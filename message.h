@@ -10,6 +10,11 @@
 #include "binary.h"
 #endif
 
+#ifndef DEBUG_H
+#define DEBUG_H
+#include "debug.h"
+#endif
+
 //! Class to handle decoded information
 class message: public mglDraw
 {

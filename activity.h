@@ -5,6 +5,11 @@
 #include <mgl/mgl_zb.h>
 //#include <unistd.h>
 
+#ifndef DEBUG_H
+#define DEBUG_H
+#include "debug.h"
+#endif
+
 #ifndef LOGIC_INPUT
 #define LOGIC_INPUT
 #include "logic_input.h"

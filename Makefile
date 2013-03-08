@@ -1,8 +1,9 @@
 CC=g++
 CFLAGS=-c -Wall -O3 
+#CFLAGS=-c -Wall -O3 -DNDEBUG
 LDFLAGS=-lrt -lbcm2835 -lmgl -O3 
 
-SOURCES=activity.cpp logic_analyzer.cpp message.cpp transition.cpp binary.cpp logic_input.cpp microwire.cpp protocol.cpp
+SOURCES=debug.cpp activity.cpp logic_analyzer.cpp message.cpp transition.cpp binary.cpp logic_input.cpp microwire.cpp protocol.cpp 
 OBJECTS=$(SOURCES:.cpp=.o)
 HEADERS=$(SOURCES:.cpp=.h)
 EXECUTABLE=logic_analyzer

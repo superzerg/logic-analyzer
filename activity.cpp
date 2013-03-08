@@ -2,6 +2,7 @@
 
 activity::activity(logic_input *data,uint8_t pin, logic_state active_value)
 {
+    pmesg(DEBUG,"activity constructor.\n");
     this->nactive=0;
     this->t_start=NULL;
     this->t_end=NULL;
@@ -13,7 +14,7 @@ activity::activity(logic_input *data,uint8_t pin, logic_state active_value)
 
 activity::~activity()
 {
-printf("activity destructor\n");
+    pmesg(DEBUG,"activity destructor.\n");
     if(this->t_start!=NULL)
         delete[] this->t_start;
     if(this->t_end!=NULL)
@@ -26,10 +27,7 @@ printf("activity destructor\n");
 
 void activity::init(logic_input *data,uint8_t cs_pin, logic_state active_value)
 {
-printf("activity::init()\n");
-printf("activity destructor\n");
-//test disable destructors
-//    this->~activity();
+    pmesg(DEBUG,"activity::init().\n");
     logic_state inactive_value;
     if(active_value == HIGHV)
         inactive_value = LOWV;
@@ -37,30 +35,31 @@ printf("activity destructor\n");
         inactive_value = HIGHV;
     else
     {
-        printf("ERROR in activity::init(): bad active_value = %i\n",active_value);
+        pmesg(ERROR,"ERROR in activity::init(): bad active_value = %i\n",active_value);
         return;
     }
     if(data==NULL)
     {
-        printf("ERROR in activity::init(): data is NULL\n");
+        pmesg(ERROR,"ERROR in activity::init(): data is NULL\n");
         return;
     }
     if (cs_pin>=data->npin)
     {
-        printf("ERROR in activity::init(): bad pin %i\n",cs_pin);
+        pmesg(ERROR,"ERROR in activity::init(): bad pin %i\n",cs_pin);
         return;
     }
     this->npin=data->npin;
+    pmesg(DEBUG,"activity::npin=%i\n",this->npin);
     //get the number of activation
     uint8_t active=0;
-//printf("look in the %i points\n",data->npoint);
+    pmesg(DEBUG,"look in the %i points.\n",data->npoint);
     for(uint32_t point=0;point<data->npoint;point++)
     {
         if((data->rawdata[cs_pin].a[point]==active_value ) && (active==0))
         {
             this->nactive++;
             active=1;
-//printf("activity detected\n");
+        pmesg(DEBUG,"activity detected\n");
         }
         if((data->rawdata[cs_pin].a[point]==inactive_value) && (active==1))
         {
@@ -78,13 +77,13 @@ printf("activity destructor\n");
         if((data->rawdata[cs_pin].a[point]==active_value) && (active==0))
         {
             t_start[nactive]=data->t.a[point];
-printf("%ith activity at t=%fs ",nactive+1,t_start[nactive]);
+            pmesg(INFORMATION,"%ith activity at t=%fs ",nactive+1,t_start[nactive]);
             active=1;
         }
         if((data->rawdata[cs_pin].a[point]==inactive_value) && (active==1))
         {
             t_end[nactive]=data->t.a[point-1];
-printf("end at t=%fs\n",t_end[nactive]);
+            pmesg(INFORMATION,"end at t=%fs\n",t_end[nactive]);
             active=0;
             nactive++;
         }   
@@ -95,17 +94,18 @@ printf("end at t=%fs\n",t_end[nactive]);
         if(nactive==this->nactive-1)
         {
             t_end[nactive]=data->t.a[data->npoint-1];
-printf("end at t=%fs\n",t_end[nactive]);
+        pmesg(INFORMATION,"end at t=%fs\n",t_end[nactive]);
         }else
-            printf("ERROR in activity constructor: number of activation does not match between two calls.\n");
+            pmesg(WARNING,"ERROR in activity::init(): number of activation does not match between two calls.\n");
     }
 }
 
 int activity::Draw(mglGraph *gr,uint8_t subplot)
 {
+    pmesg(DEBUG,"activity::Draw(%i).\n",subplot);
     if(subplot>=this->npin)
     {
-        printf("ERROR in activity::Draw(), subplot greater than the number of plot.\n");
+        pmesg(WARNING,"ERROR in activity::Draw(), subplot=%i greater than the number of plot=%i.\n",subplot,this->npin);
         return 1;
     }
     if(gr==NULL)

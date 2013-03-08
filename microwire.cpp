@@ -2,6 +2,7 @@
 
 microwire::microwire(uint8_t pins[],uint8_t npin)
 {
+    pmesg(DEBUG,"microwire constructor.\n");
     this->mosi_mess=NULL;
     this->miso_mess=NULL;
     this->nmessage=0;
@@ -11,7 +12,7 @@ microwire::microwire(uint8_t pins[],uint8_t npin)
 
 microwire::~microwire()
 {
-printf("microwire destructor\n");
+    pmesg(DEBUG,"microwire destructor.\n");
     if(mosi_mess!=NULL)
         delete[] mosi_mess;
     if(miso_mess!=NULL)
@@ -23,25 +24,27 @@ printf("microwire destructor\n");
 
 void microwire::decode()
 {
-printf("decode cs, capture has %i points on %i pins at %X\n",this->capture.npoint,this->capture.npin,&(this->capture));
+    pmesg(DEBUG,"microwire::decode().\n");
+    pmesg(DEBUG,"decode cs, capture has %i points on %i pins at %X\n",this->capture.npoint,this->capture.npin,&(this->capture));
     cs.init(&(this->capture), 0, HIGHV);
-printf("decode clk\n");
+    pmesg(DEBUG,"decode clk\n");
     clk.init(&(this->capture), 1,&(this->cs));
-printf("got %i activity\n",this->cs.nactive);
-printf("decode mosi (binary)\n");
+    pmesg(DEBUG,"got %i activity\n",this->cs.nactive);
+    pmesg(DEBUG,"decode mosi (binary)\n");
     mosi.init(&(this->capture), &(this->clk), 2, 'u');
-printf("decode miso (binary)\n");
+    pmesg(DEBUG,"decode miso (binary)\n");
     miso.init(&(this->capture), &(this->clk), 3, 'd');
-printf("decode mosi (message)\n");
+    pmesg(DEBUG,"decode mosi (message)\n");
     this->decode_mosi();
-printf("got %i messages\n",this->nmessage);
-printf("decode miso (message)\n");
+    pmesg(DEBUG,"got %i messages\n",this->nmessage);
+    pmesg(DEBUG,"decode miso (message)\n");
     this->decode_miso();
-printf("got %i messages\n",this->nmessage);
+    pmesg(DEBUG,"got %i messages\n",this->nmessage);
 }
 
 void microwire::decode_mosi()
 {
+    pmesg(DEBUG,"microwire::decode_mosi().\n");
     if(this->cs.nactive==0)
     {
         printf("ERROR in microwire::decode_mosi: no activity\n");
@@ -59,11 +62,11 @@ printf("Create %i mosi messages\n",this->nmessage);
     {
         t0=0;
         firstbit=0;
-printf("Copy mosi to data from %fs to %fs\n",cs.t_start[i],cs.t_end[i]);
+        pmesg(DEBUG,"Copy mosi to data from %fs to %fs\n",cs.t_start[i],cs.t_end[i]);
         data=new binary(this->mosi,cs.t_start[i],cs.t_end[i]);
         if(data==NULL)
         {
-            printf("ERROR in microwire::decode_mosi: data is NULL between %fs and %fs\n",cs.t_start[i],cs.t_end[i]);
+            pmesg(ERROR,"ERROR in microwire::decode_mosi: data is NULL between %fs and %fs\n",cs.t_start[i],cs.t_end[i]);
             return;
         }
         //look for starting 1
@@ -84,7 +87,7 @@ printf("Copy mosi to data from %fs to %fs\n",cs.t_start[i],cs.t_end[i]);
             t0=data->t.a[firstbit]-clk_period/2;
         }
         //Decode instruction
-//printf("message %i, bits[%i:%i]=%i\n",i,firstbit,firstbit+1,data->Get(firstbit,firstbit+1));
+        pmesg(DEBUG,"message %i, bits[%i:%i]=%i\n",i,firstbit,firstbit+1,data->Get(firstbit,firstbit+1));
         switch(data->Get(firstbit,firstbit+1))
         {
             case 2://READ
@@ -115,7 +118,7 @@ printf("Copy mosi to data from %fs to %fs\n",cs.t_start[i],cs.t_end[i]);
                 this->mosi_mess[i].init(data,label,t0,t1-t0,'y');
                 break;
             case 0://need 2 more bits to get instruction
-//printf("message %i, bits[2:3]=%i\n",i,data->Get(firstbit+2,firstbit+3));
+            pmesg(DEBUG,"message %i, bits[2:3]=%i\n",i,data->Get(firstbit+2,firstbit+3));
                 switch(data->Get(firstbit+2,firstbit+3))
                 {
                     case 3://ENABLE WRITE
@@ -152,11 +155,11 @@ printf("Copy mosi to data from %fs to %fs\n",cs.t_start[i],cs.t_end[i]);
                         this->mosi_mess[i].init(data,label,t0,t1-t0,'y');
                         break;
                     default:
-                        printf("ERROR while reading instruction: got 2nd OP code=%i\n",data->Get(firstbit+2,firstbit+3));
+                        pmesg(WARNING,"ERROR while reading instruction: got 2nd OP code=%i\n",data->Get(firstbit+2,firstbit+3));
                 }
                 break;
             default:
-                printf("ERROR while reading instruction: got OP=%i\n",data->Get(firstbit,firstbit+1));
+               pmesg(WARNING,"ERROR while reading instruction: got OP=%i\n",data->Get(firstbit,firstbit+1));
         }
         delete data;
     }
@@ -164,11 +167,10 @@ printf("Copy mosi to data from %fs to %fs\n",cs.t_start[i],cs.t_end[i]);
 
 void microwire::decode_miso()
 {
-printf("microwire::decode_miso()\n");
+    pmesg(DEBUG,"microwire::decode_miso()\n");
     this->nmessage=this->cs.nactive;
-printf("Create %i miso messages\n",this->nmessage);
+    pmesg(DEBUG,"Create %i miso messages\n",this->nmessage);
     this->miso_mess=new message[this->nmessage]();
-printf("binary * data\n");
     binary *data;
     float clk_period=this->clk.period;
     float t0,t1;
@@ -178,7 +180,7 @@ printf("binary * data\n");
     {
         t0=0;
         firstbit=0;
-printf("Copy miso to data from %fs to %fs\n",cs.t_start[i],cs.t_end[i]);
+        pmesg(DEBUG,"Copy miso to data from %fs to %fs\n",cs.t_start[i],cs.t_end[i]);
         data=new binary(this->miso,cs.t_start[i],cs.t_end[i]);
         //look for starting 0
         for(uint32_t bit=0;bit<data->nbit;bit++)
@@ -206,25 +208,25 @@ printf("Copy miso to data from %fs to %fs\n",cs.t_start[i],cs.t_end[i]);
 
 int microwire::Draw(mglGraph *gr)
 {
-printf("microwire::Draw() start\n");
+    pmesg(DEBUG,"microwire::Draw().\n");
     float logic_values[]={0, 1, 2, 3};
     const char *ylabels[]={"0V", "HR", "ERR", "3V3"};
     const char *plot_labels[4]={"CS","CLK","MOSI","MISO"};
     gr->SetTicksVal('y',4,logic_values,ylabels);
     gr->SetPlotFactor(1.15);
-printf("capture.Draw()\n");
+    pmesg(DEBUG,"capture.Draw()\n");
     this->capture.Draw(gr,plot_labels);
-printf("cs.Draw(0)\n");
+    pmesg(DEBUG,"cs.Draw(0)\n");
     this->cs.Draw(gr,0);
-printf("cs.Draw(1)\n");
+    pmesg(DEBUG,"cs.Draw(1)\n");
     this->cs.Draw(gr,1);
-/*printf("clk.Draw()\n");
+    pmesg(DEBUG,"clk.Draw()\n");
     this->clk.Draw(gr);
-printf("mosi.Draw()\n");
+    pmesg(DEBUG,"mosi.Draw()\n");
     this->cs.Draw(gr,2);
     this->clk.Draw(gr,'u',2);
     this->mosi.Draw(gr);
-printf("miso.Draw()\n");
+    pmesg(DEBUG,"miso.Draw()\n");
     this->cs.Draw(gr,3);
     this->clk.Draw(gr,'d',3);
     this->miso.Draw(gr);
@@ -241,7 +243,7 @@ printf("miso.Draw()\n");
         {
             this->miso_mess[i].Draw(gr);
         }
-    }*/
+    }
     return 0;
 }
 

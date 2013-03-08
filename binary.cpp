@@ -3,6 +3,7 @@
 
 binary::binary(uint32_t nbit)
 {
+    pmesg(DEBUG,"binary destructor.\n");
     this->nbit=nbit;
     if (nbit>0)
         this->bits=new uint8_t[nbit];
@@ -17,12 +18,13 @@ binary::binary(const binary &source, uint32_t index_start,  uint32_t index_end)
 {
     if(index_end==0)
         index_end=source.nbit-1;
+    pmesg(DEBUG,"binary copy constructor, i_start=%i i_end=%i.\n",index_start,index_end);
     this->npin=0;
     this->pin=0;
     this->bits=NULL;
     if(index_end-index_start+1<1)
     {
-        printf("ERROR in binary copy constructor, empty range\n");
+        pmesg(ERROR,"ERROR in binary copy constructor, empty range.\n");
         return;
     }
     this->nbit=index_end-index_start+1;
@@ -41,13 +43,13 @@ binary::binary(const binary &source, float t_start,  float t_end)
 {
     if(t_end==0)
         t_end=source.t.a[nbit-1];
-//printf("binary copy constructor, t_start=%f t_end=%f\n",t_start,t_end);
+    pmesg(DEBUG,"binary copy constructor, t_start=%f t_end=%f.\n",t_start,t_end);
     this->npin=0;
     this->pin=0;
     this->bits=NULL;
     if(t_end-t_start<0)
     {
-        printf("ERROR in binary copy constructor, empty range\n");
+        pmesg(ERROR,"ERROR in binary copy constructor, empty range\n");
         return;
     }
     //find the number of bits between t_start and t_end
@@ -68,8 +70,7 @@ binary::binary(const binary &source, float t_start,  float t_end)
     }
     if (index_end==0)
         index_end=source.nbit-1;
-//printf("binary copy constructor, this->nbit=%i or %i, index_end=%i (t=%fs), index_start=%i(t=%fs)\n",this->nbit,index_end-index_start+1,index_end,source.t.a[index_end],index_start,source.t.a[index_start]);
-//        this->nbit=index_end-index_start+1;
+        pmesg(DEBUG,"binary copy constructor, this->nbit=%i or %i, index_end=%i (t=%fs), index_start=%i(t=%fs)\n",this->nbit,index_end-index_start+1,index_end,source.t.a[index_end],index_start,source.t.a[index_start]);
     this->bits=new uint8_t[this->nbit];
     this->t.Create(this->nbit);
     for (uint32_t bit=0;bit<this->nbit;bit++)
@@ -83,7 +84,7 @@ binary::binary(const binary &source, float t_start,  float t_end)
 
 binary::~binary()
 {
-printf("binary destructor\n");
+    pmesg(DEBUG,"binary destructor\n");
     if (this->bits!=NULL)
         delete[] this->bits;
     this->bits=NULL;
@@ -94,11 +95,10 @@ printf("binary destructor\n");
 
 void binary::init(logic_input *data, transition *clk, uint8_t pin, char transition_direction)
 {
-//test disable destructors
-//    this->~binary();
+    pmesg(DEBUG,"binary::init().\n");
     if(data==NULL)
     {
-        printf("ERROR in binary::init(): data is NULL\n");
+        pmesg(CRITICAL,"ERROR in binary::init(): data is NULL\n");
         return;
     }
     uint32_t nbit;
@@ -106,7 +106,7 @@ void binary::init(logic_input *data, transition *clk, uint8_t pin, char transiti
     mglData *t_transition;
     if (pin>=data->npin)
     {
-        printf("ERROR in binar::init(), pin %i not valid\n",pin);
+        pmesg(CRITICAL,"ERROR in binar::init(), pin %i not valid\n",pin);
         return;
     }
     this->npin=data->npin;
@@ -125,22 +125,21 @@ void binary::init(logic_input *data, transition *clk, uint8_t pin, char transiti
             t_transition=&(clk->t_transition_down);
             break;
          default:
-            printf("ERROR in binary::init(), transition_direction must be \'u\' or \'d\'\n");
+            pmesg(CRITICAL,"ERROR in binary::init(), transition_direction must be \'u\' or \'d\'\n");
             return;
     }
-//printf("allocate memory for  %i bits\n",nbit);
+    pmesg(DEBUG,"allocate memory for  %i bits\n",nbit);
     this->nbit=nbit;
     this->bits=new uint8_t[this->nbit];
-//printf("create t\n");
+    pmesg(DEBUG,"create t\n");
     this->t.Create(this->nbit);
-//printf("fill bits and t\n");
+    pmesg(DEBUG,"fill bits and t\n");
     for (uint32_t i=0;i<this->nbit;i++)
     {
         this->bits[i]=data->rawdata[pin].a[index_transition[i]];
         this->t.a[i]=t_transition->a[i];
-//printf("read :%i at %fs\n",this->bits[i],this->t.a[i]);
+        pmesg(DEBUG,"read :%i at %fs\n",this->bits[i],this->t.a[i]);
     }
-//printf("done\n");
 } 
    
 uint32_t binary::Get_nbad(uint32_t index_start, uint32_t index_end)
@@ -149,7 +148,7 @@ uint32_t binary::Get_nbad(uint32_t index_start, uint32_t index_end)
         index_end=index_start;
     if(index_start>=this->nbit || index_end>=this->nbit)
     {
-        printf("ERROR in binary::Get_nbad(%i,%i): out of ranges index(es)\n",index_start,index_end);
+        pmesg(WARNING,"ERROR in binary::Get_nbad(%i,%i): out of ranges index(es)\n",index_start,index_end);
         return 0;
     }
     uint32_t nbad=0;
@@ -163,11 +162,12 @@ uint32_t binary::Get_nbad(uint32_t index_start, uint32_t index_end)
 
 uint32_t binary::Get(uint32_t index_start, uint32_t index_end)
 {
+    pmesg(DEBUG,"binary::Get().\n");
     if(index_end==0)
         index_end=index_start;
     if(index_start>=this->nbit || index_end>=this->nbit)
     {
-        printf("ERROR in binary::Get(%i,%i): out of ranges index(es)\n",index_start,index_end);
+        pmesg(WARNING,"ERROR in binary::Get(%i,%i): out of ranges index(es)\n",index_start,index_end);
         return 0;
     }
     uint32_t value=0;
@@ -175,7 +175,7 @@ uint32_t binary::Get(uint32_t index_start, uint32_t index_end)
     for (uint32_t bit=index_start;bit<=index_end;bit++)
     {
         lshift=index_end-bit;
-//printf("at index %i/%i, bit=%i<<%i, counting for %i\n",bit,this->nbit,this->bits[bit],lshift,((uint32_t)(this->bits[bit]/3))<<lshift);
+        pmesg(DEBUG,"at index %i/%i, bit=%i<<%i, counting for %i\n",bit,this->nbit,this->bits[bit],lshift,((uint32_t)(this->bits[bit]/3))<<lshift);
         value=value+(((uint32_t)(this->bits[bit]/3))<<lshift);
     }
     return value;
@@ -185,7 +185,7 @@ void binary::sprint(char value[2], uint32_t bit)
 {
     if(bit>this->nbit-1)
     {
-        printf("ERROR in binary::sprint(): bit=%i>nbit-1\n",bit);
+        pmesg(ERROR,"ERROR in binary::sprint(): bit=%i>nbit-1\n",bit);
         strcpy(value,"");
         return;
     }
@@ -211,12 +211,13 @@ void binary::sprint(char value[2], uint32_t bit)
 
 int binary::Draw(mglGraph *gr)
 {
+    pmesg(DEBUG,"binary::Draw().\n");
     char c[2];
     gr->SubPlot(1,this->npin,this->pin);
     for(uint32_t i=0;i<this->nbit;i++)
     {
         this->sprint(c,i);
-//printf("subplot %i: add label \"%s\" at t=%fs\n",this->pin,c,this->t.a[i]);
+        pmesg(DEBUG,"subplot %i: add label \"%s\" at t=%fs\n",this->pin,c,this->t.a[i]);
         gr->Puts(mglPoint(this->t.a[i],1.5,0.5),c);
     }
     return 0;

@@ -15,6 +15,11 @@
 #include "activity.h"
 #endif
 
+#ifndef DEBUG_H
+#define DEBUG_H
+#include "debug.h"
+#endif
+
 //! class getting LTH (Low To High) and HTL (High To Low) transitions in logic_input
 class transition: public mglDraw  //clock transitions
 {

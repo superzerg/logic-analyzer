@@ -3,6 +3,7 @@
 
 transition::transition(logic_input *data,uint8_t pin_clock,activity *cs)
 {
+    pmesg(DEBUG,"transition constructor.\n");
     this->ntransition_up=0;
     this->index_transition_up=NULL;
     this->ntransition_down=0;
@@ -16,7 +17,7 @@ transition::transition(logic_input *data,uint8_t pin_clock,activity *cs)
 
 transition::~transition()
 {
-printf("transition destructor\n");
+    pmesg(DEBUG,"transition destructor.\n");
     this->ntransition_up=0;
     this->ntransition_down=0;
     this->npin=0;
@@ -38,23 +39,21 @@ printf("transition destructor\n");
 
 void transition::init(logic_input *data,uint8_t pin_clock,activity *cs)
 {
-//test disable destructors
-//    this->~transition();
     if(data==NULL)
     {
-        printf("ERROR in transition::init(): data is NULL\n");
+        pmesg(CRITICAL,"ERROR in transition::init(): data is NULL\n");
         return;
     }
     if(pin_clock>=data->npin)
     {
-        printf("ERROR in  transition::init(): pin=%i not valid\n",pin_clock);
+        pmesg(CRITICAL,"ERROR in  transition::init(): pin=%i not valid\n",pin_clock);
         return;
     }
     this->pin_clock=pin_clock;
     this->npin=data->npin;
-printf("find u transitions\n");
+    pmesg(DEBUG,"find u transitions\n");
     this->find_transition(data,'u');
-printf("find d transitions\n");
+    pmesg(DEBUG,"find d transitions\n");
     this->find_transition(data,'d');
     if(cs!=NULL)
         this->period=this->GetStats(cs,'u')/2+this->GetStats(cs,'d')/2;
@@ -62,6 +61,7 @@ printf("find d transitions\n");
 
 float transition::GetStats(activity *cs,char sign)
 {
+    pmesg(DEBUG,"transition::GetStats().\n");
     uint32_t *index_transition=NULL;
     uint32_t *ntransition=NULL;
     mglData *t_transition=NULL;
@@ -78,12 +78,12 @@ float transition::GetStats(activity *cs,char sign)
             t_transition=&this->t_transition_down;
             break;
         default:
-            printf("ERROR in transition::get_stats: sign unknown (must be \'u\' or \'d\')\n");
+            pmesg(WARNING,"ERROR in transition::get_stats: sign unknown (must be \'u\' or \'d\')\n");
             return 0.;
     }
     if(index_transition==NULL)
     {
-        printf("ERROR in transition::get_stats: transition::init() must be called first\n");
+        pmesg(WARNING,"ERROR in transition::get_stats: transition::init() must be called first\n");
         return 0.;
     }
     float period_min=1e6, period_max=0, period_mean=0,period;
@@ -98,7 +98,7 @@ float transition::GetStats(activity *cs,char sign)
             if(t_transition->a[j]>cs->t_start[i] && t_transition->a[j+1]>cs->t_start[i])
             {
                 period=t_transition->a[j+1]-t_transition->a[j];
-//printf("mess %i T %i/%i=%f (%f - %f), limits =(%f , %f)\n",i+1, j+1, *ntransition-1 ,period, t_transition->a[j+1], t_transition->a[j], cs->t_start[i], cs->t_end[i]);
+                pmesg(DEBUG,"mess %i T %i/%i=%f (%f - %f), limits =(%f , %f)\n",i+1, j+1, *ntransition-1 ,period, t_transition->a[j+1], t_transition->a[j], cs->t_start[i], cs->t_end[i]);
                 if(period_min > period)
                     period_min=period;
                 if(period_max < period)
@@ -107,13 +107,10 @@ float transition::GetStats(activity *cs,char sign)
                     this->t_first_activity=cs->t_start[i]/2+cs->t_end[i]/2;
                 period_mean+=period;
                 nperiod++;
-             }
-         }
-     }
-     period_mean/=nperiod;
-//printf("T%c_{min} is %3fms\n",sign,period_min);        
-//printf("T%c_{max} is %3fms\n",sign,period_max);
-//printf("<T%c> is %3fms\n",sign,period_mean);
+            }
+        }
+    }
+    period_mean/=nperiod;
     this->period=period_mean;
     this->period_min=period_min;
     this->period_max=period_max;
@@ -122,25 +119,25 @@ float transition::GetStats(activity *cs,char sign)
 
 void transition::find_transition(logic_input *data,char sign)
 {
-printf("transition::find_transition\n");
+    pmesg(DEBUG,"transition::find_transition\n");
     if (data==NULL) 
     {
-        printf("ERROR in transition::find_transition: data is NULL\n");
+        pmesg(ERROR,"ERROR in transition::find_transition: data is NULL\n");
         return;
     }
     if (data->npin==0) 
     {
-        printf("ERROR in transition::find_transition: data->npin is 0\n");
+        pmesg(ERROR,"ERROR in transition::find_transition: data->npin is 0\n");
         return;
     }
     if (data->npoint==0) 
     {
-        printf("ERROR in transition::find_transition: data->npoint is 0\n");        
+        pmesg(ERROR,"ERROR in transition::find_transition: data->npoint is 0\n");        
         return;
     }
     if (this->pin_clock<0 || this->pin_clock>data->npin) 
     {
-        printf("ERROR in transition::find_transition: pin_clock must be >0 and <data->npin\n");
+        pmesg(ERROR,"ERROR in transition::find_transition: pin_clock must be >0 and <data->npin\n");
         return;
     }
     float oldstate_ok,newstate_ok;
@@ -154,7 +151,7 @@ printf("transition::find_transition\n");
             newstate_ok=HIGHV;
             ntransition=&this->ntransition_up;
             index_transition=&this->index_transition_up;
-printf("this->t_transition_up at %X\n",&this->t_transition_up);
+            pmesg(DEBUG,"this->t_transition_up at %X\n",&this->t_transition_up);
             t_transition=&this->t_transition_up;
             break;
         case 'd':
@@ -163,14 +160,14 @@ printf("this->t_transition_up at %X\n",&this->t_transition_up);
             ntransition=&this->ntransition_down;
             index_transition=&this->index_transition_down;
             t_transition=&this->t_transition_down;
-printf("this->t_transition_down at %X\n",&this->t_transition_down);
+            pmesg(DEBUG,"this->t_transition_down at %X\n",&this->t_transition_down);
             break;
         default:
-            printf("ERROR in transition::find_transition: sign unknown (must be \'u\' or \'d\')\n");
+            pmesg(ERROR,"ERROR in transition::find_transition: sign unknown (must be \'u\' or \'d\')\n");
             return;
     }
     //find number of transition first
-printf("find number of transitions...\n");    
+    pmesg(DEBUG,"find number of transitions...\n");    
     uint32_t nskip=0;
     float oldstate=HIGHR;
     float clock_val;
@@ -187,29 +184,29 @@ printf("find number of transitions...\n");
         }else
             nskip++;
     }
-printf("case %c, pin %i, %i trans found, allocate memory\n",sign,this->pin_clock,*ntransition);
-printf("ntransition_up=%i, ntransition_down=%i\n",this->ntransition_up,this->ntransition_down);
+    pmesg(DEBUG,"case %c, pin %i, %i trans found, allocate memory\n",sign,this->pin_clock,*ntransition);
+    pmesg(DEBUG,"ntransition_up=%i, ntransition_down=%i\n",this->ntransition_up,this->ntransition_down);
     //Allocate memory for clock variables
-printf("t_transition->nx=%i\n",t_transition->nx);
-printf("t_transition->Create(%i) with t_transition=%X\n",*ntransition,t_transition);
+    pmesg(DEBUG,"t_transition->nx=%i\n",t_transition->nx);
+    pmesg(DEBUG,"t_transition->Create(%i) with t_transition=%X\n",*ntransition,t_transition);
     t_transition->Create(*ntransition);
-printf("new uint32_t[%i])\n",*ntransition);
+    pmesg(DEBUG,"new uint32_t[%i])\n",*ntransition);
     (*index_transition)=new uint32_t[*ntransition];
     //Fill clock variables
     nskip=0;
     oldstate=HIGHR;
     uint32_t j=0;
-printf("Fill variables\n");
+    pmesg(DEBUG,"Fill variables\n");
     for (uint32_t i=0;i<data->npoint;i++)
     {
-//printf("data point #%i, transition %i\n",i,j);
+//        pmesg(DEBUG,"data point #%i, transition %i\n",i,j);
         clock_val=data->rawdata[this->pin_clock].a[i];
         if(oldstate==oldstate_ok && clock_val==newstate_ok)
         {
             (*index_transition)[j]=i;
             t_transition->a[j]=data->t.a[i];
             j++;
-//printf("transition found at t=%fs\n",data->t.a[i]);               
+            pmesg(DEBUG,"transition found at t=%fs\n",data->t.a[i]);               
         }
         if(clock_val==LOWV || clock_val==HIGHV ||nskip>3)
         {
@@ -218,18 +215,17 @@ printf("Fill variables\n");
         }else
             nskip++;
     }
-//printf("done\n");
 }
 
    
 int transition::Draw(mglGraph *gr)
 {
-//printf("transition::Draw\n");
+    pmesg(DEBUG,"transition::Draw().\n");
     gr->SubPlot(1,this->npin,this->pin_clock);
     char stats[50]="";
     if (this->t_first_activity!=0)
         sprintf(stats,"T=%.1fms (%.1fms to %.1fms)",this->period*1000,this->period_min*1000,this->period_max*1000);
-//printf("Puts(%f, %f),\"%s\")\n",this->t_first_activity,3.2,stats);
+    pmesg(DEBUG,"Puts(%f, %f),\"%s\")\n",this->t_first_activity,3.2,stats);
     gr->Puts(mglPoint(this->t_first_activity,3.2,1.),stats);
     return 0;
 }   
@@ -237,7 +233,7 @@ int transition::Draw(mglGraph *gr)
 
 int transition::Draw(mglGraph *gr,char sign,uint8_t subplot)
 {
-//printf("transition::Draw\n");
+    pmesg(DEBUG,"transition::Draw(%c,%i).\n",sign,subplot);
     float oldstate,newstate;
     uint32_t *ntransition;
     mglData *t_transition;
@@ -256,7 +252,7 @@ int transition::Draw(mglGraph *gr,char sign,uint8_t subplot)
             t_transition=&this->t_transition_down;
             break;
         default:
-            printf("ERROR in transition::draw: sign unknown (must be \'u\' or \'d\')\n");
+            pmesg(WARNING,"ERROR in transition::draw: sign unknown (must be \'u\' or \'d\')\n");
             return 1;
     }
     gr->SubPlot(1,this->npin,subplot);
