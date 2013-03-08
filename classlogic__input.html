@@ -61,6 +61,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -105,8 +106,15 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a0f5cf5d89a03cfea37539f51647bf0bf"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a0f5cf5d89a03cfea37539f51647bf0bf"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogic__input.html#a0f5cf5d89a03cfea37539f51647bf0bf">~logic_input</a> ()</td></tr>
 <tr class="memdesc:a0f5cf5d89a03cfea37539f51647bf0bf"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br/></td></tr>
-<tr class="memitem:af7b36a0c791992f06a82275824ec7671"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogic__input.html#af7b36a0c791992f06a82275824ec7671">Draw</a> (mglGraph *gr, const char *label[]=NULL)</td></tr>
-<tr class="memdesc:af7b36a0c791992f06a82275824ec7671"><td class="mdescLeft">&#160;</td><td class="mdescRight">Plot logic values acquired.  <a href="#af7b36a0c791992f06a82275824ec7671"></a><br/></td></tr>
+<tr class="memitem:a76e9b46e68a0b404e1423801b92955d8"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogic__input.html#a76e9b46e68a0b404e1423801b92955d8">Draw</a> (mglGraph *gr, const char *label[]=NULL, uint8_t pin_stats=0)</td></tr>
+<tr class="memdesc:a76e9b46e68a0b404e1423801b92955d8"><td class="mdescLeft">&#160;</td><td class="mdescRight">Plot logic values acquired.  <a href="#a76e9b46e68a0b404e1423801b92955d8"></a><br/></td></tr>
+<tr class="memitem:a2a9a9dc41ce8ff467cf9aef67276d56f"><td class="memItemLeft" align="right" valign="top">const void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogic__input.html#a2a9a9dc41ce8ff467cf9aef67276d56f">Save</a> (const char *filename)</td></tr>
+<tr class="memdesc:a2a9a9dc41ce8ff467cf9aef67276d56f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save the object into a file.  <a href="#a2a9a9dc41ce8ff467cf9aef67276d56f"></a><br/></td></tr>
+<tr class="memitem:a6432c8ce43a33c26d18f9e58d392aa20"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogic__input.html#a6432c8ce43a33c26d18f9e58d392aa20">Load</a> (const char *filename)</td></tr>
+<tr class="memdesc:a6432c8ce43a33c26d18f9e58d392aa20"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load the object into a file.  <a href="#a6432c8ce43a33c26d18f9e58d392aa20"></a><br/></td></tr>
+<tr class="memitem:a4177a44b0a1b4cf2c6375f3bb93ecddb"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a4177a44b0a1b4cf2c6375f3bb93ecddb"></a>
+void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classlogic__input.html#a4177a44b0a1b4cf2c6375f3bb93ecddb">Clean</a> ()</td></tr>
+<tr class="memdesc:a4177a44b0a1b4cf2c6375f3bb93ecddb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Clean the object. <br/></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -126,7 +134,7 @@ uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Class doing acquisition from RPI's GPIO. </p>
-<p>Saving to and loading from a file to be added. </p>
+<p>Saving to a file and loading from a file to be added. </p>
 </div><h2>Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a450e489e87441db0bad7c5c9d71494b5"></a>
 <div class="memitem">
@@ -205,7 +213,7 @@ uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 
 </div>
 </div>
-<a class="anchor" id="af7b36a0c791992f06a82275824ec7671"></a>
+<a class="anchor" id="a76e9b46e68a0b404e1423801b92955d8"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -219,7 +227,13 @@ uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">const char *&#160;</td>
-          <td class="paramname"><em>label</em>[] = <code>NULL</code>&#160;</td>
+          <td class="paramname"><em>label</em>[] = <code>NULL</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>pin_stats</em> = <code>0</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -234,10 +248,10 @@ uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
   <table class="params">
     <tr><td class="paramname">gr</td><td>pointer to a mglGraph object </td></tr>
     <tr><td class="paramname">label</td><td>array of strings giving label of each pin. </td></tr>
+    <tr><td class="paramname">pin_stats</td><td>subplot where to print stats about acquisition. </td></tr>
   </table>
   </dd>
 </dl>
-<p>printf("Box()\n"); </p>
 
 </div>
 </div>
@@ -268,8 +282,56 @@ uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 <p>Initialisation of the object for the capture. </p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">pins</td><td>array of the GPIO pin number (i for GPIOi) to be used during acquisition. </td></tr>
+    <tr><td class="paramname">pins</td><td>array of the GPIO pin numbers (ex {9,10} for GPIO9 and GPIO10) to be used during acquisition. </td></tr>
     <tr><td class="paramname">npin</td><td>number of pins to be used during acquisition. Max value is pins array size. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a6432c8ce43a33c26d18f9e58d392aa20"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void logic_input::Load </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Load the object into a file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>string contenaning filename to be loaded. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="a2a9a9dc41ce8ff467cf9aef67276d56f"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">const void logic_input::Save </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+
+<p>Save the object into a file. </p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>string contenaning filename to be saved. </td></tr>
   </table>
   </dd>
 </dl>
@@ -314,7 +376,7 @@ uint8_t *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href=
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 6 2013 10:18:44 for Logic Analyzer RPi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Mar 8 2013 22:51:28 for Logic Analyzer RPi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

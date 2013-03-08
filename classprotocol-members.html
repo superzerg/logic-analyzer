@@ -82,29 +82,22 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!-- top -->
 <div class="header">
   <div class="headertitle">
-<div class="title">logic_input Member List</div>  </div>
+<div class="title">protocol Member List</div>  </div>
 </div><!--header-->
 <div class="contents">
 
-<p>This is the complete list of members for <a class="el" href="classlogic__input.html">logic_input</a>, including all inherited members.</p>
+<p>This is the complete list of members for <a class="el" href="classprotocol.html">protocol</a>, including all inherited members.</p>
 <table class="directory">
-  <tr class="even"><td class="entry"><a class="el" href="classlogic__input.html#aa46010f91ee7f82cb5f74a75ba913a88">acquire</a>(uint32_t npoint=0, float delay=0)</td><td class="entry"><a class="el" href="classlogic__input.html">logic_input</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classlogic__input.html#a4177a44b0a1b4cf2c6375f3bb93ecddb">Clean</a>()</td><td class="entry"><a class="el" href="classlogic__input.html">logic_input</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classlogic__input.html#a76e9b46e68a0b404e1423801b92955d8">Draw</a>(mglGraph *gr, const char *label[]=NULL, uint8_t pin_stats=0)</td><td class="entry"><a class="el" href="classlogic__input.html">logic_input</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classlogic__input.html#aa39c71bd501093e64be1703fce039038">init_acquisition</a>(uint8_t *pins, uint8_t npin=0)</td><td class="entry"><a class="el" href="classlogic__input.html">logic_input</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classlogic__input.html#a6432c8ce43a33c26d18f9e58d392aa20">Load</a>(const char *filename)</td><td class="entry"><a class="el" href="classlogic__input.html">logic_input</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classlogic__input.html#a450e489e87441db0bad7c5c9d71494b5">logic_input</a>(uint8_t npin=0, uint8_t *pins=NULL, uint32_t npoint=0, float delay=0)</td><td class="entry"><a class="el" href="classlogic__input.html">logic_input</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classlogic__input.html#a3349a83e945710442279df3f53907328">npin</a></td><td class="entry"><a class="el" href="classlogic__input.html">logic_input</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classlogic__input.html#a6cc447732c8c6e0432ab17115e77dc53">npoint</a></td><td class="entry"><a class="el" href="classlogic__input.html">logic_input</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classlogic__input.html#a691df164430ee863f12e0aaaeb7510a7">pins</a></td><td class="entry"><a class="el" href="classlogic__input.html">logic_input</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classlogic__input.html#a208c7f7472cb5bb44da0e33aaf32a66e">rawdata</a></td><td class="entry"><a class="el" href="classlogic__input.html">logic_input</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classlogic__input.html#a2a9a9dc41ce8ff467cf9aef67276d56f">Save</a>(const char *filename)</td><td class="entry"><a class="el" href="classlogic__input.html">logic_input</a></td><td class="entry"></td></tr>
-  <tr><td class="entry"><a class="el" href="classlogic__input.html#a4b9112427064603351d34f5170feb643">t</a></td><td class="entry"><a class="el" href="classlogic__input.html">logic_input</a></td><td class="entry"></td></tr>
-  <tr class="even"><td class="entry"><a class="el" href="classlogic__input.html#a0f5cf5d89a03cfea37539f51647bf0bf">~logic_input</a>()</td><td class="entry"><a class="el" href="classlogic__input.html">logic_input</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classprotocol.html#acac3d92bdf1cbe13b801e2e4404c390b">acquire</a>(uint32_t npoint=2000, float period=1.0)</td><td class="entry"><a class="el" href="classprotocol.html">protocol</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classprotocol.html#a3911b0d33a9f76d931116aa93ac86a78">capture</a></td><td class="entry"><a class="el" href="classprotocol.html">protocol</a></td><td class="entry"></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classprotocol.html#a82520485f257ad8e1e169071f4dc041f">decode</a>(void)=0</td><td class="entry"><a class="el" href="classprotocol.html">protocol</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classprotocol.html#ab39aba2eb80454a58fb04f5039a1609c">Draw</a>(mglGraph *gr)=0</td><td class="entry"><a class="el" href="classprotocol.html">protocol</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
+  <tr class="even"><td class="entry"><a class="el" href="classprotocol.html#ae9e4832c346d820016b1e2b46d97f71c">init_acquisition</a>(uint8_t pins[], uint8_t npin)</td><td class="entry"><a class="el" href="classprotocol.html">protocol</a></td><td class="entry"><span class="mlabel">virtual</span></td></tr>
+  <tr><td class="entry"><a class="el" href="classprotocol.html#a4c8135d776fcc29ed75e86e4ed0fb92b">~protocol</a>()=0</td><td class="entry"><a class="el" href="classprotocol.html">protocol</a></td><td class="entry"><span class="mlabel">pure virtual</span></td></tr>
 </table></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 8 2013 22:51:28 for Logic Analyzer RPi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Mar 8 2013 22:51:35 for Logic Analyzer RPi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

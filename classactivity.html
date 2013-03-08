@@ -61,6 +61,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -96,8 +97,9 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a2760a7910c1be3a91c2444591297b9fd"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classactivity.html#a2760a7910c1be3a91c2444591297b9fd">activity</a> (<a class="el" href="classlogic__input.html">logic_input</a> &amp;data, uint8_t pin=0, float active_value=1)</td></tr>
-<tr class="memdesc:a2760a7910c1be3a91c2444591297b9fd"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor from a <a class="el" href="classlogic__input.html" title="Class doing acquisition from RPI&#39;s GPIO.">logic_input</a> object data.  <a href="#a2760a7910c1be3a91c2444591297b9fd"></a><br/></td></tr>
+<tr class="memitem:a35b51e12d1b28d3b8d6fe1c95dc0860b"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classactivity.html#a35b51e12d1b28d3b8d6fe1c95dc0860b">activity</a> (<a class="el" href="classlogic__input.html">logic_input</a> *data=NULL, uint8_t pin=0, logic_state=HIGHV)</td></tr>
+<tr class="memdesc:a35b51e12d1b28d3b8d6fe1c95dc0860b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor from a <a class="el" href="classlogic__input.html" title="Class doing acquisition from RPI&#39;s GPIO.">logic_input</a> object data.  <a href="#a35b51e12d1b28d3b8d6fe1c95dc0860b"></a><br/></td></tr>
+<tr class="memitem:aa614ec8f8e2bfb03e374fb7429c05e7b"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classactivity.html#aa614ec8f8e2bfb03e374fb7429c05e7b">init</a> (<a class="el" href="classlogic__input.html">logic_input</a> *data, uint8_t pin=0, logic_state=HIGHV)</td></tr>
 <tr class="memitem:a95e2c2cbb4cb64bfbf744063b1e5f26e"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a95e2c2cbb4cb64bfbf744063b1e5f26e"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classactivity.html#a95e2c2cbb4cb64bfbf744063b1e5f26e">~activity</a> ()</td></tr>
 <tr class="memdesc:a95e2c2cbb4cb64bfbf744063b1e5f26e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br/></td></tr>
@@ -122,15 +124,15 @@ float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 <div class="textblock"><p>Class containing activity obtained from <a class="el" href="classlogic__input.html" title="Class doing acquisition from RPI&#39;s GPIO.">logic_input</a>. </p>
 <p>Class containing time range when ship is active and able to draw the background of subplots accordingly </p>
 </div><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a2760a7910c1be3a91c2444591297b9fd"></a>
+<a class="anchor" id="a35b51e12d1b28d3b8d6fe1c95dc0860b"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
           <td class="memname">activity::activity </td>
           <td>(</td>
-          <td class="paramtype"><a class="el" href="classlogic__input.html">logic_input</a> &amp;&#160;</td>
-          <td class="paramname"><em>data</em>, </td>
+          <td class="paramtype"><a class="el" href="classlogic__input.html">logic_input</a> *&#160;</td>
+          <td class="paramname"><em>data</em> = <code>NULL</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -141,8 +143,8 @@ float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">float&#160;</td>
-          <td class="paramname"><em>active_value</em> = <code>1</code>&#160;</td>
+          <td class="paramtype">logic_state&#160;</td>
+          <td class="paramname"><em>active_value</em> = <code>HIGHV</code>&#160;</td>
         </tr>
         <tr>
           <td></td>
@@ -153,14 +155,7 @@ float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 </div><div class="memdoc">
 
 <p>Constructor from a <a class="el" href="classlogic__input.html" title="Class doing acquisition from RPI&#39;s GPIO.">logic_input</a> object data. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">data</td><td><a class="el" href="classlogic__input.html" title="Class doing acquisition from RPI&#39;s GPIO.">logic_input</a> object </td></tr>
-    <tr><td class="paramname">pin</td><td>pin index corresponding to Chip Select </td></tr>
-    <tr><td class="paramname">active_value</td><td>value when the Chip is Enabled (1 for active HIGH or 0 for active LOW) </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>Calls init if data is not NULL </p>
 
 </div>
 </div>
@@ -200,6 +195,46 @@ float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 
 </div>
 </div>
+<a class="anchor" id="aa614ec8f8e2bfb03e374fb7429c05e7b"></a>
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void activity::init </td>
+          <td>(</td>
+          <td class="paramtype"><a class="el" href="classlogic__input.html">logic_input</a> *&#160;</td>
+          <td class="paramname"><em>data</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">uint8_t&#160;</td>
+          <td class="paramname"><em>pin</em> = <code>0</code>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">logic_state&#160;</td>
+          <td class="paramname"><em>active_value</em> = <code>HIGHV</code>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">data</td><td><a class="el" href="classlogic__input.html" title="Class doing acquisition from RPI&#39;s GPIO.">logic_input</a> object </td></tr>
+    <tr><td class="paramname">pin</td><td>pin index corresponding to Chip Select </td></tr>
+    <tr><td class="paramname">active_value</td><td>value when the Chip is Enabled (HIGHV or LOWV) </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <h2>Member Data Documentation</h2>
 <a class="anchor" id="a76bd1462c255a6837e1b7323f0aa9e41"></a>
 <div class="memitem">
@@ -223,7 +258,7 @@ float *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="c
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 6 2013 10:18:43 for Logic Analyzer RPi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Mar 8 2013 22:51:27 for Logic Analyzer RPi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

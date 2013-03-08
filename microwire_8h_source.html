@@ -115,36 +115,68 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;activity.h&quot;</span></div>
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="code" href="classmicrowire.html">   34</a></span>&#160;<span class="keyword">class </span><a class="code" href="classmicrowire.html" title="Example class decoding instructions sent to a NMC9314 EEPROM memory (Microwire interface)">microwire</a>: <span class="keyword">public</span> mglDraw</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;{</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <a class="code" href="classmicrowire.html#ad89e7320e8e3f0d2a3bf8623aca7466e" title="Constructor.">microwire</a>(uint8_t pins[],uint8_t npin=4);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <a class="code" href="classmicrowire.html#ae9a22d28da087436867f16e247163699" title="Destructor.">~microwire</a>();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;<span class="preprocessor">#ifndef PROTOCOL</span></div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define PROTOCOL</span></div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;protocol.h&quot;</span></div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;<span class="preprocessor">#ifndef DEBUG_H</span></div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define DEBUG_H</span></div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;debug.h&quot;</span></div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;<span class="comment">//* As bellow, all protocols must herit from class protocol.</span></div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="code" href="classmicrowire.html">   46</a></span>&#160;<span class="keyword">class </span><a class="code" href="classmicrowire.html" title="Example class decoding instructions sent to a NMC9314 EEPROM memory (Microwire interface)">microwire</a>: <span class="keyword">public</span> <a class="code" href="classprotocol.html" title="protocol class, parent of all protocols.">protocol</a></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;{</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;<span class="keyword">public</span>:</div>
 <div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classmicrowire.html#a2b9d8c3a06c68a05121cc3b16053b5cc" title="function extracting messages">decode_mosi</a>();</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classmicrowire.html#a4d3da038a2e96b557cfbc10ca1d9ae2c" title="function extracting messages">decode_miso</a>();</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classmicrowire.html#a0ad61652080d4d2598284232d2ecfe61" title="Draw all messages.">Draw</a>(mglGraph *gr);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">//private:</span></div>
-<div class="line"><a name="l00060"></a><span class="lineno"><a class="code" href="classmicrowire.html#aa84e069d8f48017fcb3f4d500f546a08">   60</a></span>&#160;<span class="comment"></span>    <a class="code" href="classlogic__input.html" title="Class doing acquisition from RPI&#39;s GPIO.">logic_input</a> <a class="code" href="classmicrowire.html#aa84e069d8f48017fcb3f4d500f546a08" title="Contain the raw capture of all pins.">capture</a>;</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno"><a class="code" href="classmicrowire.html#acb9490b02cb44b0db64629996e65bba3">   63</a></span>&#160;    <a class="code" href="classactivity.html" title="Class containing activity obtained from logic_input.">activity</a> <a class="code" href="classmicrowire.html#acb9490b02cb44b0db64629996e65bba3" title="Contain the activity.">cs</a>;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;</div>
-<div class="line"><a name="l00066"></a><span class="lineno"><a class="code" href="classmicrowire.html#af1e79b9d1affd39d8fe6bc65b35e5467">   66</a></span>&#160;    <a class="code" href="classtransition.html" title="class getting LTH (Low To High) and HTL (High To Low) transitions in logic_input">transition</a> <a class="code" href="classmicrowire.html#af1e79b9d1affd39d8fe6bc65b35e5467" title="Contain the clock transitions.">clk</a>;</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;</div>
-<div class="line"><a name="l00069"></a><span class="lineno"><a class="code" href="classmicrowire.html#ae34e347c3e3e938b4f3ebbee7363efd6">   69</a></span>&#160;    <a class="code" href="classbinary.html" title="Class containing bits information obtained from logic_input and transition.">binary</a> <a class="code" href="classmicrowire.html#ae34e347c3e3e938b4f3ebbee7363efd6" title="Contain the MOSI binary data.">mosi</a>;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;</div>
-<div class="line"><a name="l00072"></a><span class="lineno"><a class="code" href="classmicrowire.html#a9074f46d9dc941da3b48296dd69980bc">   72</a></span>&#160;    <a class="code" href="classbinary.html" title="Class containing bits information obtained from logic_input and transition.">binary</a> <a class="code" href="classmicrowire.html#a9074f46d9dc941da3b48296dd69980bc" title="Contain the MISO binary data.">miso</a>;</div>
-<div class="line"><a name="l00074"></a><span class="lineno"><a class="code" href="classmicrowire.html#acabbc04d12988c361aafca7c2d274bcb">   74</a></span>&#160;    <a class="code" href="classmessage.html" title="Class to handle decoded information.">message</a> *<a class="code" href="classmicrowire.html#acabbc04d12988c361aafca7c2d274bcb" title="array of message decoded from mosi">mosi_mess</a>;</div>
-<div class="line"><a name="l00076"></a><span class="lineno"><a class="code" href="classmicrowire.html#aa3cfed40986cf09b4bc4e4a890c09e83">   76</a></span>&#160;    <a class="code" href="classmessage.html" title="Class to handle decoded information.">message</a> *<a class="code" href="classmicrowire.html#aa3cfed40986cf09b4bc4e4a890c09e83" title="array of message decoded from miso">miso_mess</a>;</div>
-<div class="line"><a name="l00078"></a><span class="lineno"><a class="code" href="classmicrowire.html#af59697859d5b71a390f960ba43c43c45">   78</a></span>&#160;    uint32_t <a class="code" href="classmicrowire.html#af59697859d5b71a390f960ba43c43c45" title="number of messages">nmessage</a>;</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;};</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    <a class="code" href="classmicrowire.html#a207f331741be408a4aa8698de5fe4ff4" title="Constructor.">microwire</a>(uint8_t pins[]=NULL,uint8_t npin=4);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    </div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <a class="code" href="classmicrowire.html#ae9a22d28da087436867f16e247163699" title="Destructor.">~microwire</a>();</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;    </div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">// Initialize acquisition (not defined, as protocol::init_acquisition() do the job).</span></div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="comment">/* Setup capture on the GPIO pins given.</span></div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;<span class="comment">            \param pins array of GPIO pin used in  init_acquisition() such as:</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;<span class="comment">                - pins[0] acquires CS (Chip Select)</span></div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;<span class="comment">                - pins[1] acquires CLK (the clock)</span></div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;<span class="comment">                - pins[2] acquires MOSI (Master Out Slave In)</span></div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;<span class="comment">                - pins[3] acquires MISO (Master In Slave Out)</span></div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;<span class="comment">                - any pin&gt;3 will not be decoded but will be acquired and displayed.</span></div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">            \param npin number of pin to acquire (must be smaller or equal to the size of pins)*/</span></div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="comment">//void init_acquisition(uint8_t pins[],uint8_t npin);</span></div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;    </div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="comment">// Start acquisition (not defined, as protocol::acquire() do the job).</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;    <span class="comment">/*     \param npoint number of points to acquire.</span></div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;<span class="comment">            \param period wait time in ms between 2 measurements.*/</span></div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    <span class="comment">//void acquire(uint32_t npoint=2000, float period=1.0);</span></div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classmicrowire.html#a9678b4984c291d23b88935a8d3098a76" title="Perform all the decoding.">decode</a> ();</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;</div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classmicrowire.html#a2b9d8c3a06c68a05121cc3b16053b5cc" title="function extracting messages from MOSI">decode_mosi</a>();</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classmicrowire.html#a4d3da038a2e96b557cfbc10ca1d9ae2c" title="function extracting messages from MISO">decode_miso</a>();</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;    </div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classmicrowire.html#a0ad61652080d4d2598284232d2ecfe61" title="Draw all messages.">Draw</a>(mglGraph *gr);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    </div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;<span class="comment">//private:</span></div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;<span class="comment"></span></div>
+<div class="line"><a name="l00095"></a><span class="lineno"><a class="code" href="classmicrowire.html#acb9490b02cb44b0db64629996e65bba3">   95</a></span>&#160;    <a class="code" href="classactivity.html" title="Class containing activity obtained from logic_input.">activity</a> <a class="code" href="classmicrowire.html#acb9490b02cb44b0db64629996e65bba3" title="Contain the activity.">cs</a>;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;</div>
+<div class="line"><a name="l00098"></a><span class="lineno"><a class="code" href="classmicrowire.html#af1e79b9d1affd39d8fe6bc65b35e5467">   98</a></span>&#160;    <a class="code" href="classtransition.html" title="class getting LTH (Low To High) and HTL (High To Low) transitions in logic_input">transition</a> <a class="code" href="classmicrowire.html#af1e79b9d1affd39d8fe6bc65b35e5467" title="Contain the clock transitions.">clk</a>;</div>
+<div class="line"><a name="l00100"></a><span class="lineno">  100</span>&#160;</div>
+<div class="line"><a name="l00101"></a><span class="lineno"><a class="code" href="classmicrowire.html#ae34e347c3e3e938b4f3ebbee7363efd6">  101</a></span>&#160;    <a class="code" href="classbinary.html" title="Class containing bits information obtained from logic_input and [transition](transition).">binary</a> <a class="code" href="classmicrowire.html#ae34e347c3e3e938b4f3ebbee7363efd6" title="Contain the MOSI binary data.">mosi</a>;</div>
+<div class="line"><a name="l00103"></a><span class="lineno">  103</span>&#160;</div>
+<div class="line"><a name="l00104"></a><span class="lineno"><a class="code" href="classmicrowire.html#a9074f46d9dc941da3b48296dd69980bc">  104</a></span>&#160;    <a class="code" href="classbinary.html" title="Class containing bits information obtained from logic_input and [transition](transition).">binary</a> <a class="code" href="classmicrowire.html#a9074f46d9dc941da3b48296dd69980bc" title="Contain the MISO binary data.">miso</a>;</div>
+<div class="line"><a name="l00106"></a><span class="lineno"><a class="code" href="classmicrowire.html#acabbc04d12988c361aafca7c2d274bcb">  106</a></span>&#160;    <a class="code" href="classmessage.html" title="Class to handle decoded information.">message</a> *<a class="code" href="classmicrowire.html#acabbc04d12988c361aafca7c2d274bcb" title="array of message decoded from mosi">mosi_mess</a>;</div>
+<div class="line"><a name="l00108"></a><span class="lineno"><a class="code" href="classmicrowire.html#aa3cfed40986cf09b4bc4e4a890c09e83">  108</a></span>&#160;    <a class="code" href="classmessage.html" title="Class to handle decoded information.">message</a> *<a class="code" href="classmicrowire.html#aa3cfed40986cf09b4bc4e4a890c09e83" title="array of message decoded from miso">miso_mess</a>;</div>
+<div class="line"><a name="l00110"></a><span class="lineno"><a class="code" href="classmicrowire.html#af59697859d5b71a390f960ba43c43c45">  110</a></span>&#160;    uint32_t <a class="code" href="classmicrowire.html#af59697859d5b71a390f960ba43c43c45" title="number of messages">nmessage</a>;</div>
+<div class="line"><a name="l00111"></a><span class="lineno">  111</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 6 2013 10:18:43 for Logic Analyzer RPi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Mar 8 2013 22:51:27 for Logic Analyzer RPi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

@@ -61,6 +61,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
     <ul class="tablist">
       <li><a href="annotated.html"><span>Class&#160;List</span></a></li>
       <li><a href="classes.html"><span>Class&#160;Index</span></a></li>
+      <li><a href="hierarchy.html"><span>Class&#160;Hierarchy</span></a></li>
       <li><a href="functions.html"><span>Class&#160;Members</span></a></li>
     </ul>
   </div>
@@ -93,26 +94,41 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
  <a href="classmicrowire.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="microwire_8h_source.html">microwire.h</a>&gt;</code></p>
+<div class="dynheader">
+Inheritance diagram for microwire:</div>
+<div class="dyncontent">
+ <div class="center">
+  <img src="classmicrowire.png" usemap="#microwire_map" alt=""/>
+  <map id="microwire_map" name="microwire_map">
+<area href="classprotocol.html" title="protocol class, parent of all protocols." alt="protocol" shape="rect" coords="0,0,67,24"/>
+</map>
+ </div></div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:ad89e7320e8e3f0d2a3bf8623aca7466e"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmicrowire.html#ad89e7320e8e3f0d2a3bf8623aca7466e">microwire</a> (uint8_t pins[], uint8_t npin=4)</td></tr>
-<tr class="memdesc:ad89e7320e8e3f0d2a3bf8623aca7466e"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#ad89e7320e8e3f0d2a3bf8623aca7466e"></a><br/></td></tr>
+<tr class="memitem:a207f331741be408a4aa8698de5fe4ff4"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmicrowire.html#a207f331741be408a4aa8698de5fe4ff4">microwire</a> (uint8_t pins[]=NULL, uint8_t npin=4)</td></tr>
+<tr class="memdesc:a207f331741be408a4aa8698de5fe4ff4"><td class="mdescLeft">&#160;</td><td class="mdescRight">Constructor.  <a href="#a207f331741be408a4aa8698de5fe4ff4"></a><br/></td></tr>
 <tr class="memitem:ae9a22d28da087436867f16e247163699"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="ae9a22d28da087436867f16e247163699"></a>
 &#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmicrowire.html#ae9a22d28da087436867f16e247163699">~microwire</a> ()</td></tr>
 <tr class="memdesc:ae9a22d28da087436867f16e247163699"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destructor. <br/></td></tr>
+<tr class="memitem:a9678b4984c291d23b88935a8d3098a76"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmicrowire.html#a9678b4984c291d23b88935a8d3098a76">decode</a> ()</td></tr>
+<tr class="memdesc:a9678b4984c291d23b88935a8d3098a76"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform all the decoding.  <a href="#a9678b4984c291d23b88935a8d3098a76"></a><br/></td></tr>
 <tr class="memitem:a2b9d8c3a06c68a05121cc3b16053b5cc"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmicrowire.html#a2b9d8c3a06c68a05121cc3b16053b5cc">decode_mosi</a> ()</td></tr>
-<tr class="memdesc:a2b9d8c3a06c68a05121cc3b16053b5cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">function extracting messages  <a href="#a2b9d8c3a06c68a05121cc3b16053b5cc"></a><br/></td></tr>
+<tr class="memdesc:a2b9d8c3a06c68a05121cc3b16053b5cc"><td class="mdescLeft">&#160;</td><td class="mdescRight">function extracting messages from MOSI  <a href="#a2b9d8c3a06c68a05121cc3b16053b5cc"></a><br/></td></tr>
 <tr class="memitem:a4d3da038a2e96b557cfbc10ca1d9ae2c"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmicrowire.html#a4d3da038a2e96b557cfbc10ca1d9ae2c">decode_miso</a> ()</td></tr>
-<tr class="memdesc:a4d3da038a2e96b557cfbc10ca1d9ae2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">function extracting messages  <a href="#a4d3da038a2e96b557cfbc10ca1d9ae2c"></a><br/></td></tr>
+<tr class="memdesc:a4d3da038a2e96b557cfbc10ca1d9ae2c"><td class="mdescLeft">&#160;</td><td class="mdescRight">function extracting messages from MISO  <a href="#a4d3da038a2e96b557cfbc10ca1d9ae2c"></a><br/></td></tr>
 <tr class="memitem:a0ad61652080d4d2598284232d2ecfe61"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmicrowire.html#a0ad61652080d4d2598284232d2ecfe61">Draw</a> (mglGraph *gr)</td></tr>
 <tr class="memdesc:a0ad61652080d4d2598284232d2ecfe61"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw all messages.  <a href="#a0ad61652080d4d2598284232d2ecfe61"></a><br/></td></tr>
+<tr class="inherit_header pub_methods_classprotocol"><td colspan="2" onclick="javascript:toggleInherit('pub_methods_classprotocol')"><img src="closed.png" alt="-"/>&nbsp;Public Member Functions inherited from <a class="el" href="classprotocol.html">protocol</a></td></tr>
+<tr class="memitem:a4c8135d776fcc29ed75e86e4ed0fb92b inherit pub_methods_classprotocol"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprotocol.html#a4c8135d776fcc29ed75e86e4ed0fb92b">~protocol</a> ()=0</td></tr>
+<tr class="memdesc:a4c8135d776fcc29ed75e86e4ed0fb92b inherit pub_methods_classprotocol"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pure virtual destructor.  <a href="#a4c8135d776fcc29ed75e86e4ed0fb92b"></a><br/></td></tr>
+<tr class="memitem:ae9e4832c346d820016b1e2b46d97f71c inherit pub_methods_classprotocol"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprotocol.html#ae9e4832c346d820016b1e2b46d97f71c">init_acquisition</a> (uint8_t pins[], uint8_t npin)</td></tr>
+<tr class="memdesc:ae9e4832c346d820016b1e2b46d97f71c inherit pub_methods_classprotocol"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize acquisition. May not be redeclared.  <a href="#ae9e4832c346d820016b1e2b46d97f71c"></a><br/></td></tr>
+<tr class="memitem:acac3d92bdf1cbe13b801e2e4404c390b inherit pub_methods_classprotocol"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprotocol.html#acac3d92bdf1cbe13b801e2e4404c390b">acquire</a> (uint32_t npoint=2000, float period=1.0)</td></tr>
+<tr class="memdesc:acac3d92bdf1cbe13b801e2e4404c390b inherit pub_methods_classprotocol"><td class="mdescLeft">&#160;</td><td class="mdescRight">Start acquisition. May not be redeclared.  <a href="#acac3d92bdf1cbe13b801e2e4404c390b"></a><br/></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
-<tr class="memitem:aa84e069d8f48017fcb3f4d500f546a08"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="aa84e069d8f48017fcb3f4d500f546a08"></a>
-<a class="el" href="classlogic__input.html">logic_input</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmicrowire.html#aa84e069d8f48017fcb3f4d500f546a08">capture</a></td></tr>
-<tr class="memdesc:aa84e069d8f48017fcb3f4d500f546a08"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contain the raw capture of all pins. <br/></td></tr>
 <tr class="memitem:acb9490b02cb44b0db64629996e65bba3"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classactivity.html">activity</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmicrowire.html#acb9490b02cb44b0db64629996e65bba3">cs</a></td></tr>
 <tr class="memdesc:acb9490b02cb44b0db64629996e65bba3"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contain the activity.  <a href="#acb9490b02cb44b0db64629996e65bba3"></a><br/></td></tr>
 <tr class="memitem:af1e79b9d1affd39d8fe6bc65b35e5467"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classtransition.html">transition</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmicrowire.html#af1e79b9d1affd39d8fe6bc65b35e5467">clk</a></td></tr>
@@ -128,11 +144,15 @@ Public Attributes</h2></td></tr>
 <tr class="memitem:af59697859d5b71a390f960ba43c43c45"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="af59697859d5b71a390f960ba43c43c45"></a>
 uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classmicrowire.html#af59697859d5b71a390f960ba43c43c45">nmessage</a></td></tr>
 <tr class="memdesc:af59697859d5b71a390f960ba43c43c45"><td class="mdescLeft">&#160;</td><td class="mdescRight">number of messages <br/></td></tr>
+<tr class="inherit_header pub_attribs_classprotocol"><td colspan="2" onclick="javascript:toggleInherit('pub_attribs_classprotocol')"><img src="closed.png" alt="-"/>&nbsp;Public Attributes inherited from <a class="el" href="classprotocol.html">protocol</a></td></tr>
+<tr class="memitem:a3911b0d33a9f76d931116aa93ac86a78 inherit pub_attribs_classprotocol"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a3911b0d33a9f76d931116aa93ac86a78"></a>
+<a class="el" href="classlogic__input.html">logic_input</a>&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprotocol.html#a3911b0d33a9f76d931116aa93ac86a78">capture</a></td></tr>
+<tr class="memdesc:a3911b0d33a9f76d931116aa93ac86a78 inherit pub_attribs_classprotocol"><td class="mdescLeft">&#160;</td><td class="mdescRight">Contain the raw capture of all pins. <br/></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>Example class decoding instructions sent to a NMC9314 EEPROM memory (Microwire interface) </p>
 </div><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="ad89e7320e8e3f0d2a3bf8623aca7466e"></a>
+<a class="anchor" id="a207f331741be408a4aa8698de5fe4ff4"></a>
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
@@ -140,7 +160,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
           <td class="memname">microwire::microwire </td>
           <td>(</td>
           <td class="paramtype">uint8_t&#160;</td>
-          <td class="paramname"><em>pins</em>[], </td>
+          <td class="paramname"><em>pins</em>[] = <code>NULL</code>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -157,25 +177,47 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 </div><div class="memdoc">
 
 <p>Constructor. </p>
-<p>Setup and start capture on the GPIO pins given. </p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">pins</td><td>array of GPIO pin used in the capture such as:<ul>
-<li>pins[0] acquires CS (Chip Select)</li>
-<li>pins[1] acquires CLK (the clock)</li>
-<li>pins[2] acquires MOSI (Master Out Slave In)</li>
-<li>pins[3] acquires MISO (Master In Slave Out)</li>
-<li>any pin&gt;3 will not be decoded but will be acquired and displayed. </li>
-</ul>
-</td></tr>
-    <tr><td class="paramname">npin</td><td>number of pin to acquire (must be smaller or equal to the size of pins) </td></tr>
-  </table>
-  </dd>
-</dl>
+<p>call <a class="el" href="classprotocol.html#ae9e4832c346d820016b1e2b46d97f71c" title="Initialize acquisition. May not be redeclared.">init_acquisition()</a> </p>
 
 </div>
 </div>
 <h2>Member Function Documentation</h2>
+<a class="anchor" id="a9678b4984c291d23b88935a8d3098a76"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void microwire::decode </td>
+          <td>(</td>
+          <td class="paramtype">void&#160;</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Perform all the decoding. </p>
+<p>This function decodes:</p>
+<ul>
+<li>activity from CS pin,</li>
+<li>transitions from CLK,</li>
+<li>binary from MOSI and MISO</li>
+<li>messages from MOSI binary,</li>
+<li>messages from MISO binary </li>
+</ul>
+
+<p>Implements <a class="el" href="classprotocol.html#a82520485f257ad8e1e169071f4dc041f">protocol</a>.</p>
+
+</div>
+</div>
 <a class="anchor" id="a4d3da038a2e96b557cfbc10ca1d9ae2c"></a>
 <div class="memitem">
 <div class="memproto">
@@ -189,7 +231,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
       </table>
 </div><div class="memdoc">
 
-<p>function extracting messages </p>
+<p>function extracting messages from MISO </p>
 <p>Puts the extracted messages array in miso_mess, from binary miso and activity cs. </p>
 
 </div>
@@ -207,7 +249,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
       </table>
 </div><div class="memdoc">
 
-<p>function extracting messages </p>
+<p>function extracting messages from MOSI </p>
 <p>Puts the extracted messages array in mosi_mess, from binary mosi and activity cs. </p>
 
 </div>
@@ -215,6 +257,9 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 <a class="anchor" id="a0ad61652080d4d2598284232d2ecfe61"></a>
 <div class="memitem">
 <div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
       <table class="memname">
         <tr>
           <td class="memname">int microwire::Draw </td>
@@ -224,6 +269,11 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
           <td></td>
         </tr>
       </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
 </div><div class="memdoc">
 
 <p>Draw all messages. </p>
@@ -233,6 +283,8 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
   </table>
   </dd>
 </dl>
+
+<p>Implements <a class="el" href="classprotocol.html#ab39aba2eb80454a58fb04f5039a1609c">protocol</a>.</p>
 
 </div>
 </div>
@@ -278,7 +330,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 </div><div class="memdoc">
 
 <p>Contain the MISO binary data. </p>
-<p>Determined from MISO pin, clock transitions and activity </p>
+<p>Determined from MISO pin rawdata, clock transitions and activity </p>
 
 </div>
 </div>
@@ -293,7 +345,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 </div><div class="memdoc">
 
 <p>array of message decoded from miso </p>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="classmicrowire.html#a4d3da038a2e96b557cfbc10ca1d9ae2c" title="function extracting messages">decode_miso()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="classmicrowire.html#a4d3da038a2e96b557cfbc10ca1d9ae2c" title="function extracting messages from MISO">decode_miso()</a> </dd></dl>
 
 </div>
 </div>
@@ -308,7 +360,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 </div><div class="memdoc">
 
 <p>Contain the MOSI binary data. </p>
-<p>Determined from MOSI pin, clock transitions and activity </p>
+<p>Determined from MOSI pin rawdata, clock transitions and activity </p>
 
 </div>
 </div>
@@ -323,7 +375,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 </div><div class="memdoc">
 
 <p>array of message decoded from mosi </p>
-<dl class="section see"><dt>See Also</dt><dd><a class="el" href="classmicrowire.html#a2b9d8c3a06c68a05121cc3b16053b5cc" title="function extracting messages">decode_mosi()</a> </dd></dl>
+<dl class="section see"><dt>See Also</dt><dd><a class="el" href="classmicrowire.html#a2b9d8c3a06c68a05121cc3b16053b5cc" title="function extracting messages from MOSI">decode_mosi()</a> </dd></dl>
 
 </div>
 </div>
@@ -334,7 +386,7 @@ uint32_t&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 6 2013 10:18:44 for Logic Analyzer RPi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Mar 8 2013 22:51:32 for Logic Analyzer RPi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

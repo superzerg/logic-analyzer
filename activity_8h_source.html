@@ -89,31 +89,37 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;<span class="preprocessor">#include &lt;mgl/mgl_zb.h&gt;</span></div>
 <div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;<span class="comment">//#include &lt;unistd.h&gt;</span></div>
 <div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef LOGIC_INPUT</span></div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define LOGIC_INPUT</span></div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;logic_input.h&quot;</span></div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;<span class="preprocessor">#ifndef DEBUG_H</span></div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define DEBUG_H</span></div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;debug.h&quot;</span></div>
 <div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;<span class="preprocessor">#endif</span></div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;<span class="preprocessor"></span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;</div>
-<div class="line"><a name="l00016"></a><span class="lineno"><a class="code" href="classactivity.html">   16</a></span>&#160;<span class="keyword">class </span><a class="code" href="classactivity.html" title="Class containing activity obtained from logic_input.">activity</a>: <span class="keyword">public</span> mglDraw</div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;{</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <a class="code" href="classactivity.html#a2760a7910c1be3a91c2444591297b9fd" title="Constructor from a logic_input object data.">activity</a>(<a class="code" href="classlogic__input.html" title="Class doing acquisition from RPI&#39;s GPIO.">logic_input</a> &amp;data,uint8_t pin=0, <span class="keywordtype">float</span> active_value=1);</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;    <a class="code" href="classactivity.html#a95e2c2cbb4cb64bfbf744063b1e5f26e" title="Destructor.">~activity</a>();</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classactivity.html#a4985cad72c2135d040c4f8cd23fb1206" title="Paint background of a subplot according to activity.">Draw</a>(mglGraph *gr,uint8_t subplot);</div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;<span class="comment">//private:</span></div>
-<div class="line"><a name="l00032"></a><span class="lineno"><a class="code" href="classactivity.html#ab36c7ea367bdb3b6f08c6de0e5886224">   32</a></span>&#160;<span class="comment"></span>    uint32_t <a class="code" href="classactivity.html#ab36c7ea367bdb3b6f08c6de0e5886224" title="Number of active intervals.">nactive</a>;</div>
-<div class="line"><a name="l00034"></a><span class="lineno"><a class="code" href="classactivity.html#a6f2f9281b29b03261eb49696775358e0">   34</a></span>&#160;    <span class="keywordtype">float</span> *<a class="code" href="classactivity.html#a6f2f9281b29b03261eb49696775358e0" title="array of starting time of each active period">t_start</a>;</div>
-<div class="line"><a name="l00036"></a><span class="lineno"><a class="code" href="classactivity.html#acc1ea85b73888e083231e32a734247e0">   36</a></span>&#160;    <span class="keywordtype">float</span> *<a class="code" href="classactivity.html#acc1ea85b73888e083231e32a734247e0" title="array of ending time of each active period">t_end</a>;</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;</div>
-<div class="line"><a name="l00039"></a><span class="lineno"><a class="code" href="classactivity.html#a76bd1462c255a6837e1b7323f0aa9e41">   39</a></span>&#160;    uint8_t <a class="code" href="classactivity.html#a76bd1462c255a6837e1b7323f0aa9e41" title="number of pin acquired">npin</a>;</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;};</div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#ifndef LOGIC_INPUT</span></div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#define LOGIC_INPUT</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#include &quot;logic_input.h&quot;</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;</div>
+<div class="line"><a name="l00021"></a><span class="lineno"><a class="code" href="classactivity.html">   21</a></span>&#160;<span class="keyword">class </span><a class="code" href="classactivity.html" title="Class containing activity obtained from logic_input.">activity</a>: <span class="keyword">public</span> mglDraw</div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;{</div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;<span class="keyword">public</span>:</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;    <a class="code" href="classactivity.html#a35b51e12d1b28d3b8d6fe1c95dc0860b" title="Constructor from a logic_input object data.">activity</a>(<a class="code" href="classlogic__input.html" title="Class doing acquisition from RPI&#39;s GPIO.">logic_input</a> *data=NULL,uint8_t pin=0, logic_state=HIGHV);</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    <span class="keywordtype">void</span> <a class="code" href="classactivity.html#aa614ec8f8e2bfb03e374fb7429c05e7b">init</a>(<a class="code" href="classlogic__input.html" title="Class doing acquisition from RPI&#39;s GPIO.">logic_input</a> *data,uint8_t pin=0, logic_state=HIGHV);</div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    <a class="code" href="classactivity.html#a95e2c2cbb4cb64bfbf744063b1e5f26e" title="Destructor.">~activity</a>();</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    <span class="keywordtype">int</span> <a class="code" href="classactivity.html#a4985cad72c2135d040c4f8cd23fb1206" title="Paint background of a subplot according to activity.">Draw</a>(mglGraph *gr,uint8_t subplot);</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;<span class="comment">//private:</span></div>
+<div class="line"><a name="l00039"></a><span class="lineno"><a class="code" href="classactivity.html#ab36c7ea367bdb3b6f08c6de0e5886224">   39</a></span>&#160;<span class="comment"></span>    uint32_t <a class="code" href="classactivity.html#ab36c7ea367bdb3b6f08c6de0e5886224" title="Number of active intervals.">nactive</a>;</div>
+<div class="line"><a name="l00041"></a><span class="lineno"><a class="code" href="classactivity.html#a6f2f9281b29b03261eb49696775358e0">   41</a></span>&#160;    <span class="keywordtype">float</span> *<a class="code" href="classactivity.html#a6f2f9281b29b03261eb49696775358e0" title="array of starting time of each active period">t_start</a>;</div>
+<div class="line"><a name="l00043"></a><span class="lineno"><a class="code" href="classactivity.html#acc1ea85b73888e083231e32a734247e0">   43</a></span>&#160;    <span class="keywordtype">float</span> *<a class="code" href="classactivity.html#acc1ea85b73888e083231e32a734247e0" title="array of ending time of each active period">t_end</a>;</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;</div>
+<div class="line"><a name="l00046"></a><span class="lineno"><a class="code" href="classactivity.html#a76bd1462c255a6837e1b7323f0aa9e41">   46</a></span>&#160;    uint8_t <a class="code" href="classactivity.html#a76bd1462c255a6837e1b7323f0aa9e41" title="number of pin acquired">npin</a>;</div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Wed Mar 6 2013 10:18:42 for Logic Analyzer RPi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Fri Mar 8 2013 22:51:26 for Logic Analyzer RPi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
