@@ -78,13 +78,27 @@ No arguments can yet be passed to the main program, so you will have to edit log
 	
 	int main(int argc, char **argv)
 	{
-		uint8_t pins[4]={15,14,4,27};
 	
 2) Use the right protocol eg.
 
-		microwire test(pins,4);
+		microwire test;
+		
+3) Load a file
+
+        test.Load("test.dat");
+        
+or capture and save to file
+
+		uint8_t pins[4]={15,14,4,27};
+		test.init_acquisition(pins,4);
+		test.acquire(2000,1);
+		test.Save(filename.dat);
+		
+4) Decode the data
+
+        test.decode();
 	
-3) The default is to create a PNG image, it is done as follow :
+5) The default is to create a PNG image, it is done as follow :
 
 		mglGraphZB gr(1200,800);
 		test.Draw(&gr);
