@@ -84,30 +84,32 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="contents">
 <div class="fragment"><div class="line"><a name="l00001"></a><span class="lineno">    1</span>&#160;<span class="preprocessor">#include &lt;stdarg.h&gt;</span></div>
 <div class="line"><a name="l00002"></a><span class="lineno">    2</span>&#160;</div>
-<div class="line"><a name="l00003"></a><span class="lineno">    3</span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span></div>
-<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;{</div>
-<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;    CRITICAL = 0,</div>
-<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    ERROR = 1,</div>
-<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    WARNING = 2,</div>
-<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    INFORMATION = 3,</div>
-<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    DEBUG = 4,</div>
-<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;}debug_level;</div>
-<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;</div>
+<div class="line"><a name="l00004"></a><span class="lineno">    4</span>&#160;<span class="keyword">typedef</span> <span class="keyword">enum</span></div>
+<div class="line"><a name="l00005"></a><span class="lineno">    5</span>&#160;{</div>
+<div class="line"><a name="l00006"></a><span class="lineno">    6</span>&#160;    CRITICAL = 0,</div>
+<div class="line"><a name="l00007"></a><span class="lineno">    7</span>&#160;    ERROR = 1,</div>
+<div class="line"><a name="l00008"></a><span class="lineno">    8</span>&#160;    WARNING = 2,</div>
+<div class="line"><a name="l00009"></a><span class="lineno">    9</span>&#160;    INFORMATION = 3,</div>
+<div class="line"><a name="l00010"></a><span class="lineno">   10</span>&#160;    DEBUG = 4,</div>
+<div class="line"><a name="l00011"></a><span class="lineno">   11</span>&#160;}debug_level;</div>
 <div class="line"><a name="l00012"></a><span class="lineno">   12</span>&#160;</div>
-<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;<span class="preprocessor">#if defined(NDEBUG) &amp;&amp; defined(__GNUC__)</span></div>
-<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor"></span><span class="comment">/* gcc&#39;s cpp has extensions; it allows for macros with a variable number of</span></div>
-<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="comment">   arguments. We use this extension here to preprocess pmesg away. */</span></div>
-<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="preprocessor">#define pmesg(level, format, args...) ((void)0)</span></div>
-<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#else</span></div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor"></span><span class="keywordtype">void</span> pmesg(debug_level level, <span class="keyword">const</span> <span class="keywordtype">char</span> format[], ...);</div>
-<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="comment">/* print a message, if it is considered significant enough.</span></div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;<span class="comment">      Adapted from [K&amp;R2], p. 174 */</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;<span class="preprocessor">#endif</span></div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00013"></a><span class="lineno">   13</span>&#160;</div>
+<div class="line"><a name="l00014"></a><span class="lineno">   14</span>&#160;<span class="preprocessor">#if defined(NDEBUG) &amp;&amp; defined(__GNUC__)</span></div>
+<div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;<span class="preprocessor"></span><span class="comment">/* gcc&#39;s cpp has extensions; it allows for macros with a variable number of</span></div>
+<div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160;<span class="comment">   arguments. We use this extension here to preprocess pmesg away. */</span></div>
+<div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;<span class="preprocessor">#define pmesg(level, format, args...) ((void)0)</span></div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;<span class="preprocessor"></span><span class="preprocessor">#else</span></div>
+<div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160;<span class="preprocessor"></span></div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;<span class="keywordtype">void</span> pmesg(debug_level level, <span class="keyword">const</span> <span class="keywordtype">char</span> format[], ...);</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;<span class="comment">/* print a message, if it is considered significant enough.</span></div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;<span class="comment">      Adapted from oopweb.com/CPP/Documents/DebugCPP/Volume/techniques.html*/</span></div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;<span class="preprocessor">#endif</span></div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;<span class="preprocessor"></span></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 8 2013 22:51:26 for Logic Analyzer RPi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Mar 11 2013 21:39:25 for Logic Analyzer RPi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>

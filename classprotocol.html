@@ -106,8 +106,6 @@ Inheritance diagram for protocol:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-methods"></a>
 Public Member Functions</h2></td></tr>
-<tr class="memitem:a4c8135d776fcc29ed75e86e4ed0fb92b"><td class="memItemLeft" align="right" valign="top">virtual&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprotocol.html#a4c8135d776fcc29ed75e86e4ed0fb92b">~protocol</a> ()=0</td></tr>
-<tr class="memdesc:a4c8135d776fcc29ed75e86e4ed0fb92b"><td class="mdescLeft">&#160;</td><td class="mdescRight">Pure virtual destructor.  <a href="#a4c8135d776fcc29ed75e86e4ed0fb92b"></a><br/></td></tr>
 <tr class="memitem:ae9e4832c346d820016b1e2b46d97f71c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprotocol.html#ae9e4832c346d820016b1e2b46d97f71c">init_acquisition</a> (uint8_t pins[], uint8_t npin)</td></tr>
 <tr class="memdesc:ae9e4832c346d820016b1e2b46d97f71c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initialize acquisition. May not be redeclared.  <a href="#ae9e4832c346d820016b1e2b46d97f71c"></a><br/></td></tr>
 <tr class="memitem:acac3d92bdf1cbe13b801e2e4404c390b"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprotocol.html#acac3d92bdf1cbe13b801e2e4404c390b">acquire</a> (uint32_t npoint=2000, float period=1.0)</td></tr>
@@ -115,8 +113,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a82520485f257ad8e1e169071f4dc041f"><td class="memItemLeft" align="right" valign="top"><a class="anchor" id="a82520485f257ad8e1e169071f4dc041f"></a>
 virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprotocol.html#a82520485f257ad8e1e169071f4dc041f">decode</a> (void)=0</td></tr>
 <tr class="memdesc:a82520485f257ad8e1e169071f4dc041f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Perform all the decoding. Need to be defined as it will depend on the protocol. <br/></td></tr>
-<tr class="memitem:ab39aba2eb80454a58fb04f5039a1609c"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprotocol.html#ab39aba2eb80454a58fb04f5039a1609c">Draw</a> (mglGraph *gr)=0</td></tr>
-<tr class="memdesc:ab39aba2eb80454a58fb04f5039a1609c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw all. Need to be defined as it will depend on the protocol.  <a href="#ab39aba2eb80454a58fb04f5039a1609c"></a><br/></td></tr>
+<tr class="memitem:aa25a252754bae008d40ec79a0062fd69"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprotocol.html#aa25a252754bae008d40ec79a0062fd69">Save</a> (const char *filename)</td></tr>
+<tr class="memdesc:aa25a252754bae008d40ec79a0062fd69"><td class="mdescLeft">&#160;</td><td class="mdescRight">Save acquisition data. May not be redeclared.  <a href="#aa25a252754bae008d40ec79a0062fd69"></a><br/></td></tr>
+<tr class="memitem:a8dfce83140a9f27fe162678f8b8f8533"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprotocol.html#a8dfce83140a9f27fe162678f8b8f8533">Load</a> (const char *filename)</td></tr>
+<tr class="memdesc:a8dfce83140a9f27fe162678f8b8f8533"><td class="mdescLeft">&#160;</td><td class="mdescRight">Load acquisition data. May not be redeclared.  <a href="#a8dfce83140a9f27fe162678f8b8f8533"></a><br/></td></tr>
+<tr class="memitem:aaddd8c3ae22a1a8bc540327d66361653"><td class="memItemLeft" align="right" valign="top">virtual int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classprotocol.html#aaddd8c3ae22a1a8bc540327d66361653">Draw</a> (mglGraph *gr)=0</td></tr>
+<tr class="memdesc:aaddd8c3ae22a1a8bc540327d66361653"><td class="mdescLeft">&#160;</td><td class="mdescRight">Draw all. Need to be defined as it will depend on the protocol.  <a href="#aaddd8c3ae22a1a8bc540327d66361653"></a><br/></td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2><a name="pub-attribs"></a>
 Public Attributes</h2></td></tr>
@@ -126,34 +128,7 @@ Public Attributes</h2></td></tr>
 </table>
 <a name="details" id="details"></a><h2>Detailed Description</h2>
 <div class="textblock"><p>protocol class, parent of all protocols. </p>
-</div><h2>Constructor &amp; Destructor Documentation</h2>
-<a class="anchor" id="a4c8135d776fcc29ed75e86e4ed0fb92b"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">protocol::~protocol </td>
-          <td>(</td>
-          <td class="paramname"></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Pure virtual destructor. </p>
-<p>Need to be defined as protocol classes should contain at least one dynamic array of messages. </p>
-
-</div>
-</div>
-<h2>Member Function Documentation</h2>
+</div><h2>Member Function Documentation</h2>
 <a class="anchor" id="acac3d92bdf1cbe13b801e2e4404c390b"></a>
 <div class="memitem">
 <div class="memproto">
@@ -187,6 +162,7 @@ Public Attributes</h2></td></tr>
 </div><div class="memdoc">
 
 <p>Start acquisition. May not be redeclared. </p>
+<p><a class="el" href="classprotocol.html#acac3d92bdf1cbe13b801e2e4404c390b" title="Start acquisition. May not be redeclared.">acquire()</a> does not have to be reimplemented, this is the default behaviour:</p>
 <dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">npoint</td><td>number of points to acquire. </td></tr>
@@ -194,14 +170,13 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p><a class="el" href="classprotocol.html#acac3d92bdf1cbe13b801e2e4404c390b" title="Start acquisition. May not be redeclared.">acquire()</a> does not have to be reimplemented, this is the default behaviour:</p>
 <ol type="1">
 <li>Call binary::acquire() </li>
 </ol>
 
 </div>
 </div>
-<a class="anchor" id="ab39aba2eb80454a58fb04f5039a1609c"></a>
+<a class="anchor" id="aaddd8c3ae22a1a8bc540327d66361653"></a>
 <div class="memitem">
 <div class="memproto">
 <table class="mlabels">
@@ -209,7 +184,7 @@ Public Attributes</h2></td></tr>
   <td class="mlabels-left">
       <table class="memname">
         <tr>
-          <td class="memname">int protocol::Draw </td>
+          <td class="memname">virtual int protocol::Draw </td>
           <td>(</td>
           <td class="paramtype">mglGraph *&#160;</td>
           <td class="paramname"><em>gr</em></td><td>)</td>
@@ -230,13 +205,6 @@ Public Attributes</h2></td></tr>
   </table>
   </dd>
 </dl>
-<p>The draw function should :</p>
-<ol type="1">
-<li>Plot raw data</li>
-</ol>
-<ol type="1">
-<li>Set background of all subplots according to the member activity object </li>
-</ol>
 
 <p>Implemented in <a class="el" href="classmicrowire.html#a0ad61652080d4d2598284232d2ecfe61">microwire</a>.</p>
 
@@ -300,6 +268,72 @@ Public Attributes</h2></td></tr>
 
 </div>
 </div>
+<a class="anchor" id="a8dfce83140a9f27fe162678f8b8f8533"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void protocol::Load </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Load acquisition data. May not be redeclared. </p>
+<p><a class="el" href="classprotocol.html#a8dfce83140a9f27fe162678f8b8f8533" title="Load acquisition data. May not be redeclared.">Load()</a> does not have to be reimplemented, this is the default behaviour:</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>string contenaning filename to be saved. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
+<a class="anchor" id="aa25a252754bae008d40ec79a0062fd69"></a>
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">void protocol::Save </td>
+          <td>(</td>
+          <td class="paramtype">const char *&#160;</td>
+          <td class="paramname"><em>filename</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+<p>Save acquisition data. May not be redeclared. </p>
+<p><a class="el" href="classprotocol.html#aa25a252754bae008d40ec79a0062fd69" title="Save acquisition data. May not be redeclared.">Save()</a> does not have to be reimplemented, this is the default behaviour:</p>
+<dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">filename</td><td>string contenaning filename to be saved. </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <hr/>The documentation for this class was generated from the following files:<ul>
 <li><a class="el" href="protocol_8h_source.html">protocol.h</a></li>
 <li>protocol.cpp</li>
@@ -307,7 +341,7 @@ Public Attributes</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri Mar 8 2013 22:51:35 for Logic Analyzer RPi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Mon Mar 11 2013 21:39:33 for Logic Analyzer RPi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
