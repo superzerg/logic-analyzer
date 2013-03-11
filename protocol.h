@@ -36,9 +36,6 @@
  class protocol: public mglDraw
 {
 public:
-    //! Pure virtual destructor. 
-    /*! Need to be defined as protocol classes should contain at least one dynamic array of messages.*/
-    virtual ~protocol()=0;
     //! Initialize acquisition. May not be redeclared.
     /*! Setup capture on the GPIO pins given.
             \param pins array of GPIO pin used in the capture such as:
@@ -55,6 +52,12 @@ public:
     virtual void acquire(uint32_t npoint=2000, float period=1.0);
     //! Perform all the decoding. Need to be defined as it will depend on the protocol
     virtual void decode(void)=0;
+    //! Save acquisition data. May not be redeclared.
+    /*!     \param filename string contenaning filename to be saved.*/
+    virtual void Save(const char* filename);
+    //! Load acquisition data. May not be redeclared.
+    /*!     \param filename string contenaning filename to be saved.*/
+    virtual void Load(const char* filename);
     //! Draw all.  Need to be defined as it will depend on the protocol
     /*!     \param gr pointer to mglGraph object*/
     virtual int Draw(mglGraph *gr)=0;

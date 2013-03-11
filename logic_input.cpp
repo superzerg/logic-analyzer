@@ -247,6 +247,7 @@ void logic_input::Load(const char* filename)
     //allocate memory
     for (uint8_t pin=0;pin<this->npin;pin++)
         this->rawdata[pin].Create(this->npoint);
+    this->t.Create(this->npoint);
     //Fill pin array    
     nread=fread(this->pins,sizeof(*this->pins),this->npin,f);
     if(nread!=this->npin)

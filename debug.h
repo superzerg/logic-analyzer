@@ -1,12 +1,13 @@
 #include <stdarg.h>
 
+//! The different debug level available are: 
 typedef enum
 {
-    CRITICAL = 0,
-    ERROR = 1,
-    WARNING = 2,
-    INFORMATION = 3,
-    DEBUG = 4,
+    CRITICAL = 0,//!< Program will exit
+    ERROR = 1,//!< Data corrupted
+    WARNING = 2,//!< Program can continue but this should not happen
+    INFORMATION = 3,//!< Normal output
+    DEBUG = 4,//!< Information for programmers
 }debug_level;
 
 
@@ -15,8 +16,13 @@ typedef enum
    arguments. We use this extension here to preprocess pmesg away. */
 #define pmesg(level, format, args...) ((void)0)
 #else
+//! Function printing execution information if level is lower than the extern variable msglevel
+/*! This function should be used as printf adding level as first parameter 
+        \param level determine if the message is printed to stderr
+        \param format printf() format argument, followed by the usuals arguments
+    \sa debug_level*/
 void pmesg(debug_level level, const char format[], ...);
 /* print a message, if it is considered significant enough.
-      Adapted from [K&R2], p. 174 */
+      Adapted from oopweb.com/CPP/Documents/DebugCPP/Volume/techniques.html*/
 #endif
 

@@ -15,15 +15,15 @@ protocol::protocol(uint8_t pins[],uint8_t npin)
 
 // Destructor is dependant of the protocol
 /* This is a template destructor. 
-    It should delete all arrays of messages if they are not NULL.*/
+    It should delete all arrays of messages if they are not NULL.
 protocol::~protocol()
 {
 //delete[] array of message here if not NULL
-/*    if(mosi_mess!=NULL)
+    if(mosi_mess!=NULL)
         delete[] mosi_mess;
 //reinitialize all arrays of messages to NULL here.
-    mosi_mess=NULL;*/
- }
+    mosi_mess=NULL;
+ }*/
  
 //! init_acquisition() does not have to be reimplemented, this is the default behaviour:
 void protocol::init_acquisition(uint8_t pins[],uint8_t npin)
@@ -37,9 +37,9 @@ void protocol::init_acquisition(uint8_t pins[],uint8_t npin)
         this->capture.init_acquisition(pins,npin);
 }
 
+//! acquire() does not have to be reimplemented, this is the default behaviour:
 void protocol::acquire(uint32_t npoint, float period)
 {
-//! acquire() does not have to be reimplemented, this is the default behaviour:
     pmesg(DEBUG,"protocol::acquire().\n");
     //! 1. Call binary::acquire()
     this->capture.acquire(npoint,period);
@@ -61,7 +61,7 @@ void protocol::decode (void)
 }*/
 
 // Draw() also need to be implemented for each protocol
-// This is a template Draw() function, for a full exemple look at microwire::Draw()
+/* This is a template Draw() function, for a full exemple look at microwire::Draw()
 int protocol::Draw (mglGraph * gr)
 {
 //! The draw function should :
@@ -73,7 +73,7 @@ int protocol::Draw (mglGraph * gr)
 //! 1. Plot raw data
     capture.Draw(gr,plot_labels);
 //! 2. Set background of all subplots according to the member activity object
-/*    for (uint8_t pin=0;pin<capture.npin;pin++)
+    for (uint8_t pin=0;pin<capture.npin;pin++)
         this->cs.Draw(gr,pin);
 //! 3. plot clok period stats according to the member transition object.
     this->clk.Draw(gr);
@@ -89,7 +89,24 @@ int protocol::Draw (mglGraph * gr)
             this->mosi_mess[i].Draw(gr);
         }
     }
-//! 7. return 0 if no error occured.*/
+//! 7. return 0 if no error occured.
     return 0;
+}*/
+
+//! Save() does not have to be reimplemented, this is the default behaviour:
+/* If you wish, you could overload it to add saving of each objects of your protocol (you will then need to overload Load() too).*/
+void protocol::Save(const char* filename)
+{
+    //Save the capture object
+    this->capture.Save(filename);
+}
+
+//! Load() does not have to be reimplemented, this is the default behaviour:
+/* If you wish, you could overload it to add loading of each objects of your protocol (you will then need to overload Save() too).*/
+void protocol::Load(const char* filename)
+{
+    //Load the capture object
+    this->capture.Load(filename);
+    
 }
 

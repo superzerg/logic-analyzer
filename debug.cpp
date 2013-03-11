@@ -1,7 +1,9 @@
+// Adapted from oopweb.com/CPP/Documents/DebugCPP/Volume/techniques.html
 #include "debug.h"
 #include <stdio.h>
 
-extern debug_level msglevel=DEBUG; /* the higher, the more messages... */
+//extern debug_level msglevel=DEBUG; /* the higher, the more messages... */
+extern debug_level msglevel=INFORMATION; /* the higher, the more messages... */
 
 #if defined(NDEBUG) && defined(__GNUC__)
 /* Nothing. pmesg has been "defined away" in debug.h already. */

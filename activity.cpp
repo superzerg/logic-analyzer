@@ -59,7 +59,7 @@ void activity::init(logic_input *data,uint8_t cs_pin, logic_state active_value)
         {
             this->nactive++;
             active=1;
-        pmesg(DEBUG,"activity detected\n");
+            pmesg(DEBUG,"activity detected\n");
         }
         if((data->rawdata[cs_pin].a[point]==inactive_value) && (active==1))
         {
