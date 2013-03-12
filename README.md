@@ -1,8 +1,8 @@
 Guide for Logic Analyzer RPi
 ==============
 
-Logic Analyzer RPi is a program to use your Raspberry Pi as a Logic Analyzer. It allows you to capture logic states at the GPIO pins (using pull up then pull down resistors of the GPIO). The captured data can then be saved. From captured data or saved file, decoding can be performed according to specified protocol and results can be ploted in a PNG file.
-This program has been made to make the implementation of a new protocol as easy as possible.
+Logic Analyzer RPi is a program to use your Raspberry Pi as a Logic Analyzer. It allows you to capture logic states at the GPIO pins (using pull up then pull down resistors of the GPIO). The logic states of the GPIO can be measured up to few kHz, with a very large number of points. The captured data can be saved to or loaded from a file. Decoding can be performed according to specified protocol and results can be ploted in a PNG file.
+This program has been made to make the implementation of new protocols as easy as possible.
 
 I)Example of output 
 ==============
@@ -74,8 +74,8 @@ VI) Usage
     ./logic_analyzer [-h] [-v level] [-w sec] [-l file | -c pins [-i ms] [-n npoint]] [-d protocol] [-s file] [-p file]
 program displaying GPIO states over time and decoding protocols if supported. Protocols supported are :
 
-- microwire
-- raw
+- microwire: tested with an NMC9314 EEPROM.
+- raw: no decoding is performed, but the logic state evolution is shown.
     
 program parameters are:
 
