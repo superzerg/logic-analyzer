@@ -15,17 +15,16 @@ The classes used are:
 4. [binary](@ref binary): contains the bit obtained from logic_input and methods to draw it.
 5. [message](@ref message): contains decoded information. 
 
-A protocol must be used for the conversion from activity and/or transition and at least one binary to a message.
+A [message](@ref protocol) must be used for the conversion from activity and/or transition and at least one binary to a message.
 The following classes are implemented protocols:
 - [microwire](@ref microwire)
+- [raw](@ref raw)
 
 If you want to decode anything else, you need to create your own protocol
 There is a few rules to follow (this may evolve).
-1. A protocol has a logic_input and an array of [message](@ref message) as member.
-2. A protocol has a constructor with 2 parameter:
-    \param pins is an array of uint8_t corresponding to the GPIO pins used. 
-    \param npin is the size of the pins array.
-The order of the pin determines their function.
-3. A protocol has a Draw() function calling all the necessary Draw() functions of his members
-\sa microwire::microwire()
+1. A protocol herit from protocol.
+2. A protocol must redefine:
+- decode() function initializing all members from the capture object
+- Draw() function calling all the necessary Draw() functions of his members
+\sa protocol microwire raw
 */
