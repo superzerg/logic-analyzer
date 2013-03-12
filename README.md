@@ -68,11 +68,14 @@ V) Install
 VI) Usage
 ===============
 
-    ./logic_analyzer [-h] [-v level] [-w sec] [-l file | -c pins [-i ms] [-n npoint]] [-d protocol] [-s file] [-p file].
-program displaying GPIO states over time and decoding protocols if supported.\nprotocols supported are :
+    ./logic_analyzer [-h] [-v level] [-w sec] [-l file | -c pins [-i ms] [-n npoint]] [-d protocol] [-s file] [-p file]
+program displaying GPIO states over time and decoding protocols if supported. Protocols supported are :
+
     - microwire
     - raw
+    
 program parameters are:
+
     - -h|--help : this help.
     - -l|--load file : Use data in binary file as captured data.
     - -c|--capture pins: pins to use durring the capture. Must be the GPIO numbers separated by \',\' or \' \'. Space may be used if le string pins is protected by \"\". ex 14,15,27,4 or \"14 15 27 4\". Order may be inportant if --decode is used depending on the protocol.
