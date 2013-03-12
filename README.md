@@ -71,21 +71,21 @@ VI) Usage
     ./logic_analyzer [-h] [-v level] [-w sec] [-l file | -c pins [-i ms] [-n npoint]] [-d protocol] [-s file] [-p file]
 program displaying GPIO states over time and decoding protocols if supported. Protocols supported are :
 
-    - microwire
-    - raw
+- microwire
+- raw
     
 program parameters are:
 
-    - -h|--help : this help.
-    - -l|--load file : Use data in binary file as captured data.
-    - -c|--capture pins: pins to use durring the capture. Must be the GPIO numbers separated by \',\' or \' \'. Space may be used if le string pins is protected by \"\". ex 14,15,27,4 or \"14 15 27 4\". Order may be inportant if --decode is used depending on the protocol.
-    - -i|--interval ms: interval in ms between 2 captures (default is 0.5 ms wich is the recomended minimum). For low intervals (ms<10), the interval can be sometime higher if the RPi is busy durring capture.
-    - -n|--npoint npoint: number of data point to capture (default 2000).
-    - -d|--decode protocol: decode the captured data using the specified protocol. Some protocols may need a special order for the pins given to the --capture option.
-    - -s|--save file : save captured data to binary file.
-    - -p|--plot file : plot captured data to PNG file.
-    - -w|--wait sec : time in second to wait before the capture.
-    - -v|--verbose level: set the verbosity to level (0 to 4, higher means more messages,default is 3).
+- -h|--help : this help.
+- -l|--load file : Use data in binary file as captured data.
+- -c|--capture pins: pins to use durring the capture. Must be the GPIO numbers separated by \',\' or \' \'. Space may be used if le string pins is protected by \"\". ex 14,15,27,4 or \"14 15 27 4\". Order may be inportant if --decode is used depending on the protocol.
+- -i|--interval ms: interval in ms between 2 captures (default is 0.5 ms wich is the recomended minimum). For low intervals (ms<10), the interval can be sometime higher if the RPi is busy durring capture.
+- -n|--npoint npoint: number of data point to capture (default 2000).
+- -d|--decode protocol: decode the captured data using the specified protocol. Some protocols may need a special order for the pins given to the --capture option.
+- -s|--save file : save captured data to binary file.
+- -p|--plot file : plot captured data to PNG file.
+- -w|--wait sec : time in second to wait before the capture.
+- -v|--verbose level: set the verbosity to level (0 to 4, higher means more messages,default is 3).
 
 
 VII) More Information
