@@ -6,5 +6,5 @@ var searchData=
   ['pin',['pin',['../classbinary.html#a8642b4c10eb17c021ee679c847482576',1,'binary::pin()'],['../classmessage.html#ab37f2e8f1be0b10724ede7f3fc695c84',1,'message::pin()']]],
   ['pin_5fclock',['pin_clock',['../classtransition.html#aa508315d12e4368fa32b3b6ca8dba55d',1,'transition']]],
   ['pins',['pins',['../classlogic__input.html#a691df164430ee863f12e0aaaeb7510a7',1,'logic_input']]],
-  ['protocol',['protocol',['../classprotocol.html',1,'']]]
+  ['protocol',['protocol',['../classprotocol.html',1,'protocol'],['../classprotocol.html#a998eb67d8a41b8f1528e03a9e06c4e8d',1,'protocol::protocol()']]]
 ];

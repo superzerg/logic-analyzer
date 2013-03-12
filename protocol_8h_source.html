@@ -119,24 +119,25 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <div class="line"><a name="l00036"></a><span class="lineno"><a class="code" href="classprotocol.html">   36</a></span>&#160; <span class="keyword">class </span><a class="code" href="classprotocol.html" title="protocol class, parent of all protocols.">protocol</a>: <span class="keyword">public</span> mglDraw</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;{</div>
 <div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;<span class="keyword">public</span>:</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classprotocol.html#ae9e4832c346d820016b1e2b46d97f71c" title="Initialize acquisition. May not be redeclared.">init_acquisition</a>(uint8_t pins[],uint8_t npin);</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classprotocol.html#acac3d92bdf1cbe13b801e2e4404c390b" title="Start acquisition. May not be redeclared.">acquire</a>(uint32_t npoint=2000, <span class="keywordtype">float</span> period=1.0);</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classprotocol.html#a82520485f257ad8e1e169071f4dc041f" title="Perform all the decoding. Need to be defined as it will depend on the protocol.">decode</a>(<span class="keywordtype">void</span>)=0;</div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;</div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classprotocol.html#aa25a252754bae008d40ec79a0062fd69" title="Save acquisition data. May not be redeclared.">Save</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* filename);</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classprotocol.html#a8dfce83140a9f27fe162678f8b8f8533" title="Load acquisition data. May not be redeclared.">Load</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* filename);</div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classprotocol.html#aaddd8c3ae22a1a8bc540327d66361653" title="Draw all. Need to be defined as it will depend on the protocol.">Draw</a>(mglGraph *gr)=0;</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;<span class="comment">//private:</span></div>
-<div class="line"><a name="l00066"></a><span class="lineno"><a class="code" href="classprotocol.html#a3911b0d33a9f76d931116aa93ac86a78">   66</a></span>&#160;<span class="comment"></span>    <a class="code" href="classlogic__input.html" title="Class doing acquisition from RPI&#39;s GPIO.">logic_input</a> <a class="code" href="classprotocol.html#a3911b0d33a9f76d931116aa93ac86a78" title="Contain the raw capture of all pins.">capture</a>;</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;};</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;   <a class="code" href="classprotocol.html#a998eb67d8a41b8f1528e03a9e06c4e8d" title="Example constructor.">protocol</a>(uint8_t pins[]=NULL,uint8_t npin=0);</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classprotocol.html#ae9e4832c346d820016b1e2b46d97f71c" title="Initialize acquisition. May not be redeclared.">init_acquisition</a>(uint8_t pins[],uint8_t npin);</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classprotocol.html#acac3d92bdf1cbe13b801e2e4404c390b" title="Start acquisition. May not be redeclared.">acquire</a>(uint32_t npoint=2000, <span class="keywordtype">float</span> period=1.0);</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classprotocol.html#a82520485f257ad8e1e169071f4dc041f" title="Perform all the decoding. Need to be defined as it will depend on the protocol.">decode</a>(<span class="keywordtype">void</span>)=0;</div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;</div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classprotocol.html#aa25a252754bae008d40ec79a0062fd69" title="Save acquisition data. May not be redeclared.">Save</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* filename);</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">void</span> <a class="code" href="classprotocol.html#a8dfce83140a9f27fe162678f8b8f8533" title="Load acquisition data. May not be redeclared.">Load</a>(<span class="keyword">const</span> <span class="keywordtype">char</span>* filename);</div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keyword">virtual</span> <span class="keywordtype">int</span> <a class="code" href="classprotocol.html#aaddd8c3ae22a1a8bc540327d66361653" title="Draw all. Need to be defined as it will depend on the protocol.">Draw</a>(mglGraph *gr)=0;</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;<span class="comment">//private:</span></div>
+<div class="line"><a name="l00068"></a><span class="lineno"><a class="code" href="classprotocol.html#a3911b0d33a9f76d931116aa93ac86a78">   68</a></span>&#160;<span class="comment"></span>    <a class="code" href="classlogic__input.html" title="Class doing acquisition from RPI&#39;s GPIO.">logic_input</a> <a class="code" href="classprotocol.html#a3911b0d33a9f76d931116aa93ac86a78" title="Contain the raw capture of all pins.">capture</a>;</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;};</div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Mar 11 2013 21:39:25 for Logic Analyzer RPi by &#160;<a href="http://www.doxygen.org/index.html">
+Generated on Tue Mar 12 2013 16:50:43 for Logic Analyzer RPi by &#160;<a href="http://www.doxygen.org/index.html">
 <img class="footer" src="doxygen.png" alt="doxygen"/>
 </a> 1.8.1.2
 </small></address>
