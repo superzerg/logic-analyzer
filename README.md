@@ -1,6 +1,9 @@
 Guide for Logic Analyzer RPi
 ==============
 
+Logic Analyzer RPi is a program to use your Raspberry Pi as a Logic Analyzer. It allows you to capture logic states at the GPIO pins (using pull up then pull down resistors of the GPIO). The captured data can then be saved. From captured data or saved file, decoding can be performed according to specified protocol and results can be ploted in a PNG file.
+This program has been made to make the implementation of a new protocol as easy as possible.
+
 I)Example of output 
 ==============
 ![logic states](read.png)
@@ -51,7 +54,7 @@ PDF files are also availble there for easier printing.
 ![revison 2 boards](http://1.bp.blogspot.com/-s2VVUs3YO5E/USTWSZq1FzI/AAAAAAAAEqk/iRyL0OY6ZWU/s320/raspberry+leaf+r2.png "Rev. 2 board")
 
 The numbers next to the GPIO pins used to acquire data are the one to use in [pins](http://superzerg.github.com/logic-analyzer/classlogic__input.html#a691df164430ee863f12e0aaaeb7510a7) array.
-The order matter, for exemple with the microwire protocol:
+The order matters, for exemple with the microwire protocol:
 - pins[0] acquires CS (Chip Select) of the studied device.
 - pins[1] acquires CLK (clock) of the studied device.
 - pins[2] acquires MOSI (Master Out Slave In) of the studied device.
