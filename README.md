@@ -43,7 +43,7 @@ If you have to make measurement on a 5V circuit, this is a way to avoid toasting
 	R2=68 kohms
 
 On a 3V3 circuit you can connect direclty your input to the GPIO pin.
-As the GPIO pins number orderring is at least confusing, you can print the following image corrsponding to your RPi version. 
+As the GPIO pins number orderring is at least confusing, you can print the following image corrsponding to your RPi version (let your mouse on an image to see the version). 
 Then apply it on GPIO pins (from http://www.doctormonk.com/2013/02/raspberry-pi-and-breadboard-raspberry.html).
 PDF files are also availble there for easier printing.
 
