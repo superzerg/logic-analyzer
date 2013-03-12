@@ -21,7 +21,6 @@ typedef enum
 }logic_state;
 
 //! Class doing acquisition from RPI's GPIO.
-/*! Saving to a file and loading from a file to be added.*/
 class logic_input : public mglDraw
 {
 public:

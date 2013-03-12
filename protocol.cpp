@@ -3,15 +3,15 @@
 
 // Constructor is dependant of the protocol.
 /* This is a template constructor. 
-    It should initialize all arrays of messages to NULL.
+    It should initialize all arrays of messages to NULL.*/
 protocol::protocol(uint8_t pins[],uint8_t npin)
 {
-//Initialize array of messages to NULL here.  There should be 1 message array per pin acquirring binary data
-    this->mosi_mess=NULL;
+/*//Initialize array of messages to NULL here.  There should be 1 message array per pin acquirring binary data
+    this->mosi_mess=NULL;*/
 //Call init_acquisition if paramaters are given.
     if(pins!=NULL && npin>0)
-        this->init_acquisition(pins,uint8_t);
-}*/
+        this->init_acquisition(pins,npin);
+}
 
 // Destructor is dependant of the protocol
 /* This is a template destructor. 

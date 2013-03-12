@@ -4,11 +4,9 @@ Guide for Logic Analyzer RPi
 I)Example of output 
 ==============
 ![logic states](read.png)
-Image obtained during two consecutive read instructions on a NMC9314 EEPROM memory using following command:
+Image obtained during two consecutive read instructions on a NMC9314 EEPROM memory using following command (loading test.dat capture file):
 
 	make test
-
-You must have installed [NMC9314 Pi](https://github.com/superzerg/NMC9314_pi) first.
 
 II) Dependence 
 ==============
@@ -70,42 +68,22 @@ V) Install
 VI) Usage
 ===============
 
-No arguments can yet be passed to the main program, so you will have to edit logic_analyzer.cpp:
-1) Edit the pins array according to indications in [IV Connection](#iv-connection) eg.
+    ./logic_analyzer [-h] [-v level] [-w sec] [-l file | -c pins [-i ms] [-n npoint]] [-d protocol] [-s file] [-p file].
+program displaying GPIO states over time and decoding protocols if supported.\nprotocols supported are :
+    - microwire
+    - raw
+program parameters are:
+    - -h|--help : this help.
+    - -l|--load file : Use data in binary file as captured data.
+    - -c|--capture pins: pins to use durring the capture. Must be the GPIO numbers separated by \',\' or \' \'. Space may be used if le string pins is protected by \"\". ex 14,15,27,4 or \"14 15 27 4\". Order may be inportant if --decode is used depending on the protocol.
+    - -i|--interval ms: interval in ms between 2 captures (default is 0.5 ms wich is the recomended minimum). For low intervals (ms<10), the interval can be sometime higher if the RPi is busy durring capture.
+    - -n|--npoint npoint: number of data point to capture (default 2000).
+    - -d|--decode protocol: decode the captured data using the specified protocol. Some protocols may need a special order for the pins given to the --capture option.
+    - -s|--save file : save captured data to binary file.
+    - -p|--plot file : plot captured data to PNG file.
+    - -w|--wait sec : time in second to wait before the capture.
+    - -v|--verbose level: set the verbosity to level (0 to 4, higher means more messages,default is 3).
 
-	#include <mgl/mgl_zb.h>
-	#include "microwire.h"
-	
-	int main(int argc, char **argv)
-	{
-	
-2) Use the right protocol eg.
-
-		microwire test;
-		
-3) Load a file
-
-        test.Load("test.dat");
-        
-or capture and save to file
-
-		uint8_t pins[4]={15,14,4,27};
-		test.init_acquisition(pins,4);
-		test.acquire(2000,1);
-		test.Save(filename.dat);
-		
-4) Decode the data
-
-        test.decode();
-	
-5) The default is to create a PNG image, it is done as follow :
-
-		mglGraphZB gr(1200,800);
-		test.Draw(&gr);
-		gr->WritePNG("filename.png");
-	}
-	
-It is also possible to Draw into a windows or a widget, see the mathgl documentation.
 
 VII) More Information
 ===============

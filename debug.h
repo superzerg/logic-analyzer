@@ -10,6 +10,7 @@ typedef enum
     DEBUG = 4,//!< Information for programmers
 }debug_level;
 
+extern debug_level msglevel; /* the higher, the more messages... */
 
 #if defined(NDEBUG) && defined(__GNUC__)
 /* gcc's cpp has extensions; it allows for macros with a variable number of

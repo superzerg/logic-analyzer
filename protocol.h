@@ -36,6 +36,8 @@
  class protocol: public mglDraw
 {
 public:
+    //! Example constructor
+   protocol(uint8_t pins[]=NULL,uint8_t npin=0);
     //! Initialize acquisition. May not be redeclared.
     /*! Setup capture on the GPIO pins given.
             \param pins array of GPIO pin used in the capture such as:
