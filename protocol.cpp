@@ -97,6 +97,7 @@ int protocol::Draw (mglGraph * gr)
 /* If you wish, you could overload it to add saving of each objects of your protocol (you will then need to overload Load() too).*/
 void protocol::Save(const char* filename)
 {
+    pmesg(DEBUG,"protocol::Save().\n");
     //Save the capture object
     this->capture.Save(filename);
 }
@@ -105,8 +106,8 @@ void protocol::Save(const char* filename)
 /* If you wish, you could overload it to add loading of each objects of your protocol (you will then need to overload Save() too).*/
 void protocol::Load(const char* filename)
 {
+    pmesg(DEBUG,"protocol::Load().\n");
     //Load the capture object
     this->capture.Load(filename);
-    
 }
 

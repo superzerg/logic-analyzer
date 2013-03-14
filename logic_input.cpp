@@ -32,6 +32,7 @@ void logic_input::Clean()
             pmesg(DEBUG,"logic_input::Clean(): rawdata[%i] destruction.\n",pin);
             this->rawdata[pin].Create(1);
         }
+        pmesg(DEBUG,"logic_input::Clean(): rawdata destruction.\n");
         delete[] this->rawdata;
         this->rawdata=NULL;
     }
@@ -159,11 +160,17 @@ int logic_input::Draw(mglGraph *gr, const char *labels[], uint8_t pin_stats)
 
 const void logic_input::Save(const char* filename)
 {
+    pmesg(DEBUG,"logic_input::Save()\n");
+    if(filename==NULL)
+    {
+        pmesg(ERROR,"ERROR in logic_input::Save(), filename is NULL.\n",filename);
+        return;   
+    }
     FILE *f=fopen(filename,"w");
     size_t nwrote;
     if (f == NULL)
     {
-        pmesg(ERROR,"ERROR in logic_input::Save, cannot open %s.\n",filename);
+        pmesg(ERROR,"ERROR in logic_input::Save(), cannot open %s.\n",filename);
         return;
     }
     if (this->npin!=sizeof(rawdata))
@@ -176,7 +183,7 @@ const void logic_input::Save(const char* filename)
         pmesg(ERROR,"ERROR in logic_input::Save(): rawdata is NULL.\n");
         return;
     }
-    if (this->npoint!=this->rawdata[0].nx)
+    if (this->npoint!=(uint32_t) this->rawdata[0].nx)
     {
         pmesg(ERROR,"ERROR in logic_input::Save(): npoint=%i != rawdata.nx=%i.\n",this->npoint,rawdata[0].nx);
         return;
@@ -223,7 +230,18 @@ const void logic_input::Save(const char* filename)
 
 void logic_input::Load(const char* filename)
 {
+    pmesg(DEBUG,"logic_input::Load()\n");
+    if(filename==NULL)
+    {
+        pmesg(ERROR,"ERROR in logic_input::Load(), filename is NULL.\n",filename);
+        return;   
+    }
     FILE *f=fopen(filename,"r");
+    if (f == NULL)
+    {
+        pmesg(ERROR,"ERROR in logic_input::Load(), cannot open %s.\n",filename);
+        return;
+    }
     size_t nread;
     //cleaning
     this->Clean();

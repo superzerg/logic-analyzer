@@ -47,11 +47,11 @@ void microwire::decode_mosi()
     pmesg(DEBUG,"microwire::decode_mosi().\n");
     if(this->cs.nactive==0)
     {
-        printf("ERROR in microwire::decode_mosi: no activity\n");
+        pmesg(WARNING,"ERROR in microwire::decode_mosi: no activity\n");
         return;
     }
     this->nmessage=this->cs.nactive;
-printf("Create %i mosi messages\n",this->nmessage);
+    pmesg(DEBUG,"Create %i mosi messages\n",this->nmessage);
     this->mosi_mess=new message[this->nmessage];
     binary *data;
     float clk_period=this->clk.period;
@@ -118,7 +118,7 @@ printf("Create %i mosi messages\n",this->nmessage);
                 this->mosi_mess[i].init(data,label,t0,t1-t0,'y');
                 break;
             case 0://need 2 more bits to get instruction
-            pmesg(DEBUG,"message %i, bits[2:3]=%i\n",i,data->Get(firstbit+2,firstbit+3));
+                pmesg(DEBUG,"message %i, bits[2:3]=%i\n",i,data->Get(firstbit+2,firstbit+3));
                 switch(data->Get(firstbit+2,firstbit+3))
                 {
                     case 3://ENABLE WRITE
@@ -161,6 +161,7 @@ printf("Create %i mosi messages\n",this->nmessage);
             default:
                pmesg(WARNING,"ERROR while reading instruction: got OP=%i\n",data->Get(firstbit,firstbit+1));
         }
+        pmesg(INFORMATION,"decoded on MOSI: %s\n",label);
         delete data;
     }
 }
@@ -203,6 +204,7 @@ void microwire::decode_miso()
         sprintf(label,"%04X",data->Get(firstbit,lastbit));
         t1=data->t.a[lastbit]+clk_period/2;
         this->miso_mess[i].init(data,label,t0,t1-t0,'y');
+        pmesg(INFORMATION,"decoded on MISO: %s\n",label);
     }
 }
 

@@ -23,11 +23,19 @@ clean_all:
 	rm -f $(EXECUTABLE) $(OBJECTS) *~
 
 test: $(EXECUTABLE) 
-	sleep 1; ./logic_analyzer -l test.dat -d microwire -p test.png
+	sleep 1; ./logic_analyzer -l read.dat -d microwire -p read.png
 
+bigtest: $(EXECUTABLE) 
+	sleep 1; ./logic_analyzer -l readall.dat -d microwire -p readall.png
+	
 capture: $(EXECUTABLE) 
-	sleep 1; sudo nice -n -20 ./logic_analyzer -c 15,14,27,4 -i 0.5 -n 2000 -s test.dat -d microwire -p test.png& sleep 2.7;sudo ../NMC9314B_programmer/NMC9314B_bit_banged -r -a 63 -b;sudo ../NMC9314B_programmer/NMC9314B_bit_banged -r -a 63 -b
+	sleep 1; sudo nice -n -20 ./logic_analyzer -c 15,14,4,27 -i 0.5 -n 2000 -s read.dat -d microwire -p read.png& sleep 2.5;sudo ../NMC9314B_programmer/NMC9314B_bit_banged -r -a 63 -b;sudo ../NMC9314B_programmer/NMC9314B_bit_banged -r -a 63 -b
 
+bigcapture: $(EXECUTABLE) 
+	sleep 1; sudo nice -n -20 ./logic_analyzer -c 15,14,4,27 -i 0.5 -n 70000 -s readall.dat -d microwire -p readall.png& sleep 2.5;sudo ../NMC9314B_programmer/NMC9314B_bit_banged -R -b
 
 view:
-	display.im6 -update 1 test.png &
+	display.im6 -update 1 read.png &
+	
+bigview:
+	display.im6 -update 1 readall.png &

@@ -12,7 +12,6 @@ message::message(const binary *data,const char label[30],float t0,float tmessage
     strcpy(this->label,"");
     if(data!=NULL)
         init(data,label,t0,tmessage,color);
-printf("done\n");
 }
 
 void message::init(const binary *data,const char label[30],float t0,float tmessage,char color)

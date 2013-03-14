@@ -123,7 +123,7 @@ int main(int argc, char **argv)
 				break;
 			case 's': //save
 				save_flag=1;
-				strncpy(loadfile,optarg,256);
+				strncpy(savefile,optarg,256);
 				break;
 			case 'p': //plot
 				plot_flag=1;
@@ -137,9 +137,10 @@ int main(int argc, char **argv)
 				return 1;
 		}
 	}
-	for (int index = option_index; index < argc; index++)
-		pmesg(WARNING,"Non-option argument %s\n", argv[index]);
-
+	for (; optind < argc; optind++)
+	{
+		pmesg(WARNING,"Non-option argument %s\n", argv[optind]);
+    }
 	if(help_flag)
 	{
 		usage(prog_name);
@@ -198,12 +199,12 @@ int main(int argc, char **argv)
     }
     if(load_flag)
     {
-        pmesg(INFORMATION,"Load...\n");
+        pmesg(INFORMATION,"Load %s...\n",loadfile);
         capture->Load(loadfile);
     }
     if(save_flag)
     {
-        pmesg(INFORMATION,"Save...\n");
+        pmesg(INFORMATION,"Save in %s...\n",savefile);
         capture->Save(savefile);
     }
     if(decode_flag)

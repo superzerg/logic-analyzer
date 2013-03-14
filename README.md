@@ -8,7 +8,7 @@ This program has been made to make the implementation of new protocols as easy a
 I)Example of output 
 ==============
 ![logic states](read.png)
-Image obtained during two consecutive read instructions on a NMC9314 EEPROM memory using following command (loading test.dat capture file):
+Image obtained during two consecutive read instructions on a NMC9314 EEPROM memory using following command (loading read.dat capture file):
 
 	make test
 
@@ -63,11 +63,15 @@ The order matters, for exemple with the microwire protocol:
 
 V) Install
 ===============
-1. install the C library for Raspberry Pi (http://www.open.com.au/mikem/bcm2835/index.html)
+1. install:
+ - the C library for Raspberry Pi (http://www.open.com.au/mikem/bcm2835/index.html)
+ - mgl library:
+    sudo apt get install libmgl-dev libmgl-fltk5
 2. get the Logic Analyzer RPi files at https://github.com/superzerg/logic-analyzer
 3. compile with:
 	make
-
+4. test the program works correctly (no capture yet, just loading a file).
+    make test
 
 VI) Usage
 ===============

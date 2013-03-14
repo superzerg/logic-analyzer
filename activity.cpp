@@ -110,7 +110,7 @@ int activity::Draw(mglGraph *gr,uint8_t subplot)
     }
     if(gr==NULL)
     {
-        printf("ERROR in activity::Draw(),gr is NULL.\n");
+        pmesg(ERROR,"ERROR in activity::Draw(),gr is NULL.\n");
         return 1;
     }
     gr->SubPlot(1,this->npin,subplot);
