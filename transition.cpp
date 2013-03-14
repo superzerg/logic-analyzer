@@ -151,16 +151,14 @@ void transition::find_transition(logic_input *data,char sign)
             newstate_ok=HIGHV;
             ntransition=&this->ntransition_up;
             index_transition=&this->index_transition_up;
-            pmesg(DEBUG,"this->t_transition_up at %X\n",&this->t_transition_up);
             t_transition=&this->t_transition_up;
             break;
         case 'd':
-            oldstate_ok=LOWV;
-            newstate_ok=HIGHV;
+            oldstate_ok=HIGHV;
+            newstate_ok=LOWV;
             ntransition=&this->ntransition_down;
             index_transition=&this->index_transition_down;
             t_transition=&this->t_transition_down;
-            pmesg(DEBUG,"this->t_transition_down at %X\n",&this->t_transition_down);
             break;
         default:
             pmesg(ERROR,"ERROR in transition::find_transition: sign unknown (must be \'u\' or \'d\')\n");
