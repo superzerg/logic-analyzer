@@ -102,8 +102,7 @@ More information is available with the developer's guide (http://superzerg.githu
 
 VIII) License
 ===============
-Copyright (C) 1994, 1995, 1996, 1999, 2000, 2001, 2002, 2004, 2005,
-2006, 2007, 2008, 2009 Free Software Foundation, Inc.
+Copyright (C) 2012,2013 Renier Yves.
 
    Copying and distribution of this file, with or without modification,
 are permitted in any medium without royalty provided the copyright
