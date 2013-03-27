@@ -1,0 +1,5 @@
+logic-analyzer-rpi (0.1-1) unstable; urgency=low
+
+  * Initial release (Closes: #703962)
+
+ -- Yves Renier <yrenier@cern.ch>  Fri, 22 Mar 2013 22:00:25 +0000
