@@ -1,0 +1,17 @@
+Source: logic-analyzer-rpi
+Section: electronics
+Priority: optional
+Maintainer: Yves Renier <yrenier@cern.ch>
+Build-Depends: debhelper (>= 8.0.0)
+Standards-Version: 3.9.3
+Homepage: https://github.com/superzerg/logi-analyzer
+Vcs-Git: git://github.com/superzerg/logi-analyzer.git
+#Vcs-Browser: http://git.debian.org/?p=collab-maint/logic-analyzer-rpi.git;a=summary
+
+Package: logic-analyzer-rpi
+Architecture: any
+Depends: ${shlibs:Depends}, ${misc:Depends}
+Description: Use your Raspberry Pi as a logic analyzer
+ logic-analyzer-rpi is a software to capture logic states at with the Raspberry
+ Pi's GPIO pins.
+ It is possible to Save/Load capture files and to decode supported protocols.
