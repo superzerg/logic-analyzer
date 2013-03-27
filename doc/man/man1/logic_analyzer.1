@@ -1,0 +1,86 @@
+.\"                                      Hey, EMACS: -*- nroff -*-
+.\" (C) Copyright 2013 Yves Renier <yrenier@cern.ch>,
+.\"
+.\" First parameter, NAME, should be all caps
+.\" Second parameter, SECTION, should be 1-8, maybe w/ subsection
+.\" other parameters are allowed: see man(7), man(1)
+.TH LOGIC-ANALYZER-RPI 1 "March 22, 2013"
+.\" Please adjust this date whenever revising the manpage.
+.\"
+.\" Some roff macros, for reference:
+.\" .nh        disable hyphenation
+.\" .hy        enable hyphenation
+.\" .ad l      left justify
+.\" .ad b      justify to both left and right margins
+.\" .nf        disable filling
+.\" .fi        enable filling
+.\" .br        insert line break
+.\" .sp <n>    insert n+1 empty lines
+.\" for manpage-specific macros, see man(7)
+.SH NAME
+logic\-analyzer\-rpi \- program to aquire logic states at the GPIO pins of a Raspberry Pi
+.SH SYNOPSIS
+\fIlogic\-analyzer\-rpi\fR [\-h] [\-v level] [\-w sec] [\-d protocol]  <[\-l file] | [\-c pins [\-i ms] [\-n npoint]]> <[\-s file]|[\-p file]>
+.br
+.SH DESCRIPTION
+This manual page documents briefly the
+.B logic-analyzer-rpi
+and
+.B bar
+commands.
+.PP
+.\" TeX users may be more comfortable with the \fB<whatever>\fP and
+.\" \fI<whatever>\fP escape sequences to invode bold face and italics,
+.\" respectively.
+\fBlogic-analyzer-rpi\fP is a program that can capture logic states at the 
+Raspberry Pi GPIO's pins, save/load capture files, decode according to included
+protocols and plot results.
+.SH OPTIONS
+These programs follow the usual GNU command line syntax, with long
+options starting with two dashes (`-').
+A summary of options is included below.
+.TP
+.B \-h, \-\-help
+Show summary of options.
+.TP
+.B \-v, \-\-verbose  level
+Set the verbosity to level (0 to 4, higher means more messages,default is 3).
+.TP
+.B \-w, \-\-wait  sec
+Wait the specified number of seconds before capturing.
+.TP
+.B \-d, \-\-decode  protocol
+Decode according to protocol. available protocols are :
+.br
+.RI microwire
+.br
+.RI raw
+.TP
+.B \-l, \-\-load  file
+Load file instead of capturing.
+.TP
+.B \-c, \-\-capture  pins
+Capture using given pins. Pins must be the GPIO numbers separated by \',\' or \' \'. Space may be used if le string pins is protected by \"\". ex 14,15,27,4 or \"14 15 27 4\". Order may be inportant if --decode is used depending on the protocol.
+.TP
+.B \-i, \-\-interval  ms
+Interval between 2 logic state capture in milliseconds.
+.TP
+.B \-n, \-\-npoint  npoint
+Number of points to capture.
+.TP
+.B \-s, \-\-save  file
+Save capture to file.
+.TP
+.B \-p, \-\-plot  file
+Plot into file (PNG image).
+.SH SEE ALSO
+.BR activity (3),
+.BR binary (3),
+.BR logic_input (3),
+.BR message (3),
+.BR microwire (3),
+.BR protocol (3),
+.BR raw (3),
+.BR transition (3).
+.br
+

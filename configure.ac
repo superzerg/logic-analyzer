@@ -8,6 +8,12 @@ AM_INIT_AUTOMAKE()
 #AC_CONFIG_SRCDIR([logic_analyzer.cpp])
 
 # Checks for programs.
+AC_CHECK_PROGS([DOXYGEN],[doxygen])
+if test -z "$DOXYGEN";
+    then AC_MSG_WARN([Doxygen not found - Continue without Doxygen support])
+fi
+AM_CONDITIONAL([HAVE_DOXYGEN],[test -n "$DOXYGEN"])
+AM_COND_IF([HAVE_DOXYGEN],[AC_CONFIG_FILES([doc/Doxyfile])])
 AC_PROG_CXX
 AC_PROG_CC
 
@@ -26,5 +32,5 @@ AC_TYPE_UINT8_T
 
 # Checks for library functions.
 AC_CHECK_FUNCS([clock_gettime])
-AC_CONFIG_FILES([Makefile src/Makefile])
+AC_CONFIG_FILES([Makefile src/Makefile doc/Makefile])
 AC_OUTPUT()
