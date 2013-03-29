@@ -191,8 +191,10 @@ top_builddir = @top_builddir@
 top_srcdir = @top_srcdir@
 @HAVE_DOXYGEN_TRUE@directory3 = $(top_srcdir)/doc/man/man3
 @HAVE_DOXYGEN_TRUE@directory1 = $(top_srcdir)/doc/man/man1
-@HAVE_DOXYGEN_TRUE@dist_man_MANS = $(directory3)/activity.3  $(directory3)/binary.3 $(directory3)/logic_input.3 $(directory3)/message.3 $(directory3)/microwire.3  $(directory3)/protocol.3 $(directory3)/raw.3 $(directory3)/transition.3  
-@HAVE_DOXYGEN_TRUE@man_MANS = $(directory1)/logic_analyzer.1
+@HAVE_DOXYGEN_TRUE@prefix3 = logic_analyzer
+@HAVE_DOXYGEN_TRUE@doxyman3 = activity.3 binary.3 logic_input.3 message.3 microwire.3 protocol.3 raw.3 transition.3 
+@HAVE_DOXYGEN_TRUE@dist_man_MANS = $(directory3)/$(prefix3)_activity.3  $(directory3)/$(prefix3)_binary.3 $(directory3)/$(prefix3)_logic_input.3 $(directory3)/$(prefix3)_message.3 $(directory3)/$(prefix3)_microwire.3  $(directory3)/$(prefix3)_protocol.3 $(directory3)/$(prefix3)_raw.3 $(directory3)/$(prefix3)_transition.3 
+@HAVE_DOXYGEN_TRUE@man_MANS = $(directory1)/$(prefix3).1
 @HAVE_DOXYGEN_TRUE@CLEANFILES = doxyfile.stamp Doxyfile
 all: all-am
 
@@ -488,25 +490,28 @@ uninstall-man: uninstall-man1 uninstall-man3
 	uninstall-man uninstall-man1 uninstall-man3
 
 
-@HAVE_DOXYGEN_TRUE@$(directory3)/activity.3 : doxyfile.stamp
+@HAVE_DOXYGEN_TRUE@$(directory3)/$(prefix3)_activity.3 : doxyfile.stamp
 
-@HAVE_DOXYGEN_TRUE@$(directory3)/binary.3: doxyfile.stamp
+@HAVE_DOXYGEN_TRUE@$(directory3)/$(prefix3)_binary.3: doxyfile.stamp
 
-@HAVE_DOXYGEN_TRUE@$(directory3)/logic_input.3: doxyfile.stamp
+@HAVE_DOXYGEN_TRUE@$(directory3)/$(prefix3)_logic_input.3: doxyfile.stamp
 
-@HAVE_DOXYGEN_TRUE@$(directory3)/message.3: doxyfile.stamp
+@HAVE_DOXYGEN_TRUE@$(directory3)/$(prefix3)_message.3: doxyfile.stamp
 
-@HAVE_DOXYGEN_TRUE@$(directory3)/microwire.3 : doxyfile.stamp
+@HAVE_DOXYGEN_TRUE@$(directory3)/$(prefix3)_microwire.3 : doxyfile.stamp
 
-@HAVE_DOXYGEN_TRUE@$(directory3)/protocol.3: doxyfile.stamp
+@HAVE_DOXYGEN_TRUE@$(directory3)/$(prefix3)_protocol.3: doxyfile.stamp
 
-@HAVE_DOXYGEN_TRUE@$(directory3)/raw.3: doxyfile.stamp
+@HAVE_DOXYGEN_TRUE@$(directory3)/$(prefix3)_raw.3: doxyfile.stamp
 
-@HAVE_DOXYGEN_TRUE@$(directory3)/transition.3: doxyfile.stamp
+@HAVE_DOXYGEN_TRUE@$(directory3)/$(prefix3)_transition.3: doxyfile.stamp
 
 @HAVE_DOXYGEN_TRUE@doxyfile.stamp: 
 @HAVE_DOXYGEN_TRUE@	$(DOXYGEN) Doxyfile
 @HAVE_DOXYGEN_TRUE@	echo Timestamp> doxyfile.stamp
+@HAVE_DOXYGEN_TRUE@	for file3 in $(doxyman3); do \
+@HAVE_DOXYGEN_TRUE@		mv $(directory3)/$$file3 $(directory3)/$(prefix3)_$$file3; \
+@HAVE_DOXYGEN_TRUE@	done
 
 @HAVE_DOXYGEN_TRUE@all-local: doxyfile.stamp
 @HAVE_DOXYGEN_TRUE@clean-local:

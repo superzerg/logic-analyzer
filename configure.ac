@@ -2,7 +2,7 @@
 # Process this file with autoconf to produce a configure script.
 
 AC_PREREQ([2.69])
-AC_INIT(logic-analizer-rpi, 0.1)
+AC_INIT(logic-analyzer-rpi, 0.1)
 AM_INIT_AUTOMAKE()
 
 #AC_CONFIG_SRCDIR([logic_analyzer.cpp])
