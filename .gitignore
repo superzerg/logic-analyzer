@@ -15,5 +15,7 @@ doc/Makefile
 doc/Doxyfile
 doc/doxyfile.stamp
 doc/logic_analyzer.info
+doc/stamp-vti
+doc/version.texi
 Makefile
 autom4te.cache/

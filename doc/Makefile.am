@@ -6,6 +6,8 @@ prefix3=logic_analyzer
 info_TEXINFOS=logic_analyzer.texi
 man_MANS=$(directory1)/$(prefix3).1
 
+MAINTAINERCLEANFILES =  logic_analyzer.info
+
 if HAVE_DOXYGEN
 
 doxyman3=activity.3 binary.3 logic_input.3 message.3 microwire.3 protocol.3 raw.3 transition.3 
@@ -37,10 +39,12 @@ doxyfile.stamp:
 	done
 
 	
-CLEANFILES = doxyfile.stamp Doxyfile
+CLEANFILES = doxyfile.stamp 
+DISTCLEANFILES = Doxyfile
 
 all-local: doxyfile.stamp
-clean-local:
+clean-doxygen:
 	rm -rf $(top_srcdir)/doc/man/man3 $(top_srcdir)/doc/html $(top_srcdir)/doc/latex 
+clean-local: clean-doxygen
 endif
 

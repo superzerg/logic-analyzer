@@ -210,9 +210,11 @@ directoryinfo = $(top_srcdir)/doc
 prefix3 = logic_analyzer
 info_TEXINFOS = logic_analyzer.texi
 man_MANS = $(directory1)/$(prefix3).1
+MAINTAINERCLEANFILES = logic_analyzer.info
 @HAVE_DOXYGEN_TRUE@doxyman3 = activity.3 binary.3 logic_input.3 message.3 microwire.3 protocol.3 raw.3 transition.3 
 @HAVE_DOXYGEN_TRUE@dist_man_MANS = $(directory3)/$(prefix3)_activity.3  $(directory3)/$(prefix3)_binary.3 $(directory3)/$(prefix3)_logic_input.3 $(directory3)/$(prefix3)_message.3 $(directory3)/$(prefix3)_microwire.3  $(directory3)/$(prefix3)_protocol.3 $(directory3)/$(prefix3)_raw.3 $(directory3)/$(prefix3)_transition.3 
-@HAVE_DOXYGEN_TRUE@CLEANFILES = doxyfile.stamp Doxyfile
+@HAVE_DOXYGEN_TRUE@CLEANFILES = doxyfile.stamp 
+@HAVE_DOXYGEN_TRUE@DISTCLEANFILES = Doxyfile
 all: all-am
 
 .SUFFIXES:
@@ -592,10 +594,12 @@ clean-generic:
 distclean-generic:
 	-test -z "$(CONFIG_CLEAN_FILES)" || rm -f $(CONFIG_CLEAN_FILES)
 	-test . = "$(srcdir)" || test -z "$(CONFIG_CLEAN_VPATH_FILES)" || rm -f $(CONFIG_CLEAN_VPATH_FILES)
+	-test -z "$(DISTCLEANFILES)" || rm -f $(DISTCLEANFILES)
 
 maintainer-clean-generic:
 	@echo "This command is intended for maintainers to use"
 	@echo "it deletes files that may require special tools to rebuild."
+	-test -z "$(MAINTAINERCLEANFILES)" || rm -f $(MAINTAINERCLEANFILES)
 @HAVE_DOXYGEN_FALSE@clean-local:
 clean: clean-am
 
@@ -801,8 +805,9 @@ uninstall-man: uninstall-man1 uninstall-man3
 @HAVE_DOXYGEN_TRUE@	done
 
 @HAVE_DOXYGEN_TRUE@all-local: doxyfile.stamp
-@HAVE_DOXYGEN_TRUE@clean-local:
+@HAVE_DOXYGEN_TRUE@clean-doxygen:
 @HAVE_DOXYGEN_TRUE@	rm -rf $(top_srcdir)/doc/man/man3 $(top_srcdir)/doc/html $(top_srcdir)/doc/latex 
+@HAVE_DOXYGEN_TRUE@clean-local: clean-doxygen
 
 # Tell versions [3.59,3.63) of GNU make to not export all variables.
 # Otherwise a system limit (for SysV at least) may be exceeded.
