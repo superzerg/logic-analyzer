@@ -16,3 +16,4 @@ doc/Doxyfile
 doc/doxyfile.stamp
 doc/logic_analyzer.info
 Makefile
+autom4te.cache/
