@@ -1,7 +1,6 @@
 \input texinfo @c -*-texinfo-*-
 @setfilename logic_analyzer.info
 @settitle Logic Analyzer RPi
-
 @setchapternewpage odd
 
 @include version.texi
@@ -17,6 +16,11 @@
 Copyright @copyright{} 2012-13 Yves Renier
 License: GPL-3+
 @end titlepage
+
+@dircategory Electronics
+@direntry
+* logic_analyzer_rpi: (logic_analyzer)
+@end direntry
 
 @node Top, 			Introduction, 	(dir), 		(dir)
 @c    node-name 	next			previous	up

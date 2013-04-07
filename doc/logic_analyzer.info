@@ -1,4 +1,10 @@
-This is logic_analyzer.info, produced by makeinfo version 4.13 from logic_analyzer.texi.
+This is logic_analyzer.info, produced by makeinfo version 4.13 from
+logic_analyzer.texi.
+
+INFO-DIR-SECTION Electronics
+START-INFO-DIR-ENTRY
+* logic_analyzer_rpi: (logic_analyzer)
+END-INFO-DIR-ENTRY
 
 
 File: logic_analyzer.info,  Node: Top,  Next: Introduction,  Prev: (dir),  Up: (dir)
@@ -82,8 +88,8 @@ milliseconds.
 
 
 Tag Table:
-Node: Top0
-Node: Introduction955
-Node: Usage1248
+Node: Top199
+Node: Introduction1064
+Node: Usage1357
 
 End Tag Table
