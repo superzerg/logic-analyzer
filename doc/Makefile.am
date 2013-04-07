@@ -1,15 +1,12 @@
-directory3= $(top_srcdir)/doc/man/man3
-directory1= $(top_srcdir)/doc/man/man1
-directoryinfo= $(top_srcdir)/doc
-prefix3=logic_analyzer
-
 info_TEXINFOS=logic_analyzer.texi
-man_MANS=$(directory1)/$(prefix3).1
+man_MANS=$(top_srcdir)/doc/man/man1/logic_analyzer.1
 
-MAINTAINERCLEANFILES =  logic_analyzer.info
+MAINTAINERCLEANFILES = logic_analyzer.info stamp-vti version.texi Makefile.in
 
 if HAVE_DOXYGEN
 
+directory3= $(top_srcdir)/doc/man/man3
+prefix3=logic_analyzer
 doxyman3=activity.3 binary.3 logic_input.3 message.3 microwire.3 protocol.3 raw.3 transition.3 
 
 
