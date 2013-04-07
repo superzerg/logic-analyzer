@@ -1,0 +1,111 @@
+\input texinfo @c -*-texinfo-*-
+@setfilename logic_analyzer.info
+@settitle Logic Analyzer RPi
+
+@setchapternewpage odd
+
+@include version.texi
+
+@titlepage
+@sp 10
+@c this title is printed in large font.
+@title Logic Analyzer RPi
+@subtitle Edition @value{EDITION}, @value{UPDATED}
+@author Yves Renier
+@page
+@vskip 0pt plus 1fill
+Copyright @copyright{} 2012-13 Yves Renier
+License: GPL-3+
+@end titlepage
+
+@node Top, 			Introduction, 	(dir), 		(dir)
+@c    node-name 	next			previous	up
+
+@chapheading logic analyzer RPi
+Use your Raspberry Pi as a logic analyzer
+
+Copyright @copyright{} 2012-13 Yves Renier
+
+This package is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License as published by
+the Free Software Foundation; either version 3 of the License, or
+(at your option) any later version.
+ 
+This package is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+ 
+You should have received a copy of the GNU General Public License
+along with this program. If not, see <http://www.gnu.org/licenses/>
+
+@menu
+* Introduction:: 
+* Usage::
+@end menu
+
+@node Introduction, Usage, 			Top,		Top
+@c    node-name 	next			previous	up
+@chapter Introduction
+
+'logic analyzer RPi' is a software to capture logic states at with the Raspberry
+Pi's GPIO pins.
+It is possible to Save/Load capture files and to decode supported protocols.
+
+
+@node Usage, 		,			Introduction,	Top
+@c    node-name 	next			previous	up
+@chapter Usage
+
+The usage of the @command{logic_analyzer} command line is 
+
+	logic_analyzer [-h] [-v @var{level}] [-w @var{sec}] [-d @var{protocol}]  <[-l @var{file}] | [-c @var{pins} [-i @var{ms}] [-n @var{npoint}]]> <[-s @var{file}]|[-p @var{file}]>
+	
+@option{-h}
+@option{--help}
+Show summary of options.
+
+@option{-v @var{level}}
+@option{--verbose=@var{level}}
+Set the verbosity to @var{level} (0 to 4, higher means more messages,default is 3).
+
+@option{-w @var{sec}}
+@option{--wait=@var{sec}}
+Wait the specified number of seconds before capturing.
+
+@option{-d @var{protocol}}
+@option{--decode=@var{protocol}}
+Decode according to @var{protocol}. available protocols are :
+@itemize @bullet
+@item 
+microwire
+@item
+raw
+@end itemize
+
+@option{-l @var{file}}
+@option{--load=@var{file}}
+Load @var{file} instead of capturing.
+
+@option{-c @var{pins}}
+@option{--capture=@var{pins}}
+Capture using given @var{pins}. Pins must be the GPIO numbers separated by @code{,} or @code{ }. Space may be used if le string pins is protected by @code{""}. ex @code{14,15,27,4} or @code{"14 15 27 4"}. Order may be inportant if @code{--decode} is used depending on the protocol.
+
+@option{-i @var{ms}}
+@option{--interval=@var{ms}}
+Interval between 2 logic state capture in milliseconds.
+
+@option{-n @var{npoint}}
+@option{--npoint=@var{point}}
+Number of points to capture.
+
+@option{-s @var{file}}
+@option{--save=@var{file}}
+Save capture to @var{file}.
+
+@option{-p @var{file}}
+@option{--plot=@var{file}}
+Plot into @var{file} (PNG image).
+
+@bye
+
