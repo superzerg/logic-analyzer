@@ -1,5 +1,9 @@
 info_TEXINFOS=logic_analyzer.texi
 
+stamp-vti: ../configure.ac
+
+version.texi: ../configure.ac
+
 man_MANS=$(top_srcdir)/doc/man/man1/logic_analyzer.1
 
 doc_dir =$(top_builddir)/doc
@@ -47,6 +51,4 @@ clean-local: clean-doxygen
 CLEANFILES = doxyfile.stamp 
 DISTCLEANFILES = Doxyfile 
 
-
 endif
-

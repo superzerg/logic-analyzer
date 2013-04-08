@@ -5,6 +5,8 @@ MAINTAINERCLEANFILES= Makefile.in aclocal.m4 config.guess config.sub configure d
 
 EXTRA_DIST=gen_changelog.sh
 
+dist_pkgdata_DATA = examples/test.dat
+
 clean-local:
 	rm -fr autom4te.cache
 	

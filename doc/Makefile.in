@@ -780,6 +780,10 @@ uninstall-man: uninstall-man1 uninstall-man3
 	uninstall-pdf-am uninstall-ps-am
 
 
+stamp-vti: ../configure.ac
+
+version.texi: ../configure.ac
+
 @HAVE_DOXYGEN_TRUE@$(directory3)/$(prefix3)_activity.3 : doxyfile.stamp
 
 @HAVE_DOXYGEN_TRUE@$(directory3)/$(prefix3)_binary.3: doxyfile.stamp
