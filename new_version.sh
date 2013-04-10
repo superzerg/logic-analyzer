@@ -29,7 +29,11 @@ function goto_branch {
 		echo "checkout $branch_togo"
 		git checkout $branch_togo
 		check_branch_clean
-	fi	
+	fi
+	current_branch=`git branch 2>&1 | grep '*'| sed 's/* //'`
+	if [ "$current_branch" != "$branch_togo" ]; then
+		exit
+	fi
 }
 
 upstream_tag_version="v$new_version"
