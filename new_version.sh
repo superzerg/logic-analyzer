@@ -48,7 +48,7 @@ if [ $configure_version = $new_version ]; then
 	echo "configure.ac up to date"
 else
 	#if not but tag present we remove it (as we introduce change in upstream branch)
-	if [ -n $(git tag -l $upstream_tag_version) ]; then
+	if [ -n "$(git tag -l $upstream_tag_version)" ]; then
 		echo "removing old tag"
 		git tag -d $upstream_tag_version
 	fi
