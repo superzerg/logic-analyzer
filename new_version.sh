@@ -52,7 +52,7 @@ else
 		echo "removing old tag"
 		git tag -d $upstream_tag_version
 	fi
-	sed	-i 's/AC_INIT( *'$package_name' *, *'$configure_version' */AC_INIT('$package_name','$new_version'/' configure.ac
+	sed	-i 's/AC_INIT( *'"$package_name"' *, *'"$configure_version"' */AC_INIT('"$package_name"','"$new_version"'/' configure.ac
 	echo "configure.ac updated"
 	autoreconf -i
 	git add configure.ac configure
