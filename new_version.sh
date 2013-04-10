@@ -12,6 +12,7 @@ if [ -z "$new_version" ]; then
 	exit
 fi
 
+#function exiting if branch is not clean
 function check_branch_clean {
 	if [ -n "$(git status -s)" ]; then
 		echo "branch not clean, exit"
@@ -19,6 +20,7 @@ function check_branch_clean {
 	fi
 }
 
+#function to change branch (with clean state and post state checking )
 function goto_branch {
 	branch_togo=$1
 	check_branch_clean 
@@ -89,11 +91,17 @@ else
 	git rebase upstream
 fi
 
-#update debian/changelog
-echo "update debian/changelog"
-rm debian/changelog.dch
-git dch --release -N $new_version-1 --meta --commit --commit-msg="Update changelog for %(version)s release
-	Git-Dch: Ignore"  $debian_branch 
+debian_version=$new_version-1
+
+#check if debian/changelog is up to date, if not we update it with git dch
+if [ -z $(head -n 1 debian/changelog|grep "($debian_version)"| grep -v UNRELEASED) ]; then
+	echo "update debian/changelog"
+	rm -f debian/changelog.dch
+	git dch --release -N $debian_version --meta --commit --commit-msg="Update changelog for %(version)s release
+		Git-Dch: Ignore"  $debian_branch -- debian/
+else
+	echo "debian/changelog is up to date"
+fi
 
 #run git buildpackage
 echo "run git buildpackage"
