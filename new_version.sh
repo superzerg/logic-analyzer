@@ -44,11 +44,12 @@ goto_branch $upstream_branch
 configure_version=$(cat configure.ac |grep AC_INIT| sed 's/.*(\(.*\)).*/\1/'|awk -F, '{print $2}')
 package_name=$(cat configure.ac |grep AC_INIT| sed 's/.*(\(.*\)).*/\1/'|awk -F, '{print $1}')
 other_options=$(cat configure.ac |grep AC_INIT| sed 's/.*([^,]*,[^,]*\(.*\)).*/\1/')
-if [ $configure_version == $new_version ]; then
+if [ $configure_version = $new_version ]; then
 	echo "configure.ac up to date"
 else
 	#if not but tag present we remove it (as we introduce change in upstream branch)
 	if [ -n $(git tag -l $upstream_tag_version) ]; then
+		echo "removing old tag"
 		git tag -d $upstream_tag_version
 	fi
 	sed	-i 's/AC_INIT( *'$package_name' *, *'$configure_version' */AC_INIT('$package_name','$new_version'/' configure.ac
