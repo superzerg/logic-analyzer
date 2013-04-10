@@ -87,6 +87,7 @@ fi
 
 #update debian/changelog
 echo "update debian/changelog"
-git dch --release -N $new_version-1 $debian_branch
-
+git dch --release -N $new_version-1 --meta --commit-msg=\
+	"Update changelog for %(version)s release
+	Git-Dch: Ignore"  $debian_branch 
 
