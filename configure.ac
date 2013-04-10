@@ -4,7 +4,7 @@
 #TODO: use variables HAVE_<HEADER>_H in headers or at least inturupt configure if not found
 
 AC_PREREQ([2.69])
-AC_INIT(logic-analyzer-rpi, 0.1)
+AC_INIT(logic-analyzer-rpi,0.1.1)
 AM_INIT_AUTOMAKE()
 
 #AC_CONFIG_SRCDIR([logic_analyzer.cpp])
