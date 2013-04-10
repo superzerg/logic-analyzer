@@ -81,9 +81,12 @@ ncommit_debian_ahead=$(git rev-list $upstream_branch..$debian_branch|wc -l)
 if [ $ncommit_upstream_ahead = 0 ]; then
 	echo "debian branch is up to date"
 else
-	echo "rebase debian branch"
+	echo "rebase debian branch on upstream branch"
 	git rebase upstream
-	
 fi
+
+#update debian/changelog
+echo "update debian/changelog"
+git dch --release -N $new_version-1 $debian_branch
 
 
