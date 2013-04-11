@@ -21,6 +21,7 @@ function check_branch_clean {
 }
 
 #function to change branch (with clean state and post state checking )
+#second argument is for a version to rebase on
 function goto_branch {
 	branch_togo=$1
 	check_branch_clean 
@@ -35,6 +36,12 @@ function goto_branch {
 	current_branch=`git branch 2>&1 | grep '*'| sed 's/* //'`
 	if [ "$current_branch" != "$branch_togo" ]; then
 		exit
+	fi
+	if [ -n "$2" ]; then
+		tag=$2
+		echo "rebase $current_branch on $tag"
+		git rebase $tag
+		check_branch_clean
 	fi
 }
 
