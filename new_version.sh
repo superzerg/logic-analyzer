@@ -39,8 +39,8 @@ function goto_branch {
 	fi
 	if [ -n "$2" ]; then
 		tag=$2
-		echo "rebase $current_branch on $tag"
-		git rebase $tag
+		echo "reset $current_branch to $tag"
+		git reset --hard $tag
 		check_branch_clean
 	fi
 }
@@ -51,7 +51,17 @@ upstream_tag_version="v$new_version"
 #work in upstream branch
 #--------------------------
 
-goto_branch $upstream_branch
+#check if upstream tag version is set, if it is reset to that commit, if not we tag HEAD
+if [ -z $(git tag -l $upstream_tag_version) ]; then
+	goto_branch $upstream_branch
+	echo "upstream branch not tagged"
+	echo "tag $upstream_tag_version"
+	git tag $upstream_tag_version
+else
+	echo "go to tag $upstream_tag_version"
+	goto_branch $upstream_branch $upstream_tag_version
+
+fi
 
 #check if version is ok in configure.ac
 configure_version=$(cat configure.ac |grep AC_INIT| sed 's/.*(\(.*\)).*/\1/'|awk -F, '{print $2}')
@@ -72,15 +82,6 @@ else
 	git commit -m "adjust version in configure.ac to $new_version"
 fi
 
-#check if upstream tag version is set, if not, we tag HEAD
-if [ -z $(git tag -l $upstream_tag_version) ]; then
-	echo "upstream branch not tagged"
-	echo "tag $upstream_tag_version"
-	git tag $upstream_tag_version
-else
-	echo "upstream branch already tagged"
-fi
-
 #--------------------------
 #work in debian branch
 #--------------------------
@@ -95,13 +96,14 @@ if [ $ncommit_upstream_ahead = 0 ]; then
 	echo "debian branch is up to date"
 else
 	echo "rebase debian branch on upstream branch"
-	git rebase upstream
+	first_debian_commit=$(git rev-list upstream..debian | tail -n 1)
+	git rebase --onto $upstream_tag_version $first_debian_commit^1 debian
 fi
 
 debian_version=$new_version-1
 
 #check if debian/changelog is up to date, if not we update it with git dch
-if [ -z $(head -n 1 debian/changelog|grep "($debian_version)"| grep -v UNRELEASED) ]; then
+if [ -z "$(cat debian/changelog|grep "urgency="| grep "($debian_version)"| grep -v UNRELEASED)" ]; then
 	echo "update debian/changelog"
 	rm -f debian/changelog.dch
 	git dch --release -N $debian_version --meta --commit --commit-msg="Update changelog for %(version)s release
@@ -111,5 +113,13 @@ else
 fi
 
 #run git buildpackage
+if [ -n "$(git tag -l debian/$debian_version)" ]; then
+	echo "remove existing tag debian/$debian_version"
+	git tag -d debian/$debian_version
+fi
 echo "run git buildpackage"
 git buildpackage --git-tag
+
+echo "return to master branch"
+check_branch_clean
+git checkout master
