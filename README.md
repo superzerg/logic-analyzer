@@ -7,7 +7,7 @@ This program has been made to make the implementation of new protocols as easy a
 
 I)Example of output 
 ==============
-![logic states](read.png)
+![logic states](https://github.com/superzerg/NMC9314_pi/blob/master/read.png)
 Image obtained during two consecutive read instructions on a NMC9314 EEPROM memory using following command (loading read.dat capture file):
 
 	make test
