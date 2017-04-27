@@ -69,8 +69,10 @@ V) Install
     sudo apt get install libmgl-dev libmgl-fltk5
  2. get the Logic Analyzer RPi files at https://github.com/superzerg/logic-analyzer
  3. compile with:
+ 
 	./configure
 	make
+	
  4. test the program works correctly (no capture yet, just loading a file).
     make test
 
