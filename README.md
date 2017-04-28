@@ -69,6 +69,10 @@ V) Install
  
 	sudo apt-get install libmgl-dev
     
+- automake:
+
+	sudo apt-get install automake
+	
  2. get the Logic Analyzer RPi files at https://github.com/superzerg/logic-analyzer
  	
 	git clone https://github.com/superzerg/logic-analyzer.git
