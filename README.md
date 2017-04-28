@@ -66,7 +66,9 @@ V) Install
  1. install:
  - the C library for Raspberry Pi (http://www.open.com.au/mikem/bcm2835/index.html)
  - mgl library:
-    sudo apt get install libmgl-dev libmgl-fltk5
+ 
+	sudo apt get install libmgl-dev libmgl-fltk5
+    
  2. get the Logic Analyzer RPi files at https://github.com/superzerg/logic-analyzer
  	
 	git clone https://github.com/superzerg/logic-analyzer.git
