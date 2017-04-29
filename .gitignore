@@ -18,3 +18,17 @@ doc/Doxyfile
 doc/doxyfile.stamp
 Makefile
 autom4te.cache/
+INSTALL 
+Makefile.in
+aclocal.m4 
+configure 
+depcomp 
+doc/Makefile.in 
+doc/logic_analyzer.info 
+doc/mdate-sh 
+doc/texinfo.tex 
+install-sh 
+missing 
+src/Makefile.in
+compile
+doc/doxygen_sqlite3.db
