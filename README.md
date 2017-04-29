@@ -10,7 +10,8 @@ I)Example of output
 ![logic states](https://github.com/superzerg/NMC9314_pi/blob/master/read.png)
 Image obtained during two consecutive read instructions on a NMC9314 EEPROM memory using following command (loading read.dat capture file):
 
-	make test
+	logic_analyzer -l examples/test.dat -d microwire -p examples/test2.png
+
 
 II) Dependence 
 ==============
@@ -101,11 +102,17 @@ V) Install
  	
 	git clone https://github.com/superzerg/logic-analyzer.git
 	
+	cd logic-analyzer
+	
  3. compile with:
  
  	aclocal
  
  	automake --add-missing
+	
+	automake
+	
+	autoconf
  
 	./configure
 	
@@ -116,7 +123,7 @@ V) Install
 	
  4. test the program works correctly (no capture yet, just loading a file).
  
-    make test
+    logic_analyzer -l examples/test.dat -d microwire -p examples/test2.png
 
 VI) Usage
 ===============
