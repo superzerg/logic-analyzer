@@ -118,6 +118,10 @@ V) Install
 	
 	make
 	
+	optional:
+	
+	sudo make install
+	
   It seems v2 of the library in repos does not contain v1 files by default. if during compilation you got errors caus of missing headers in mgl/ remove the package libmgl-dev with "apt-get remove libmgl-dev" and follow the install from source procedure.
 
 	
