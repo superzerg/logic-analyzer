@@ -66,9 +66,23 @@ V) Install
  1. install:
  - the C library for Raspberry Pi (http://www.open.com.au/mikem/bcm2835/index.html)
  - mgl library:
- 
+
+   from repos (deos not seems to work anymore):
+   
 	sudo apt-get install libmgl-dev
-    
+   
+   from source:
+   
+   	svn checkout https://svn.code.sf.net/p/mathgl/code/ mathgl-code
+	
+	cd mathgl-code/mathgl-1x
+	
+	./configure
+	
+	make
+	
+	sudo make install
+	
 - automake:
 
 	sudo apt-get install automake
@@ -76,6 +90,10 @@ V) Install
 - doxygen:
 	
 	sudo apt-get install doxygen
+	
+- texinfo
+	
+	sudo apt-get install texinfo
 	
  2. get the Logic Analyzer RPi files at https://github.com/superzerg/logic-analyzer
  	
@@ -90,6 +108,9 @@ V) Install
 	./configure
 	
 	make
+	
+  It seems v2 of the library in repos does not contain v1 files by default. if during compilation you got errors caus of missing headers in mgl/ remove the package libmgl-dev with "apt-get remove libmgl-dev" and follow the install from source procedure.
+
 	
  4. test the program works correctly (no capture yet, just loading a file).
  
