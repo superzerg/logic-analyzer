@@ -83,6 +83,10 @@ V) Install
 	
  3. compile with:
  
+ 	aclocal
+ 
+ 	automake --add-missing
+ 
 	./configure
 	
 	make
