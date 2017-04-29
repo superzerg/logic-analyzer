@@ -83,6 +83,8 @@ V) Install
 	
 	sudo make install
 	
+	sudo ln -s /usr/local/lib/libmgl.so.5 /usr/lib/
+	
 - automake:
 
 	sudo apt-get install automake
