@@ -109,6 +109,10 @@ V) Install
  	aclocal
  
  	automake --add-missing
+	
+	automake
+	
+	autoconf
  
 	./configure
 	
