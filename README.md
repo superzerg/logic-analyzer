@@ -118,7 +118,7 @@ V) Install
 	
  4. test the program works correctly (no capture yet, just loading a file).
  
-    make test
+    logic_analyzer -l examples/test.dat -d microwire -p examples/test2.png
 
 VI) Usage
 ===============
