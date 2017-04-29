@@ -101,6 +101,8 @@ V) Install
  	
 	git clone https://github.com/superzerg/logic-analyzer.git
 	
+	cd logic-analyzer
+	
  3. compile with:
  
  	aclocal
