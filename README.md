@@ -10,7 +10,8 @@ I)Example of output
 ![logic states](https://github.com/superzerg/NMC9314_pi/blob/master/read.png)
 Image obtained during two consecutive read instructions on a NMC9314 EEPROM memory using following command (loading read.dat capture file):
 
-	make test
+	logic_analyzer -l examples/test.dat -d microwire -p examples/test2.png
+
 
 II) Dependence 
 ==============
