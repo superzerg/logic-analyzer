@@ -122,7 +122,7 @@ V) Install
 	
 	sudo make install
 	
-  It seems v2 of the library in repos does not contain v1 files by default. if during compilation you got errors caus of missing headers in mgl/ remove the package libmgl-dev with "apt-get remove libmgl-dev" and follow the install from source procedure.
+  It seems v2 of the mgl library in raspbian repositories does not contain v1 files by default. if during compilation you got errors cause of missing headers in mgl/ remove the package libmgl-dev with "apt-get remove libmgl-dev" and follow the install mgl library from source procedure.
 
 	
  4. test the program works correctly (no capture yet, just loading a file).
