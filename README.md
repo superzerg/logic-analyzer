@@ -68,11 +68,11 @@ V) Install
  - the C library for Raspberry Pi (http://www.open.com.au/mikem/bcm2835/index.html)
  - mgl library:
 
-   from repos (deos not seems to work anymore):
+   from repos (does not seems to work anymore):
    
 	sudo apt-get install libmgl-dev
    
-   from source:
+   from source (version 1.16 is confirmed to work):
    
    	svn checkout https://svn.code.sf.net/p/mathgl/code/ mathgl-code
 	
